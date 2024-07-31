@@ -271,7 +271,7 @@ sap.ui.define([
                 this.selectedRowCountry.setValueState("None");
                 oEvent.getSource().removeSelections();
                 this.closeCountryDialog();  
-            },
+            }, 
             handleCountrySearch: function (oEvent) {
                 var sQuery = oEvent.getSource().getValue();
                 var pFilter = [];
