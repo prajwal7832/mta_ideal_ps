@@ -270,7 +270,7 @@ sap.ui.define([
                 this.getView().getModel("blankJson").setProperty(that.countryPath+"/COUNTRY_DESC",countyDesc);
                 this.selectedRowCountry.setValueState("None");
                 oEvent.getSource().removeSelections();
-                this.closeCountryDialog();
+                this.closeCountryDialog();  
             },
             handleCountrySearch: function (oEvent) {
                 var sQuery = oEvent.getSource().getValue();
