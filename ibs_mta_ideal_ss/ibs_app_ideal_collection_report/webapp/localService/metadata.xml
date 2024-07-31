@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ideal_collection_report" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="RetailerPayments" EntityType="ideal_collection_report.RetailerPayments"/>
+                <EntitySet Name="Retailers" EntityType="ideal_collection_report.Retailers"/>
+            </EntityContainer>
+            <EntityType Name="RetailerPayments">
+                <Key>
+                    <PropertyRef Name="SRNO"/>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="SO_NO"/>
+                    <PropertyRef Name="RETAILER_ID"/>
+                    <PropertyRef Name="DELIVERY_NO"/>
+                    <PropertyRef Name="INVOICE_NO"/>
+                </Key>
+                <Property Name="SRNO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SO_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DELIVERY_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="INVOICE_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="INVOICE_DATE" Type="Edm.Date"/>
+                <Property Name="INVOICE_AMOUNT" Type="Edm.String" MaxLength="20"/>
+                <Property Name="INVOICE_BAL_AMOUNT" Type="Edm.String" MaxLength="20"/>
+                <Property Name="OUTSTANDING_AMOUNT" Type="Edm.String" MaxLength="20"/>
+                <Property Name="YOUR_AMOUNT" Type="Edm.Double"/>
+                <Property Name="BANK_NAME" Type="Edm.String" MaxLength="20"/>
+                <Property Name="TRANSACTION_ID" Type="Edm.String" MaxLength="30"/>
+                <Property Name="TOTAL_INV_BALANCE_AMOUNT" Type="Edm.Double"/>
+                <Property Name="DEPOSIT_DATE" Type="Edm.Date"/>
+                <Property Name="PAYMENT_STATUS" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Retailers">
+                <Key>
+                    <PropertyRef Name="RETAILER_NAME"/>
+                </Key>
+                <Property Name="RETAILER_NAME" Type="Edm.String" MaxLength="50" Nullable="false"/>
+            </EntityType>
+            <Annotations Target="ideal_collection_report.EntityContainer/RetailerPayments">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record Type="Capabilities.FilterRestrictionsType">
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record Type="Capabilities.FilterExpressionRestrictionType">
+                                    <PropertyValue Property="Property" PropertyPath="DEPOSIT_DATE"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_collection_report.EntityContainer/Retailers">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record Type="Capabilities.FilterRestrictionsType">
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record Type="Capabilities.FilterExpressionRestrictionType">
+                                    <PropertyValue Property="Property" PropertyPath="DEPOSIT_DATE"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

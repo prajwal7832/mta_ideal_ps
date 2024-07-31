@@ -1,0 +1,66 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="idlogDialog" contentHeight="70%" title="PDC Details" draggable="true" resizable="true" titleAlignment="Center" class="sapUiSizeCompact">
+
+     <f:SimpleForm id="simpleForm2" editable="true" layout="ResponsiveGridLayout" columnsM="3" columnsL="3" columnsXL="4"
+			class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+			
+		<core:Title text=""/>
+        <Label text = "Bank Name" required="true"/>
+        <Input value = "" id="idBankName" change = "handleBankName" placeholder="Please enter Bank Name"/>
+
+         <Label text = "Currency" required="true"/>
+        <ComboBox id="idCurrency" value="" showSecondaryValues="true" placeholder="Select Currency" selectionChange="handleCurrency">
+			<core:ListItem  key="INR" text="Indian Rupees" additionalText="INR" />
+			<core:ListItem key="USD" text="USD Dollar" additionalText="USD" />
+			</ComboBox>
+        
+			<core:Title text=""/>
+         <Label text = "Cheque Number" required="true"/>
+        <Input value = "" id="idChequeNo" maxLength="6" placeholder="Enter Cheque Number" change="handleChequeNumber"/>
+
+         <Label text = "Amount" required="true"/>
+		 <Input value="" id="idAmount" change="handleAmountVal"  placeholder="Enter Amount"/>
+			<core:Title text=""/>
+         <Label text = "Date" required="true"/>
+        <DatePicker id="idDateRangeSelection" />
+
+
+    </f:SimpleForm>
+		<Table id="idLogTable" sticky="ColumnHeaders,HeaderToolbar" headerText="Cheque Details:"
+		items="{retailerPdcData>/}" inset="false" autoPopinMode="true" fixedLayout="true"
+					class="sapUiContentPadding">
+						
+						<columns>
+							<Column>
+								<Label text="Bank Name" design="Bold" wrapping="true"/>
+							</Column>
+							<Column>
+								<Label text="Cheque No." design="Bold" wrapping="true"/>
+							</Column>
+							<Column>
+								<Label text="Amount" design="Bold"/>
+							</Column>
+							<Column>
+								<Label text="Date" design="Bold"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{retailerPdcData>NAME_OF_BANK}"/>
+									<Text text="{retailerPdcData>CHEQUE_NUMBER}"/>
+									<Text text="{retailerPdcData>AMOUNT}"/>
+									<Text text="{retailerPdcData>CREATION_DATE}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+		<buttons>
+			<Button text="Submit" id="id_submitPdc" press="submitDialog"/>
+			<Button text="Cancel" id="id_logcancel" press="closeDialog" icon="sap-icon://cancel"/>
+			
+		</buttons>
+		
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,209 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ibs.ibsappidealviewchange",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.2",
+      "toolsId": "c969f4e0-6bfe-4322-83c6-b5fa8567a890"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/OData/v4/ideal-retailer-registration/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ViewChange-display": {
+          "semanticObject": "ViewChange",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.126.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibs.ibsappidealviewchange.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.ibs.ibsappidealviewchange.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteApp",
+          "pattern": "",
+          "target": [
+              "TargetApp"
+          ]
+      },
+        {
+          "name": "RouteMasterpage",
+          "pattern": "Masterpage",
+          "target": [
+            "TargetMasterpage"
+          ]
+        },
+        {
+          "name": "ServiceMsg",
+          "pattern": "ServiceMsg",
+          "target": [
+              "ServiceMsg"
+          ]
+        },
+        {
+          "name": "RouteUploadPage",
+          "pattern": "UploadPage",
+          "target": [
+            "TargetUploadPage"
+          ]
+        },
+        {
+          "name": "RouteDisplayform",
+          "pattern": "displayForm/{RETAILER_ID}",
+          "target": [
+            "TargetDisplayform"
+          ]
+        },
+        {
+          "name": "RouteEditdetails",
+          "pattern": "editDetails/{RETAILER_ID}",
+          "target": [
+            "TargetEditdetails"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetApp": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewName": "App"
+      },
+        "TargetMasterpage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Masterpage",
+          "viewName": "Masterpage"
+        },
+        "ServiceMsg": {
+          "viewType": "XML",
+          "viewName": "ServiceMsg"
+        },
+        "TargetUploadPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "UploadPage",
+          "viewName": "UploadPage"
+        },
+        "TargetDisplayform": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Displayform",
+          "viewName": "Displayform"
+        },
+        "TargetEditdetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Editdetails",
+          "viewName": "Editdetails"
+        }
+      
+      }
+    },
+    "rootView": {
+      "viewName": "com.ibs.ibsappidealviewchange.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "ibs_bs_ideal_ss"
+  }
+}

@@ -1,0 +1,226 @@
+<mvc:View controllerName="com.ibs.ibsappidealviewchange.controller.Displayform"
+    xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+	xmlns:t="sap.suite.ui.commons" xmlns:l="sap.ui.layout">
+   
+    <m:App>
+    <m:Page id="page" showHeader="false" showFooter="false" class="sapUiTinyMarginBegin">
+        <m:content>
+        <ObjectPageLayout id="ObjectPageLayout" selectedSection="firstSection" enableLazyLoading="false" showEditHeaderButton="false"
+			editHeaderButtonPress="handleEditBtnPress">
+
+		<headerTitle>
+			<ObjectPageHeader objectTitle = "Retailer Profile Details">
+				<m:Button icon="sap-icon://nav-back" press="onBack" type="Emphasized"></m:Button>
+			</ObjectPageHeader>
+		</headerTitle>
+
+        <sections>
+			<ObjectPageSection title="Retailer Profile" id="firstSection">
+			<!-- <subSections> -->
+		<ObjectPageSubSection title="">
+        <f:SimpleForm id="simpleForm2" editable="true" layout="ResponsiveGridLayout" columnsM="2" columnsL="3" columnsXL="4"
+			class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+			
+			<core:Title text=""/>
+			<m:Label text="Retailer ID " design="Bold" required="true"/>
+			<m:Text text ="{path:'retailerData>/RETAILER_ID', formatter:'.formatter.getDataNullValue'}" class="sapUiTinyMarginBegin"/>
+
+			<m:Label text="Retailer Name " design="Bold" required="true"/>
+			<m:Text id="idName" text="{path:'retailerData>/RETAILER_NAME', formatter:'.formatter.getDataNullValue'}" />
+			
+			<core:Title text=""/>
+			<m:Label text="Retailer Type" design="Bold" required="true"/>
+			<m:Text text="{retailerData>/TO_RETAILER_TYPE/RETAILER_TYPE}" />
+
+
+            <m:Label text="Retailer Classification" design="Bold" required="true"/>
+			<m:Text text="{path:'retailerData>/RETAILER_CLASS', formatter:'.formatter.getDataNullValue'}" />
+
+			<core:Title text=""/>
+            <m:Label text="Payment Terms(Days)" design="Bold" required="true"/>
+			<m:Text text="{path:'retailerData>/PAY_TERM', formatter:'.formatter.getDataNullValue'}" />
+		</f:SimpleForm>
+        </ObjectPageSubSection>
+        </ObjectPageSection>
+	
+		<!-- Address Details Table -->
+	<ObjectPageSection>
+
+    <ObjectPageSubSection id="addressDetails" title="Address Details">
+	<ui:Table rows="{retailerData>/TO_ADDRESS}" id="trAddId" selectionMode="None" ariaLabelledBy="title">
+		<ui:columns>
+			<ui:Column width="11rem">
+				<m:Label required="true" text="Address Type" design="Bold" wrapping="true"/>
+				<ui:template>
+						<m:ComboBox showSecondaryValues="true" filterSecondaryValues="true" selectedKey="{retailerData>TO_ADDRESS_TYPE/ADDRESS_TYPE}"
+						items="{addreessTypeModel>/}" editable="false">
+							<core:ListItem key="{addreessTypeModel>ADDRESS_TYPE}" text="{addreessTypeModel>ADDRESS_DESC}" additionalText=""/>
+						</m:ComboBox>
+						
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="8rem">
+				<m:Label required="true" text="Street No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>STREET_NO', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="12rem">
+				<m:Label required="true" text="Address Line 1" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>ADDRESS_LINE_1', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="12rem">
+				<m:Label text="Address Line 2" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>ADDRESS_LINE_2', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="12rem">
+				<m:Label text="Address Line 3" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>ADDRESS_LINE_3', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="10rem">
+				<m:Label required="true" text="Country" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>TO_COUNTRY/LANDX', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="10rem">
+				<m:Label required="true" text="Region" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>TO_REGION/BEZEI', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="10rem">
+				<m:Label required="true" text="City" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>TO_CITY/CITY_DESC', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="8rem">
+				<m:Label required="true" text="Postal Code" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>POSTAL_CODE', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="12rem">
+				<m:Label required="true" text="Mobile No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>MOBILE_NO', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="12rem">
+				<m:Label text="Telephone No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>TELEPHONE_NO', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+			
+			<ui:Column width="12rem">
+				<m:Label required="true" text="Email ID" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{parts: [{path:'retailerData>EMAIL_ID'},{value:'EMAIL_CHECK'}], formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="16rem">
+				<m:Label required="true" text="Contact Person" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>CONTACT_PERSON', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="12rem">
+				<m:Label text="Fax No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input editable="false" value="{path:'retailerData>FAX_NO', formatter:'.formatter.getDataNullValue'}"/>
+				</ui:template>
+			</ui:Column>
+			
+			
+		</ui:columns>
+	</ui:Table>
+
+    </ObjectPageSubSection>
+    </ObjectPageSection>
+
+    <ObjectPageSection>
+        <ObjectPageSubSection title="Bank Details">
+
+         <f:SimpleForm id="bankDetailsForm" editable="true"  columnsM="2" columnsL="3" columnsXL="4"
+			labelSpanS ="5" labelSpanL="5" labelSpanM="5" labelSpanXL="5" class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+            <core:Title text=""/>
+			<m:Label text="Bank Name" design="Bold" required="true"/>
+			<m:Text id="idNameOfBank" text="{path:'retailerData>/NAME_OF_BANK', formatter:'.formatter.getDataNullValue'}" />
+            <m:Label text="UPI ID" design="Bold" required="false"/>
+			<!-- <m:HBox> -->
+			<m:Text text="{path:'retailerData>/UPI_ID', formatter:'.formatter.getDataNullValue'}"/>
+
+            <core:Title text=""/>
+			<m:Label text="Account Number" design="Bold" required="true"/>
+			<m:Text id="idAccountNo" text="{path:'retailerData>/BANK_ACC_NO', formatter:'.formatter.getDataNullValue'}" />
+
+            <core:Title text=""/>
+			<m:Label text="IFSC Code" design="Bold" required="true"/>
+			<m:Text id="idIfsc" text="{path:'retailerData>/IFSC_CODE', formatter:'.formatter.getDataNullValue'}" />
+            
+        </f:SimpleForm>
+
+        </ObjectPageSubSection>
+        </ObjectPageSection>
+        <ObjectPageSection>
+            <ObjectPageSubSection title="Tax Details">
+            <f:SimpleForm id="taxDetails" editable="true" layout="ResponsiveGridLayout" columnsM="2" columnsL="3" columnsXL="4"
+                labelSpanS ="5" labelSpanL="5" labelSpanM="5" labelSpanXL="5" class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+                <core:Title text=""/>
+                <m:Label text="Registered Tax ID" design="Bold" required="true"/>
+                <m:Text id="idGstNo" text="{path:'retailerData>/REGISTERED_TAX_ID', formatter:'.formatter.getDataNullValue'}"/>
+                <core:Title text=""/>
+                <m:Label text="PAN No" design="Bold" required="false"/>
+                <m:Text id="idPan" text="{path:'retailerData>/PAN_NO', formatter:'.formatter.getDataNullValue'}" />
+                <!-- <core:Title text=""/>
+                 <m:Label text="VAT No" design="Bold" required="true"/>
+			    <m:Text id="idVat" text="{retailerData>/VAT_NO}" /> -->
+            </f:SimpleForm>
+            </ObjectPageSubSection>
+        </ObjectPageSection>
+		<ObjectPageSection>
+		 <ObjectPageSubSection title="Attachments">
+		 <!-- <m:content> -->
+            <m:Table id="idAttachments"  items="{retailerAttchmentsModel>/}">
+			<m:columns>
+				<m:Column hAlign="Left">
+					<m:Label text="File Name" design="Bold" wrapping="true"/>
+				</m:Column>
+				<m:Column hAlign="Left">
+					<m:Label text="Action" design="Bold" wrapping="true"/>
+				</m:Column>
+			</m:columns>
+			<m:items>
+				<m:ColumnListItem type="Inactive" press="onPress">
+					<m:cells> <m:Text text ="{retailerAttchmentsModel>FILE_NAME}" />
+					<m:Button text ="" icon="sap-icon://download" press="onDownload"/>
+					</m:cells>
+				</m:ColumnListItem>
+			</m:items>
+			</m:Table>
+			<!-- </m:content> -->
+        </ObjectPageSubSection>
+        </ObjectPageSection>
+
+         </sections>
+        </ObjectPageLayout>
+    </m:content>
+		
+    </m:Page>
+    </m:App>
+</mvc:View>

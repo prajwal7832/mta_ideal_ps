@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Invoice No" contentHeight="40%" draggable="true"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="invoiceSrchId" liveChange="handleInvoiceSearch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="invoice_listId" items="{invoiceModelFrag>/}"
+			mode="SingleSelectMaster" selectionChange="handleInvoiceSelection">
+			<StandardListItem title="{invoiceModelFrag>INVOICE_NO}" />
+			 <!-- description="{invoiceModelFrag>RETAILER_ID}"/> -->
+
+		</List>
+		<buttons>
+			<!-- <Button text="Submit" press="submitQtyDialog" type="Emphasized"/> -->
+			<Button text="Cancel" press="invoiceDialogClose" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

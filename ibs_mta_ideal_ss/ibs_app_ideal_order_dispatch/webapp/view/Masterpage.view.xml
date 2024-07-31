@@ -1,0 +1,111 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealorderdispatch.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+
+<mvc:View controllerName="com.ibs.ibsappidealorderdispatch.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m">
+	<App id="idApp">
+	<pages>
+    <Page id="page" showHeader="false" showFooter="false">
+    
+        <!-- <content> -->
+        <l:VerticalLayout width="100%">
+					<fb:FilterBar id="idFilterBar" class="sapUiSmallMarginTop" visible="{appView>/oFilterBarVisible}" reset="onReset" search="onSearch" 
+					showRestoreButton="false" useToolbar="false" showFilterConfiguration="false" showGoOnFB="false" filterContainerWidth="9%">
+						<fb:filterItems>
+							
+							<fb:FilterItem name="A" label="Retailer">
+								<fb:control>
+									<Input id="retailerId" placeholder="Select Retailer" showSuggestion="true"
+									 showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onRetailerFrag"></Input>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="B" label="Refresh">
+								<fb:control>
+									<HBox>
+										<Button text="Go" press="onSelectGo" type="Emphasized" visible="false"/>
+										<Button id="refresh" press="handleRefresh" icon="sap-icon://refresh" type="Transparent" visible="true"/>
+									</HBox>
+								</fb:control>
+							</fb:FilterItem>
+						</fb:filterItems>
+					</fb:FilterBar>
+				</l:VerticalLayout>
+            <content>
+		<Table id="idProductsTable" inset="false" items="{path:'retailerHeaderModel>/', sorter : { path : 'SO_NO',descending : true}}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+				 growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						
+						<!-- <headerToolbar>
+							<OverflowToolbar visible="true">
+								<Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/>
+								<content>
+									<ToolbarSpacer/>
+									<Button text="Create Order" type="Emphasized" icon="sap-icon://add-activity" press="onCreate"/>
+									<SearchField id="oSearchMasterData" visible="true" width="40%" placeholder="Search"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar> -->
+						<columns>
+							<Column hAlign="Center" width="12rem">
+								<Label text="So No" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center" width="12rem">
+								<Label wrapping="true" text="Retailer Name" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label wrapping="true" text="Creation Date" design="Bold"/>
+							</Column>
+                             <Column hAlign="Right" width="12rem">
+								<Label wrapping="true" text="Total Amount(₹)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label wrapping="true" text="Status" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label wrapping="true" text="Action" design="Bold"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive" press="onPress">
+								<cells>
+                                    <Text text="{path:'retailerHeaderModel>SO_NO', formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+
+									<Text wrapping="true" text="{retailerHeaderModel>RETAILER_NAME}"/>
+									
+									<Text wrapping="true" text="{path:'retailerHeaderModel>CREATION_DATE', formatter:'.formatter.formatDate'}"/>
+									<Text textAlign="End" wrapping="true" text="{path:'retailerHeaderModel>GROSS_TOTAL', formatter:'.formatter.getDataNullValue'}"/>
+									<ObjectStatus text="{path:'retailerHeaderModel>TO_STATUS/DESC', formatter:'.formatter.getDataNullValue'}"
+									 inverted="true" state="{path:'retailerHeaderModel>STATUS',formatter:'.formatter.getStatus'}"></ObjectStatus>
+								
+									<Button icon="sap-icon://show" press="onSelect"/>
+									
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</content>
+            <footer>
+				<Bar>
+					
+					<contentRight>
+						<Button text="Submit" press="onSelect" type="Success" enabled="true"/>
+					</contentRight>
+				</Bar>
+			</footer>
+    </Page>
+	</pages>
+	</App>
+</mvc:View>
+

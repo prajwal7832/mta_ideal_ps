@@ -1,0 +1,118 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealviewchange.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	controllerName="com.ibs.ibsappidealviewchange.controller.Masterpage" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page class="sapUiSizeCompact" showHeader="false">
+				<content>
+					<Table id="idProductsTable" sticky="ColumnHeaders,HeaderToolbar" inset="false" items="{path:'retailerData>/',sorter: { path : 'RETAILER_ID',descending : true}}"
+						 class="sapUiContentPadding" growing="true"
+						growingThreshold="10" autoPopinMode="true" fixedLayout="true">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+								<SearchField id="onSearchMasterData" width="36%" showRefreshButton="false" placeholder="Search" liveChange="onSearch">
+									<layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow"/>
+									</layoutData>
+									</SearchField>
+									<ToolbarSpacer/>
+									<!-- <Button text="Create" press="onCreate" /> -->
+									<MenuButton text="Create">
+									<layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow"/>
+									</layoutData>
+										<menu>
+											<Menu itemSelected="onMenuAction">
+												<MenuItem text="Via Registration Form" icon="sap-icon://form" press="onCreate"/>
+												<MenuItem text="Via Uploading Retailer Details" icon="sap-icon://excel-attachment" press="onUploadData" >
+													<!-- <items>
+														<MenuItem text="Upload File" icon="sap-icon://upload" press="onUpload">
+														</MenuItem>
+													</items> -->
+												</MenuItem>
+											</Menu>
+										</menu>
+									</MenuButton>
+									
+									<Button id="idSortBtn" icon="sap-icon://sort" press="handleSort" type="Transparent" class="sapUiTinyMarginEnd">
+									  <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow"/>
+									</layoutData></Button>
+									<Button id="idFilterBtn" icon="sap-icon://filter" press="onFilter" type="Transparent" class="sapUiNoMarginEnd sapUiNoMarginBegin">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow"/>
+									</layoutData></Button>
+									<Button icon="sap-icon://refresh" press="handleRefresh" type="Transparent">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow"/>
+									</layoutData></Button>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Left" width="6rem">
+								<Label text="Retailer ID" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Left" width="6rem">
+								<Label text="Retailer Name" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center" width="6rem">
+								<Label text="Retailer Type" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center" width="6rem">
+								<Label text="Phone" design="Bold" wrapping="true"/>
+							</Column>
+							
+							<Column hAlign="Center" width="8rem">
+								<Label text="Email ID" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center" width="6rem">
+								<Label text="City" design="Bold"/>
+							</Column>
+							
+							<Column hAlign="Center" width="4rem">
+								<Label text="Edit" design="Bold"/>
+							</Column>
+							<Column hAlign="Center" width="4rem">
+								<Label text="PDC Details" design="Bold" wrapping="true"/>
+							</Column>
+
+							<Column hAlign="Center" width="5rem">
+								<Label text="Active/Inactive" design="Bold" wrapping="true"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="onPress">
+								<cells>
+									<Text text="{path:'retailerData>RETAILER_ID', formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<Text text="{path:'retailerData>RETAILER_NAME', formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+                                    <Text text="{path:'retailerData>TO_RETAILER_TYPE/RETAILER_TYPE', formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+                                    <Text text="{parts:[{path:'retailerData>TO_ADDRESS/0/MOBILE_NO'},{path:'retailerData>TO_ADDRESS'}], formatter:'.formatter.getPrimaryMobile'}" wrapping="true"/>
+									<Text text="{parts:[{path:'retailerData>TO_ADDRESS/0/EMAIL_ID'},{path:'retailerData>TO_ADDRESS'}],formatter:'.formatter.getPrimaryEmail'}" wrapping="true"/>
+
+									<Text text="{parts:[{path:'retailerData>TO_ADDRESS/0/TO_CITY/CITY_DESC'},{path:'retailerData>TO_ADDRESS'}], formatter:'.formatter.getPrimaryCity'}" wrapping="true"/>
+								
+								<Button type="Transparent" class="sapUiTinyMarginBegin" icon="sap-icon://edit" press="onEdit" />
+								<Button class="sapUiTinyMarginBegin" icon="sap-icon://money-bills" press="onPdcDetails"
+									type="Transparent" id="idEmailButton" tooltip="PDC Details"></Button>
+								<Switch id="idBlockState" state="{= ${retailerData>BLOCKED}==='Y'? true : false}" customTextOn="I" customTextOff="A" tooltip="{= ${retailerData>BLOCKED}==='Y'? 'Inactive' : 'Active'}"
+								 class="sapUiTinyMarginBegin" change="onBlockRetailer"/> 
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

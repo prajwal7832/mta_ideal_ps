@@ -1,0 +1,277 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealcoustomeraccountstatement.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"  xmlns="sap.m" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:f="sap.ui.layout.form" xmlns:m="sap.ui.table" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	controllerName="com.ibs.ibsappidealcoustomeraccountstatement.controller.Home" height="100%" class="sapUiSizeCompact">
+	<html:style>
+		.btn{ height: 2.000rem; padding: 1rem; float: right; margin-right: 1rem; position: relative;}
+	</html:style>
+	<Page title="Account Statement" id="page" showHeader="false" class="sapUiSizeCompact">
+		<!--<smartFilterBar:SmartFilterBar id="smartFilterBar" filterBarExpanded="false" useToolbar="false" useSnapshot="false" showFilterConfiguration="false" entitySet="HeaderDetailsSet" search="onSubmit" filtersDialogSearchForFilters="dialog"-->
+		<!--	afterVariantLoad="dialog2" considerSelectionVariants="false" showRestoreButton="false" reset="onReset" filterChange="onSubmit">-->
+	<!-- <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+			adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+			singleContainerFullSize="false" class="sapUiSizeCompact">
+			<Label text="Transaction Period "/>
+				<RadioButtonGroup id="radioBtnGrpId" selectedIndex="0" columns="4" width="100%" class="sapUiMediumMarginBottom" select="onMonthSelect">
+					<buttons>
+						<RadioButton text="Fiscal Year"/>
+						<RadioButton text="Month"/>
+						<RadioButton text="Date Range"/>
+					</buttons>
+				</RadioButtonGroup>
+				<DatePicker id="monthId" class="disablekb" value="{AccountStatementModel>/MonthPicker}" visible="false" displayFormat="MMM, yyyy"
+					width="60%" valueFormat="yyyyMMdd" required="true"/>
+				<DatePicker id="dateToId" class="disablekb" value="{AccountStatementModel>/DateTo}" valueFormat="yyyyMMdd" width="60%" visible="false"
+					required="true"/>
+				<DatePicker id="yearId" class="disablekb" value="{AccountStatementModel>/Year}" displayFormat="yyyy-yyyy" width="60%"
+					valueFormat="yyyyMMdd" visible="true" required="true" change="onYearChange"/> -->
+			<Button text="Filter" type="Emphasized" icon="sap-icon://filter" press="onFilterButton" width="10%"></Button> 
+			<!--</HBox>-->
+		<!-- </f:SimpleForm> -->
+		<!--</smartFilterBar:SmartFilterBar>-->
+		<ObjectHeader id="ObjectId" title="{detailModel>/results/0/Name} ({detailModel>/results/0/Kunnr})" backgroundDesign="Translucent" visible="true"
+			fullScreenOptimized="true">
+			<statuses>
+				<ObjectStatus text="Security Deposit : {detailModel>/results/0/SecDeposit}"/>
+				<ObjectStatus text="Additional Deposit : {detailModel>/results/0/AddDeposit}"/>
+			</statuses>
+			<attributes>
+				<ObjectAttribute title="Opening Balance"
+					text="{detailModel>/results/0/Open_Bal} {parts:[{path:'detailModel>/results/0/Open_Bal'}, {path:'detailModel>/results/0/FlagIndOpen'}], formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.openFlag'}"/>
+				<ObjectAttribute title="Sales"
+					text="{path:'detailModel>/results/0/Invoice_Amt', formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.salesFlag'}"/>
+				<ObjectAttribute title="Sales Return"
+					text="{detailModel>/results/0/SalesReturn} {parts:[{path:'detailModel>/results/0/SalesReturn'},{path:'detailModel>/results/0/FlagIndSalRet'}], formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.collectionFlag'}"/>
+				<ObjectAttribute title="Debit Note"
+					text="{path:'detailModel>/results/0/Debit_Note', formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.debitNote'}"/>
+				<ObjectAttribute title="Credit Note"
+					text="{path:'detailModel>/results/0/Credit_Note', formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.creditNote'}"/>
+				<ObjectAttribute title="Collection"
+					text="{detailModel>/results/0/Collection} {parts:[{path:'detailModel>/results/0/Collection'}, {path:'detailModel>/results/0/FlagIndColl'}], formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.collectionFlag'}"/>
+				<ObjectAttribute title="Closing Balance"
+					text="{detailModel>/results/0/Close_Bal} {parts:[{path:'detailModel>/results/0/Close_Bal'}, {path:'detailModel>/results/0/FlagIndClose'}], formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.closeFlag'}"/>
+				<ObjectAttribute title="Period"
+					text="{path:'detailModel>/results/0/From_Date', formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.formatDate'} to {path:'detailModel>/results/0/To_Date',formatter:'com.ibs.ibsappidealcoustomeraccountstatement.controller.formatter.formatDate'}"/>
+			</attributes>
+		</ObjectHeader>
+
+		
+			<!-- <smartTable:SmartTable id="LineItemSmartTable" entitySet="ItemDetailsSet"   smartFilterId="smartFilterBar" 
+					tableType="ResponsiveTable"  beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true"  
+					 showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
+					 class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="true" > -->
+		 
+			<smartTable:SmartTable id="LineItemSmartTable" entitySet="ItemDetailsSet" smartFilterId="smartFilterBar" tableType="Table"
+			useExportToExcel="true" beforeExport="onBeforeExport" showRowCount="false" enableAutoBinding="true" demandPopin="false"
+			exportType="UI5Client" beforeRebindTable="onBeforeRebindTable" class="sapUiResponsiveContentPadding" useTablePersonalisation="true"
+			showTablePersonalisation="false" persistencyKey="SmartTableAnalytical_Explored">
+			<smartTable:layoutData>
+				<FlexItemData growFactor="1" baseSize="0%"/>
+			</smartTable:layoutData>
+			<smartTable:customToolbar>
+				<OverflowToolbar design="Transparent">
+					<ToolbarSpacer/>
+				</OverflowToolbar>
+			</smartTable:customToolbar>
+			<m:Table id="tableid" 
+			busyStateChanged="onContextChange" customFilter="onTableFilter" enableCellFilter="false" selectionMode="Single">
+				<m:columns >
+				
+					<m:Column sortProperty="Blart" filterProperty="Blart" autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Blart","columnIndex":"1", "leadingProperty": "Blart"}'/>
+						</m:customData>
+						<Label text="Doc Type"/>
+						<m:template>
+							<Text text="{Blart}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column sortProperty="Invoice" filterProperty="Invoice" autoResizable="true" width="9rem" showFilterMenuEntry="true">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Invoice","columnIndex":"2", "leadingProperty": "Invoice"}'/>
+						</m:customData>
+						<Label text="Invoice No."/>
+						<m:template>
+							<Link text="{Invoice}" press="onDocLinkPress"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column sortProperty="Belnr" filterProperty="Belnr" autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Belnr","columnIndex":"3", "leadingProperty": "Belnr"}'/>
+						</m:customData>
+						<Label text="Document Number"/>
+						<m:template>
+							<Text text="{Belnr}"/>
+						</m:template>
+					</m:Column>
+				
+					<m:Column sortProperty="Spart" filterProperty="Spart" autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Spart","columnIndex":"4", "leadingProperty": "Spart"}'/>
+						</m:customData>
+						<Label text="Division"/>
+						<m:template>
+							<Text text="{Spart}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column sortProperty="Date" filterProperty="Date" autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"date","columnKey": "Date","columnIndex":"5", "leadingProperty": "Date"}'/>
+						</m:customData>
+						<Label text="Date"/>
+						<m:template>
+							<Text text="{Date}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "CD_Amt","columnIndex":"6", "leadingProperty": "CD_Amt"}'/>
+						</m:customData>
+						<Label text="CD Amount"/>
+						<m:template>
+							<Text text="{CD_Amt}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Debit","columnIndex":"7", "leadingProperty": "Debit"}'/>
+						</m:customData>
+						<Label text="Debit"/>
+						<m:template>
+							<Text text="{Debit}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Credit","columnIndex":"8", "leadingProperty": "Credit"}'/>
+						</m:customData>
+						<Label text="Credit"/>
+						<m:template>
+							<Text text="{Credit}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column sortProperty="Location" filterProperty="Location" autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Location","columnIndex":"9", "leadingProperty": "Location"}'/>
+						</m:customData>
+						<Label text="Location"/>
+						<m:template>
+							<Text text="{Location}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column autoResizable="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "TDS_TCS","columnIndex":"10", "leadingProperty": "TDS_TCS"}'/>
+						</m:customData>
+						<Label text="TDS/TCS"/>
+						<m:template>
+							<Text text="{TDS_TCS}"/>
+						</m:template>
+					</m:Column>
+				
+					<m:Column visible="false" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Option","columnIndex":"12", "leadingProperty": "Option"}'/>
+						</m:customData>
+						<Label text="Date"/>
+						<m:template>
+							<Text text="{Option}"/>
+						</m:template>
+					</m:Column>
+					<m:Column visible="false" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "To_Date","columnIndex":"13", "leadingProperty": "To_Date"}'/>
+						</m:customData>
+						<Label text="To_Date"/>
+						<m:template>
+							<Text text="{To_Date}"/>
+						</m:template>
+					</m:Column>
+					<m:Column visible="false" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "From_Date","columnIndex":"14", "leadingProperty": "From_Date"}'/>
+						</m:customData>
+						<Label text="From Date"/>
+						<m:template>
+							<Text text="{From_Date}"/>
+						</m:template>
+					</m:Column>
+					<m:Column visible="false" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Posnr","columnIndex":"15", "leadingProperty": "Posnr"}'/>
+						</m:customData>
+						<Label text="Line Item"/>
+						<m:template>
+							<Text text="{Posnr}"/>
+						</m:template>
+					</m:Column>
+					<m:Column visible="false" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Prctr","columnIndex":"16", "leadingProperty": "Prctr"}'/>
+						</m:customData>
+						<Label text="Profit Center"/>
+						<m:template>
+							<Text text="{Prctr}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column visible="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Reference","columnIndex":"17", "leadingProperty": "Reference"}'/>
+						</m:customData>
+						<Label text="Refrence"/>
+						<m:template>
+							<Text text="{Reference}"/>
+						</m:template>
+					</m:Column>
+					
+					<m:Column visible="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Text","columnIndex":"18", "leadingProperty": "Text"}'/>
+						</m:customData>
+						<Label text="Text"/>
+						<m:template>
+							<Text text="{Text}"/>
+						</m:template>
+					</m:Column>
+					<m:Column visible="true" width="9rem">
+						<m:customData>
+							<core:CustomData key="p13nData" value='\{"type":"string","columnKey": "Balance","columnIndex":"19", "leadingProperty": "Balance"}'/>
+						</m:customData>
+						<Label text="Cumulative balance"/>
+						<m:template>
+							<Text text="{Balance}"/>
+						</m:template>
+					</m:Column>
+				</m:columns>
+			</m:Table>
+					</smartTable:SmartTable> 
+
+
+
+		<Button text="Back to Top" class="btn" press="onclick" type="Emphasized"></Button>
+		<!--<footer>-->
+		<!--	<OverflowToolbar>-->
+		<!--		<ToolbarSpacer/>-->
+		<!--		<Button id="btnDownloadId" visible="true" text="Download" icon="sap-icon://pdf-attachment" type="Emphasized" press="onDownloadPress"></Button>-->
+		<!--	</OverflowToolbar>-->
+		<!--</footer>-->
+	</Page>
+</mvc:View>
+

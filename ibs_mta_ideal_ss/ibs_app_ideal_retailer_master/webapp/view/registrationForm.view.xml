@@ -1,0 +1,284 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealretailermaster.controller.registrationForm"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealretailermaster.controller.registrationForm"
+    xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+	xmlns:t="sap.suite.ui.commons" xmlns:l="sap.ui.layout" >
+    <m:App>
+    <m:Page id="page" showHeader="false">
+        <m:content>
+        <ObjectPageLayout id="ObjectPageLayout" selectedSection="firstSection" enableLazyLoading="false" showEditHeaderButton="false"
+			editHeaderButtonPress="handleEditBtnPress">
+		<headerTitle>
+			<ObjectPageHeader objectTitle = "Retailer Registration Form">
+				<m:Button icon="sap-icon://nav-back" press="onBack" type="Emphasized"></m:Button>
+			</ObjectPageHeader>
+		</headerTitle>
+        <sections>
+			<ObjectPageSection title="Retailer Profile" id="firstSection">
+			<!-- <subSections> -->
+		<ObjectPageSubSection id="retailerProfile" title="">
+        <f:SimpleForm id="simpleForm2" editable="true" layout="ResponsiveGridLayout" columnsM="1" columnsL="1" columnsXL="1"
+			class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+			<!-- <core:Title text=""/> -->
+			<m:Label text="Retailer Name " design="Bold" required="true"/>
+			<m:Input id="idName" value="{blankJson>/RETAILER_NAME}" placeholder="Enter Retailer Name"
+				change="handleRetailerName" width="19rem"/>
+
+			<m:Label text="Retailer Type" design="Bold" required="true"/>
+			<!-- value="{blankJson>/RETAILER_TYPE_ID}" placeholder="Select Retailer Type" -->
+			<m:Select id="idRetailerType" width="19rem" editable="true" forceSelection="false"
+			items="{RetailerTypeMaster>/}" change="handleRetailerType">
+			<core:Item key="{RetailerTypeMaster>RETAILER_TYPE_ID}" text="{RetailerTypeMaster>RETAILER_TYPE}"/>
+			</m:Select>
+
+            <m:Label text="Retailer Classification" design="Bold" required="true"/>
+			<m:Select id="idRetailserClass" width="19rem" forceSelection="false"
+			 selectedKey="{blankJson>/RETAILER_CLASS}"
+			 change="handleRetailerClass" >
+			  <core:Item key="A" text="A"/>
+			 <core:Item key="B" text="B"/>
+			 <core:Item key="C" text="C"/>
+			</m:Select>
+
+            <m:Label text="Payment Terms(Days)" design="Bold" required="true"/>
+			<!-- selectedKey="{blankJson>/PAY_TERM}" -->
+			<m:Select id="idPaymentTerms" width="19rem" forceSelection="false"
+			 change="handlePaymentTerms" >
+				<core:Item key="15" text="15"/>
+                <core:Item key="30" text="30"/>
+                <core:Item key="45" text="45"/>
+                <core:Item key="60" text="60"/>
+			    <core:Item key="90" text="90"/>
+			</m:Select>
+		</f:SimpleForm>
+        </ObjectPageSubSection>
+        </ObjectPageSection>
+
+		<!-- Address Details -->
+
+		<ObjectPageSection>
+
+        <ObjectPageSubSection id="addressDetails" title="Address Details">
+
+		<ui:Table rows="{blankJson>/retailerAddress}" id="trAddId" selectionMode="None" ariaLabelledBy="title" visibleRowCount="2">
+		<ui:extension>
+			<m:OverflowToolbar style="Clear">
+				<m:ToolbarSpacer/>
+				<m:Button text="Add Address" type="Emphasized" class="sapUiTinyMarginBottom" press="handleAddress"/>
+			</m:OverflowToolbar>
+		</ui:extension>
+		<ui:columns>
+			<ui:Column width="15rem">
+				<m:Label required="true" text="Address Type" design="Bold" wrapping="true"/>
+				<ui:template>
+						<m:Select width="14rem" forceSelection="false" showSecondaryValues="true" items="{addreessTypeModel>/}"
+						editable="true" change="handleAddressType" selectedKey="{blankJson>ADDRESS_TYPE}">
+						<!-- selectedKey="{blankJson>ADDRESS_TYPE}"  -->
+							<core:ListItem key="{addreessTypeModel>ADDRESS_TYPE}" text="{addreessTypeModel>ADDRESS_DESC}" additionalText=""/>
+						</m:Select>
+						
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="10rem">
+				<m:Label required="true" text="Street No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>STREET_NO}" change="handleStreetNo" placeholder="Enter Street No" maxLength="60"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="12rem">
+				<m:Label required="true" text="Address Line 1" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>ADDRESS_LINE_1}" change="handleAddressLine1" placeholder="Enter Address Line 1" maxLength="60"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="12rem">
+				<m:Label text="Address Line 2" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>ADDRESS_LINE_2}" change="handleAddressLine2" placeholder="Enter Address Line 2" maxLength="40"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="12rem">
+				<m:Label text="Address Line 3" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>ADDRESS_LINE_3}" change="handleAddressLine3" placeholder="Enter Address Line 3" maxLength="40"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="10rem">
+				<m:Label required="true" text="Country" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input placeholder="Select Country" valueHelpOnly="true" value="{blankJson>COUNTRY_DESC}" showValueHelp="true"
+					 valueHelpRequest="handleCountryDialog" change="handleCountryChange" valueState="{blankJson>countryValueState}"/>
+				</ui:template>
+			</ui:Column>
+			<ui:Column width="10rem">
+				<m:Label required="true" text="Region" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>REGION_DESC}" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="handleRegionDialog"
+					valueState="{blankJson>regionValueState}" placeholder="Select Region" maxLength="241"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="10rem">
+				<m:Label required="true" text="City" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>CITY_DESC}" valueHelpOnly="true" placeholder="Select City" showValueHelp="true"
+					valueState="{blankJson>cityValueState}" valueHelpRequest="handleCityDialog" maxLength="241"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="8rem">
+				<m:Label required="true" text="Postal Code" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>POSTAL_CODE}" placeholder="Enter Postal Code" change="_postalCodeVal" 
+					valueState="{blankJson>postalCodeValueState}" maxLength="6"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="12rem">
+				<m:Label required="true" text="Mobile No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>MOBILE_NO}" placeholder="Enter Mobile No" 
+					change="_validateMobileNo" valueState="{blankJson>mobNoValueState}" maxLength="10"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="12rem">
+				<m:Label text="Telephone No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>TELEPHONE_NO}" placeholder="Enter Telephone No" change="_validateTelephoneNo" 
+					valueState="{blankJson>telPhoneValueState}" maxLength="15"/>
+				</ui:template>
+			</ui:Column>
+			
+			<ui:Column width="12rem">
+				<m:Label required="true" text="Email ID" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>EMAIL_ID}" placeholder="Enter Email ID" change="_validateEmail" valueState="{blankJson>emailIdValueState}" maxLength="241"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="16rem">
+				<m:Label required="true" text="Contact Person" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>CONTACT_PERSON}" placeholder="Enter Contact Person"
+					valueState="{blankJson>contPersonValueState}" change="_validateContactPerson" maxLength="241"/>
+				</ui:template>
+			</ui:Column>
+
+			<ui:Column width="12rem">
+				<m:Label text="Fax No" design="Bold" wrapping="true"/>
+				<ui:template>
+					<m:Input value="{blankJson>FAX_NO}" placeholder="Enter Fax No"
+					valueState="{blankJson>faxNoValueState}" change="_validateFaxNo" maxLength="10"/>
+				</ui:template>
+			</ui:Column>
+			
+			<ui:Column width="1.7rem">
+				<m:Label text="" design="Bold"/>
+					<ui:template>
+						<core:Icon src="sap-icon://delete" color="red" press="handleDeleteAddress" class="sapUiTinyMarginEnd"/>
+					</ui:template>
+			</ui:Column>
+		</ui:columns>
+	</ui:Table>
+
+    </ObjectPageSubSection>
+    </ObjectPageSection>
+
+    <ObjectPageSection>
+        <ObjectPageSubSection id="bankDetails" title="Bank Details">
+
+         <f:SimpleForm id="bankDetailsForm" editable="true" layout="ResponsiveGridLayout" columnsM="2" columnsL="3" columnsXL="4"
+			class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle" labelSpanS ="5" labelSpanL="5" labelSpanM="5" labelSpanXL="4">
+            <core:Title text=""/>
+			<m:Label text="Bank Name" design="Bold" required="true"/>
+			<m:Input id="idNameOfBank" value="{blankJson>/NAME_OF_BANK}" placeholder="Enter Bank Name"
+				change="handleNameOfBank"/>
+            <m:Label text="UPI ID" design="Bold" required="false"/>
+			<!-- <m:HBox> -->
+			<m:Input value="{blankJson>/UPI_ID}" placeholder="Enter UPI ID" id="idUPI"
+				change="handleUpi"/>
+
+            <core:Title text=""/>
+			<m:Label text="Account Number" design="Bold" required="true"/>
+			<m:Input id="idAccountNo" value="{blankJson>/BANK_ACC_NO}" change="_validateAccountNo" placeholder="Enter Account Number" maxLength = "18"/>
+
+            <core:Title text=""/>
+			<m:Label text="IFSC Code" design="Bold" required="true"/>
+			<m:Input id="idIfsc" value="{blankJson>/IFSC_CODE}" placeholder="Enter IFSC Code"
+				change="_validateIfscCode" maxLength="11"/>
+            
+        </f:SimpleForm>
+
+        </ObjectPageSubSection>
+        </ObjectPageSection>
+
+        <ObjectPageSection>
+            <ObjectPageSubSection id="taxDetailsObjSub" title="Tax Details">
+            <f:SimpleForm id="taxDetails" editable="true" layout="ResponsiveGridLayout" columnsM="3" columnsL="3" columnsXL="3"
+			labelSpanS ="5" labelSpanL="5" labelSpanM="5" labelSpanXL="5" class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+                <core:Title text=""/>
+                <m:Label text="Registered Tax ID" design="Bold" required="true"/>
+                <m:Input id="idGstNo" value="{blankJson>/REGISTERED_TAX_ID}" placeholder="Enter GSTN/Vat No"
+                    change="_validateGstNo" maxLength="15"/>
+                <core:Title text=""/>
+                <m:Label text="PAN No" design="Bold" required="false"/>
+                <m:Input id="idPan" value="{blankJson>/PAN_NO}" placeholder="Enter PAN No"
+                    change="_validatePanNo" maxLength="10"/>
+                <!-- <core:Title text=""/>
+                 <m:Label text="VAT No" design="Bold" required="true"/>
+			    <m:Input id="idVat" value="{blankJson>/VAT_NO}" placeholder="Enter VAT No"
+				change="_validateVatNo" maxLength="15"/> -->
+            </f:SimpleForm>
+            </ObjectPageSubSection>
+        </ObjectPageSection>
+
+        <ObjectPageSection>
+             <ObjectPageSubSection id="idAttachments" title="Attachments">
+            <m:VBox>
+            <m:MessageStrip class="sapUiTinyMarginTop" type="Information" text="Supported Attachment types : txt,jpg,png,docx,pdf,zip,xlsx and Attachment size upto : 5MB" />
+			<m:HBox>
+            <m:Label text="Attach File " required="true" class="sapUiSmallMarginTop"/>
+             <u:FileUploader class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+                        fileType = "txt,jpg,docx,pdf,zip,xlsx,png"
+						id="fileUploader"
+                        maximumFileSize="5.0"
+						uploadComplete="handleUploadComplete"
+						change="handleValueChange"
+						typeMissmatch="handleTypeMissmatch"
+						style="Emphasized"
+                        icon="sap-icon://attachment"
+						placeholder="Choose a file...">
+			</u:FileUploader>
+            </m:HBox>
+            </m:VBox>
+        </ObjectPageSubSection>
+        </ObjectPageSection>
+         </sections>
+        </ObjectPageLayout>
+    </m:content>
+			<m:footer>
+				<m:Bar>
+					<m:contentLeft>
+						<m:Button id="messagePopoverBtn" visible="false" type="Ghost" icon="sap-icon://message-popup"
+						 text="" press=".handleMessagePopoverPress"
+							ariaHasPopup="Dialog"/>
+						<!--<m:Button text="" press="handleSampleData"/>-->
+					</m:contentLeft>
+
+					<m:contentRight>
+						<m:Button id="saveBt" text="Save" press="onRetailerDataFetch" type="Success" enabled="true"/>
+					</m:contentRight>
+				</m:Bar>
+			</m:footer>
+    </m:Page>
+    </m:App>
+</mvc:View>
+

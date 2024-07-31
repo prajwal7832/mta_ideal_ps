@@ -1,0 +1,113 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealretailerinvoice.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealretailerinvoice.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar" xmlns:u="sap.ui.unified"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}" showHeader="false" showFooter="false">
+        <!-- <content /> -->
+       
+		<content>
+    <fb:FilterBar id="idFilterBar" visible="true" reset="onReset" search="onSearch" showRestoreButton="false" useToolbar="false" showFilterConfiguration="false"
+						 showGoOnFB="false" filterContainerWidth="9rem">
+						<fb:filterItems>
+          <fb:FilterItem name="A" label="Start Date">
+								<fb:control>
+									<DatePicker id="idStartDate" width="7rem" value="{retailerPaymentModel>DEPOSIT_DATE}"/>
+									
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="B" label="End Date">
+								<fb:control>
+									<DatePicker id="idEndDate" width="7rem" value="{retailerPaymentModel>DEPOSIT_DATE}"/>
+									
+								</fb:control>
+							</fb:FilterItem>
+
+              <fb:FilterItem name="C" label="Invoice No">
+								<fb:control>
+									<Input id="idInvoice" placeholder="Select Invoice No" showSuggestion="true" showValueHelp="true"
+									 valueHelpOnly="true" valueHelpRequest="onInvoiceFrag"></Input>
+								</fb:control>
+							</fb:FilterItem>
+
+              <fb:FilterItem name="D" label="Retailer">
+								<fb:control>
+									<Input id="idRetailer" placeholder="Select Retailer" showSuggestion="true" showValueHelp="true"
+									 valueHelpOnly="true" valueHelpRequest="onRetailerFrag"></Input>
+								</fb:control>
+							</fb:FilterItem>
+
+							<fb:FilterItem name="E" label="Submit/Refresh">
+								<fb:control>
+									<l:HorizontalLayout>
+										<Button text="Go" press="onSelectGo" type="Emphasized" visible="true"/>
+										<Button id="refresh" press="handleRefresh" icon="sap-icon://refresh" type="Transparent" visible="true"/>
+									</l:HorizontalLayout>
+								</fb:control>
+							</fb:FilterItem>
+              </fb:filterItems>
+                      <!-- <core:Title text="" /> -->
+              </fb:FilterBar>
+		
+		<Table id="distributorTblData" items = "{retailerModel>/}" growing="true"
+     		growingThreshold="10" autoPopinMode="true" sticky="HeaderToolbar,ColumnHeaders" fixedLayout="true"> 
+           <!-- <headerToolbar visible="false">
+              <Toolbar>
+                <ToolbarSpacer/>
+                  <SearchField id="idSearchValue" width="29%" class="sapUiMediumMarginTopBottom" placeholder="Search by Material Group,Material" liveChange="onSearch"/>
+                  <Button icon="sap-icon://excel-attachment" press="onExport" visible="true" />
+                  <u:FileUploader id="FileUploaderId" buttonText="Upload" sameFilenameAllowed="true" iconOnly="false"
+                  buttonOnly="true" fileType="XLSX,xlsx" icon="sap-icon://upload" iconFirst="true" 
+                  style="Emphasized" change="onUpload" class="sapUiTinyMarginBottom"/>
+            </Toolbar>
+            </headerToolbar> -->
+              <columns>
+              <Column hAlign="Center">
+                <Text text="Sales Order No" wrapping="true"/>
+              </Column>
+               <Column hAlign="Center">
+                <Text text="Retailer" wrapping="true"/>
+              </Column>   
+			  
+              <Column hAlign="Center">
+                <Text text="Delivery No"/>
+              </Column>
+              <Column hAlign="Center">
+                <Text text="Invoice No" />
+              </Column>
+              <Column hAlign="Center">
+                <Text text="Invoice Date" wrapping="true"/>
+              </Column>
+             
+               <Column id="Action" hAlign="Center" visible="true">
+                <Text text="Action" />
+              </Column>            
+              </columns>
+
+              <items>
+              <ColumnListItem type="Inactive" press="onPress">
+                <cells><Text text="{path:'retailerModel>SO_NO',formatter:'.formatter.getDataNullValue'}"/></cells>
+                 <cells><ObjectIdentifier title="{path:'retailerModel>RETAILER_NAME',formatter:'.formatter.getDataNullValue'}"
+										 text="{path:'retailerModel>RETAILER_ID',formatter:'.formatter.getDataNullValue'}"/></cells>
+              	
+                <cells><Text text ="{path:'retailerModel>DELIVERY_NO',formatter:'.formatter.getDataNullValue'}"/></cells>
+                <cells><Text text="{path:'retailerModel>INVOICE_NO',formatter:'.formatter.getDataNullValue'}" /></cells>
+                <cells> <Text text ="{path:'retailerModel>INVOICE_DATE',formatter:'.formatter.getDataNullValue',type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd.MM.yyyy' , UTC: false }}" textAlign="Right"/></cells>
+                <!-- <cells><ObjectStatus text="{path:'retailerModel>STATUS',formatter:'.formatter.getStatusDesc'}"
+					state="{path:'retailerModel>STATUS', formatter:'.formatter.getStatus'}"/></cells> -->
+                <cells><Button icon="sap-icon://print" press="onPrint" type="Transparent"/></cells>
+              </ColumnListItem>
+              </items>
+
+            </Table>
+			</content>
+    </Page>
+</mvc:View>
+

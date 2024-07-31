@@ -1,0 +1,389 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ibs.ibsappidealrequestreportfiori",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.14.2",
+      "toolsId": "3d69f974-420e-42e3-8db2-e3c54cd81f93"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/ideal-report-fiori-srv/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "RequestReportFiori-display": {
+          "semanticObject": "RequestReportFiori",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.126.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibs.ibsappidealrequestreportfiori.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "RequestInfoList",
+          "target": [
+            "RequestInfoList"
+          ]
+        },
+        {
+          "pattern": "RequestInfo({key}):?query:",
+          "name": "RequestInfoObjectPage",
+          "target": [
+            "RequestInfoList",
+            "RequestInfoObjectPage"
+          ]
+        }
+      ],
+      "targets": {
+        "RequestInfoList": {
+          "type": "Component",
+          "id": "RequestInfoList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/RequestInfo",
+              "variantManagement": "Page",
+              "navigation": {
+                "RequestInfo": {
+                  "detail": {
+                    "route": "RequestInfoObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "selectionMode": "None"
+                  },
+                  "columns": {
+                    "DataField::REQUEST_NUM": {
+                      "width": "137px"
+                    },
+                    "Entitydiscribtion": {
+                      "header": "Discribution/Entity",
+                      "position": {
+                        "anchor": "DataField::ENTITY_CODE",
+                        "placement": "After"
+                      },
+                      "template": "com.ibs.ibsappidealrequestreportfiori.ext.fragment.Entitydiscribtion",
+                      "availability": "Default"
+                    }
+                  }
+                }
+              },
+              "initialLoad": "Enabled"
+            }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
+        },
+        "RequestInfoObjectPage": {
+          "type": "Component",
+          "id": "RequestInfoObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/RequestInfo",
+              "controlConfiguration": {
+                "TO_ATTACHMENTS/@com.sap.vocabularies.UI.v1.LineItem#CompanyProfile": {
+                  "columns": {
+                    "Download": {
+                      "header": "Download",
+                      "position": {
+                        "anchor": "DataField::FILE_NAME",
+                        "placement": "After"
+                      },
+                      "template": "com.ibs.ibsappidealrequestreportfiori.ext.fragment.Download"
+                    }
+                  }
+                },
+                "TO_ADDRESS/@com.sap.vocabularies.UI.v1.LineItem#OtherOfficeAddress": {
+                  "tableSettings": {
+                    "quickVariantSelection": {
+                      "showCounts": true,
+                      "paths": [
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#SimpleFilter"
+                        },
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#SimpleFilteroth"
+                        }
+                      ]
+                    },
+                    "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "DataField::STREET1": {
+                      "width": "137px"
+                    }
+                  }
+                },
+                "TO_CONTACTS/@com.sap.vocabularies.UI.v1.LineItem#OtherContacts": {
+                  "tableSettings": {
+                    "quickVariantSelection": {
+                      "showCounts": true,
+                      "paths": [
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#SimpleFilter1"
+                        },
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#SimpleFilter3"
+                        }
+                      ]
+                    },
+                    "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "DataField::TO_COUNTRY::LAND1": {
+                      "width": "248px"
+                    },
+                    "DataField::DESIGNATION": {
+                      "width": "248px"
+                    },
+                    "DataField::EMAIL": {
+                      "width": "248px"
+                    },
+                    "DataField::CONTACT_NO": {
+                      "width": "248px"
+                    },
+                    "DataField::MOBILE_NO": {
+                      "width": "248px"
+                    }
+                  }
+                },
+                "TO_BANKS/@com.sap.vocabularies.UI.v1.LineItem#OtherBankDetails": {
+                  "tableSettings": {
+                    "quickVariantSelection": {
+                      "showCounts": true,
+                      "paths": [
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#tablebankdetail"
+                        },
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#tablebankdetail2"
+                        }
+                      ]
+                    }
+                  },
+                  "columns": {
+                    "DataField::BANK_COUNTRY": {
+                      "width": "112px"
+                    }
+                  }
+                },
+                "TO_BUSINESS_HISTORY/@com.sap.vocabularies.UI.v1.LineItem#BusinessHistoryDetails": {
+                  "columns": {
+                    "DataField::DEALERSHIP": {
+                      "width": "240px"
+                    },
+                    "DataField::PURCHASES": {
+                      "width": "240px"
+                    },
+                    "Purchases": {
+                      "header": "Purchases",
+                      "position": {
+                        "anchor": "DataField::PURCHASES",
+                        "placement": "After"
+                      },
+                      "template": "com.ibs.ibsappidealrequestreportfiori.ext.fragment.Purchases"
+                    },
+                    "DataField::PROD_GROUP": {
+                      "width": "240px"
+                    },
+                    "DataField::SINCE": {
+                      "width": "240px"
+                    },
+                    "Sincefragmet": {
+                      "header": "Since",
+                      "position": {
+                        "anchor": "DataField::SINCE",
+                        "placement": "After"
+                      },
+                      "template": "com.ibs.ibsappidealrequestreportfiori.ext.fragment.Sincefragmet"
+                    }
+                  }
+                },
+                "TO_CUSTOMERS/@com.sap.vocabularies.UI.v1.LineItem#CustomerDetails": {
+                  "columns": {
+                    "DataField::CUST_NO": {
+                      "width": "310px"
+                    },
+                    "DataField::YEAR2": {
+                      "width": "310px"
+                    },
+                    "DataField::YEAR1": {
+                      "width": "310px"
+                    },
+                    "DataField::CUSTOMER_NAME": {
+                      "width": "310px"
+                    },
+                    "CustomerDetails": {
+                      "header": "Customer Details",
+                      "position": {
+                        "anchor": "DataField::CUST_NO",
+                        "placement": "After"
+                      },
+                      "template": "com.ibs.ibsappidealrequestreportfiori.ext.fragment.CustomerDetails"
+                    }
+                  }
+                },
+                "TO_PROMOTERS/@com.sap.vocabularies.UI.v1.LineItem#ManagementDetails": {
+                  "columns": {
+                    "DataField::WORK_EXP": {
+                      "width": "207px"
+                    },
+                    "DataField::NAME": {
+                      "width": "207px"
+                    },
+                    "DataField::YRS_IN_COMP": {
+                      "width": "207px"
+                    },
+                    "DataField::DESIGNATION": {
+                      "width": "207px"
+                    },
+                    "DataField::ROLE": {
+                      "width": "207px"
+                    },
+                    "DataField::QUALIFICATION": {
+                      "width": "207px"
+                    }
+                  },
+                  "tableSettings": {
+                    "enableExport": true
+                  }
+                },
+                "TO_ATTACHMENTS/@com.sap.vocabularies.UI.v1.LineItem#AttachmentTable": {
+                  "columns": {
+                    "FileDownload": {
+                      "header": "File Download",
+                      "position": {
+                        "anchor": "DataField::TO_CMS::FILE_CONTENT",
+                        "placement": "After"
+                      },
+                      "template": "com.ibs.ibsappidealrequestreportfiori.ext.fragment.FileDownload"
+                    }
+                  }
+                }
+              },
+              "sectionLayout": "Tabs"
+            }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/RequestInfo({key})"
+        }
+      },
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsBeginExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "ibs_bs_ideal_ps"
+  }
+}
+

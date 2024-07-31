@@ -1,0 +1,133 @@
+<mvc:View controllerName="com.ibs.ibsappidealorderdispatch.controller.Displaypage"
+    xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+	xmlns:t="sap.suite.ui.commons" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout">
+	<m:App id="idApp">
+	<!-- <pages> -->
+    <m:Page id="page" showHeader="false">
+	<m:content>
+    
+			 	<ObjectPageLayout id="idObj">
+				<headerTitle>
+				<ObjectPageDynamicHeaderTitle class="sapUiNoMarginBottom">
+				<actions>
+					<m:Title text="Stock Selection" class="titleWeight"/>
+					<m:ToolbarSpacer />
+					<m:Button icon="sap-icon://nav-back" type="Emphasized" press="onBackMaster" class="sapUiNoMarginTop sapUiNoMarginBottom"/>
+			 	
+				</actions>
+				</ObjectPageDynamicHeaderTitle>
+				</headerTitle>
+				<sections>
+					<ObjectPageSection title = "Header" showTitle="true">
+					
+					<subSections>
+					<ObjectPageSubSection title="Header" showTitle="true">
+    <f:SimpleForm id="simpleForm1" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+							adjustLabelSpan="false" columnsXL="3" columnsL="3" columnsM="2" class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+					<f:content>
+					<core:Title/>
+					<m:Label text="Sales Order No" design="Bold"/>
+					<m:Text text ="{path:'retailerHeaderModel>/0/SO_NO', formatter:'.formatter.getDataNullValue'}"/>
+
+					<m:Label text="Retailer Code " design="Bold"/>
+					<m:Text id="idName" text="{path:'retailerHeaderModel>/0/RETAILER_ID', formatter:'.formatter.getDataNullValue'}" />
+					
+					<core:Title/>
+					<m:Label text="Retailer Name" design="Bold"/>
+					<m:Text text="{path:'retailerHeaderModel>/0/RETAILER_NAME', formatter:'.formatter.getDataNullValue'}" />
+
+					<m:Label text="Total Amount" design="Bold"/>
+					<m:Text text="{path:'retailerHeaderModel>/0/GROSS_TOTAL', formatter:'.formatter.formatterAmount'}" />
+					</f:content>
+			</f:SimpleForm>
+			</ObjectPageSubSection>
+							</subSections>
+							</ObjectPageSection>
+
+		<ObjectPageSection title="Items" showTitle="true">
+		<subSections>
+		<ObjectPageSubSection title="Items" showTitle="true">
+        <!-- <content> -->
+		<m:Table id="idProductsTable" inset="false" items="{retailerDetailModel>/}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<!-- <dependents> -->
+								<!-- <plugins:m:ColumnResizer/> hSpacing="2rem" showGoOnFB="false"-->
+							<!-- </dependents> -->
+						<!-- <headerToolbar>
+							<OverflowToolbar visible="false">
+								<Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/>
+								<content>
+									<ToolbarSpacer/>
+									<SearchField id="oSearchMasterData" visible="true" width="40%" placeholder="Search"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar> -->
+						<m:columns>
+							<m:Column hAlign="Left" width="9rem">
+								<m:Label text="Material" design="Bold" wrapping="true"/>
+							</m:Column>
+							<!-- <m:Column hAlign="Center" width="13rem">
+								<m:Label text="Available Qty" design="Bold" wrapping="true"/>
+							</m:Column> -->
+							<m:Column hAlign="Right" width="11rem">
+								<m:Label text="Order Qty" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Right">
+								<m:Label text="Pending Qty" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Right">
+								<m:Label text="Dispatched So Far" wrapping="true" design="Bold"/>
+							</m:Column>
+                            <m:Column hAlign="Right">
+								<m:Label text="Free Item" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label text="Select Stock" design="Bold" wrapping="true"/>
+							</m:Column>
+							
+						</m:columns>
+						<m:items>
+							<m:ColumnListItem type="Inactive" press="onPress">
+								<m:cells>
+									<m:ObjectIdentifier title="{retailerDetailModel>MATERIAL_DESC}"
+                                     text="{path:'retailerDetailModel>MATERIAL_CODE',formatter:'.formatter.getDataNullValue'}"/>
+									
+									<m:Text textAlign="End" text="{retailerDetailModel>QUANTITY}" wrapping="true"/>
+									
+									<!-- <m:Text text="{retailerDetailModel>ORDER_QUANTITY}"/> -->
+									
+									<m:Text textAlign="End" text="{path:'retailerDetailModel>PENDING_QUANTITY',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									
+									<m:Text textAlign="End" text="{retailerDetailModel>DISPATCH_QTY}"/>
+									<m:Text textAlign="End" text="{path:'retailerDetailModel>FREE_ITEM',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<m:Button tooltip="Select-Stock" icon="sap-icon://request" type="Ghost" press="handleQtySelection" class="sapUiTinyMarginEnd"
+									 enabled="{path:'retailerDetailModel>PENDING_QUANTITY',formatter:'.formatter.setEditQtyEnabled'}"/>
+									<!-- sap-icon://bar-code -->
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+					</m:Table>
+					</ObjectPageSubSection>
+				</subSections>
+							</ObjectPageSection>
+						</sections>
+					</ObjectPageLayout>
+			</m:content>
+			<m:footer>
+				<m:Bar>
+					
+					<m:contentRight>
+						<m:Button id="saveBt" text="Proceed" press="onSelect" type="Emphasized" enabled="true"/>
+					</m:contentRight>
+				</m:Bar>
+			</m:footer>
+    </m:Page>
+	<!-- </pages> -->
+	</m:App>
+</mvc:View>

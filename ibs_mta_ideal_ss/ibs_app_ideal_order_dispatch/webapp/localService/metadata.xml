@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ideal_retailer_dispatch" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="RetailerDetails" EntityType="ideal_retailer_dispatch.RetailerDetails"/>
+                <EntitySet Name="RetailerDeliveryHeader" EntityType="ideal_retailer_dispatch.RetailerDeliveryHeader">
+                    <NavigationPropertyBinding Path="TO_DIVISION" Target="divisionMaster"/>
+                    <NavigationPropertyBinding Path="TO_DELIVERY_ITEM_REF" Target="RetailerDeliveryItem"/>
+                </EntitySet>
+                <EntitySet Name="RetailerDeliveryItem" EntityType="ideal_retailer_dispatch.RetailerDeliveryItem"/>
+                <EntitySet Name="RetailerInvoiceHeader" EntityType="ideal_retailer_dispatch.RetailerInvoiceHeader">
+                    <NavigationPropertyBinding Path="PAYMENT_STATUS_REF" Target="PaymentEntryStatusMaster"/>
+                    <NavigationPropertyBinding Path="TO_DIVISION" Target="divisionMaster"/>
+                    <NavigationPropertyBinding Path="TO_INVOICE_ITEM_REF" Target="RetailerInvoiceItem"/>
+                </EntitySet>
+                <EntitySet Name="RetailerInvoiceItem" EntityType="ideal_retailer_dispatch.RetailerInvoiceItem"/>
+                <EntitySet Name="RetailerSoHeader" EntityType="ideal_retailer_dispatch.RetailerSoHeader">
+                    <NavigationPropertyBinding Path="TO_STATUS" Target="statusMaster"/>
+                    <NavigationPropertyBinding Path="TO_DIVISION" Target="divisionMaster"/>
+                    <NavigationPropertyBinding Path="TO_SO_ITEM_REF" Target="RetailerSoItems"/>
+                </EntitySet>
+                <EntitySet Name="RetailerSoItems" EntityType="ideal_retailer_dispatch.RetailerSoItems"/>
+                <EntitySet Name="divisionMaster" EntityType="ideal_retailer_dispatch.divisionMaster"/>
+                <EntitySet Name="statusMaster" EntityType="ideal_retailer_dispatch.statusMaster"/>
+                <EntitySet Name="retailerMaster" EntityType="ideal_retailer_dispatch.retailerMaster"/>
+                <EntitySet Name="master_credit_debit_tx" EntityType="ideal_retailer_dispatch.master_credit_debit_tx"/>
+                <EntitySet Name="PaymentEntryStatusMaster" EntityType="ideal_retailer_dispatch.PaymentEntryStatusMaster"/>
+                <EntitySet Name="Grn_Stock" EntityType="ideal_retailer_dispatch.Grn_Stock"/>
+                <ActionImport Name="dispatchCreation" Action="ideal_retailer_dispatch.dispatchCreation"/>
+            </EntityContainer>
+            <EntityType Name="RetailerDetails">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="RETAILER_ID"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="NAME_OF_BANK" Type="Edm.String" MaxLength="50"/>
+                <Property Name="BANK_ACC_NO" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IFSC_CODE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="UPI_ID" Type="Edm.String" MaxLength="30"/>
+                <Property Name="REGISTERED_TAX_ID" Type="Edm.String" MaxLength="15"/>
+                <Property Name="PAN_NO" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CREATION_DATE" Type="Edm.Date"/>
+                <Property Name="RETAILER_TYPE" Type="Edm.Int32"/>
+                <Property Name="BLOCKED" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CHANGE_DATE" Type="Edm.Date"/>
+                <Property Name="RETAILER_CLASS" Type="Edm.String" MaxLength="1"/>
+                <Property Name="PAY_TERM" Type="Edm.Int32"/>
+                <Property Name="FIELD_1" Type="Edm.String" MaxLength="50"/>
+                <Property Name="FIELD_2" Type="Edm.String" MaxLength="50"/>
+                <Property Name="FIELD_3" Type="Edm.String" MaxLength="50"/>
+                <Property Name="FIELD_4" Type="Edm.String" MaxLength="50"/>
+                <Property Name="FIELD_5" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="RetailerDeliveryHeader">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="DELIVERY_NO"/>
+                    <PropertyRef Name="SO_NO"/>
+                    <PropertyRef Name="RETAILER_ID"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DELIVERY_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SO_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="CREATION_DATE" Type="Edm.Date"/>
+                <Property Name="DIVISION" Type="Edm.String" MaxLength="5"/>
+                <Property Name="TRANSPORTER_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DESTINATION" Type="Edm.String" MaxLength="100"/>
+                <Property Name="VEHICLE_NO" Type="Edm.String" MaxLength="15"/>
+                <Property Name="GROSS_WEIGHT" Type="Edm.Double"/>
+                <Property Name="GROSS_TOTAL" Type="Edm.String" MaxLength="100"/>
+                <Property Name="TOTAL_NO_PACKAGES" Type="Edm.Int32"/>
+                <Property Name="E_WAY_BILL_NO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="E_WAY_BILL_DATE" Type="Edm.Date"/>
+                <Property Name="LR_DATE" Type="Edm.Date"/>
+                <Property Name="LR_NO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="SHIPPING_CHARGES" Type="Edm.Double"/>
+                <Property Name="REFERENCE" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="TO_DIVISION" Type="ideal_retailer_dispatch.divisionMaster">
+                    <ReferentialConstraint Property="DIVISION" ReferencedProperty="DIVISION"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_DELIVERY_ITEM_REF" Type="Collection(ideal_retailer_dispatch.RetailerDeliveryItem)"/>
+            </EntityType>
+            <EntityType Name="RetailerDeliveryItem">
+                <Key>
+                    <PropertyRef Name="DELIVERY_NO"/>
+                    <PropertyRef Name="DELIVERY_ITEM_NO"/>
+                </Key>
+                <Property Name="DELIVERY_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DELIVERY_ITEM_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="BATCH" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MATERIAL_GROUP_DESC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="MATERIAL_CODE" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ORDER_QUANTITY" Type="Edm.Int32"/>
+                <Property Name="DELIVERY_QUANTITY" Type="Edm.Int32"/>
+                <Property Name="UNIT_OF_MEASURE" Type="Edm.String" MaxLength="3"/>
+                <Property Name="STD_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BASE_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISC_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISC_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TOTAL_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TAXES_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="HSN_CODE" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="RetailerInvoiceHeader">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="SO_NO"/>
+                    <PropertyRef Name="RETAILER_ID"/>
+                    <PropertyRef Name="INVOICE_NO"/>
+                    <PropertyRef Name="DELIVERY_NO"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SO_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="INVOICE_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DELIVERY_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="CREATION_DATE" Type="Edm.Date"/>
+                <Property Name="DIVISION" Type="Edm.String" MaxLength="5"/>
+                <Property Name="REFERENCE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="GROSS_TOTAL" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PAYMENT_STATUS" Type="Edm.Int32"/>
+                <NavigationProperty Name="PAYMENT_STATUS_REF" Type="ideal_retailer_dispatch.PaymentEntryStatusMaster">
+                    <ReferentialConstraint Property="PAYMENT_STATUS" ReferencedProperty="PAYMENT_STATUS"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_DIVISION" Type="ideal_retailer_dispatch.divisionMaster">
+                    <ReferentialConstraint Property="DIVISION" ReferencedProperty="DIVISION"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_INVOICE_ITEM_REF" Type="Collection(ideal_retailer_dispatch.RetailerInvoiceItem)"/>
+            </EntityType>
+            <EntityType Name="RetailerInvoiceItem">
+                <Key>
+                    <PropertyRef Name="INVOICE_NO"/>
+                    <PropertyRef Name="INVOICE_ITEM_NO"/>
+                </Key>
+                <Property Name="INVOICE_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="INVOICE_ITEM_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MATERIAL_GROUP_DESC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="MATERIAL_CODE" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="BATCH" Type="Edm.String" MaxLength="10"/>
+                <Property Name="INVOICE_QUANTITY" Type="Edm.Int32"/>
+                <Property Name="UNIT_OF_MEASURE" Type="Edm.String" MaxLength="3"/>
+                <Property Name="STD_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BASE_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISC_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISC_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TOTAL_AMOUNT" Type="Edm.Double"/>
+                <Property Name="CGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TAXES_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="HSN_CODE" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="RetailerSoHeader">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="SO_NO"/>
+                    <PropertyRef Name="RETAILER_ID"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SO_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="CREATION_DATE" Type="Edm.Date"/>
+                <Property Name="DIVISION" Type="Edm.String" MaxLength="5"/>
+                <Property Name="SHIP_TO_PARTY" Type="Edm.String" MaxLength="600"/>
+                <Property Name="GROSS_TOTAL" Type="Edm.String" MaxLength="100"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <NavigationProperty Name="TO_STATUS" Type="ideal_retailer_dispatch.statusMaster">
+                    <ReferentialConstraint Property="STATUS" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_DIVISION" Type="ideal_retailer_dispatch.divisionMaster">
+                    <ReferentialConstraint Property="DIVISION" ReferencedProperty="DIVISION"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_SO_ITEM_REF" Type="Collection(ideal_retailer_dispatch.RetailerSoItems)"/>
+            </EntityType>
+            <EntityType Name="RetailerSoItems">
+                <Key>
+                    <PropertyRef Name="SO_NO"/>
+                    <PropertyRef Name="RETAILER_ID"/>
+                    <PropertyRef Name="ITEM_NO"/>
+                </Key>
+                <Property Name="SO_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="ITEM_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="50"/>
+                <Property Name="MATERIAL_GROUP_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="MATERIAL_CODE" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="HSN_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UNIT_OF_MEASURE" Type="Edm.String" MaxLength="3"/>
+                <Property Name="QUANTITY" Type="Edm.Int32"/>
+                <Property Name="FREE_QUANTITY" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISPATCH_QUANTITY" Type="Edm.Int32"/>
+                <Property Name="STD_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BASE_PRICE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISC_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISC_PERCENTAGE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="NET_AMOUNT" Type="Edm.String" MaxLength="100"/>
+                <Property Name="TOTAL_AMOUNT" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TAXES_AMOUNT" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="divisionMaster">
+                <Key>
+                    <PropertyRef Name="DIVISION"/>
+                </Key>
+                <Property Name="DIVISION" Type="Edm.String" MaxLength="5" Nullable="false"/>
+                <Property Name="DIVISION_DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="statusMaster">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="retailerMaster">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="RETAILER_ID"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="RETAILER_NAME" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="master_credit_debit_tx">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="PaymentEntryStatusMaster">
+                <Key>
+                    <PropertyRef Name="PAYMENT_STATUS"/>
+                </Key>
+                <Property Name="PAYMENT_STATUS" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="STATUS_DESCRIPTION" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="Grn_Stock">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="MATERIAL_GROUP"/>
+                    <PropertyRef Name="MATERIAL_CODE"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="MATERIAL_CODE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="UNIT_PRICE" Type="Edm.String" MaxLength="17"/>
+                <Property Name="UPDATED_PRICE" Type="Edm.String" MaxLength="17"/>
+                <Property Name="MATERIAL_STOCK" Type="Edm.Int32"/>
+                <Property Name="HSN_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UNIT_OF_MEASURE" Type="Edm.String" MaxLength="3"/>
+                <Property Name="CGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UPDATED_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+            </EntityType>
+            <Action Name="dispatchCreation" IsBound="false">
+                <Parameter Name="deliveryheader" Type="Collection(ideal_retailer_dispatch.RetailerDeliveryHeader)" Nullable="false"/>
+                <Parameter Name="deliveryItem" Type="Collection(ideal_retailer_dispatch.RetailerDeliveryItem)" Nullable="false"/>
+                <Parameter Name="invoiceHeader" Type="Collection(ideal_retailer_dispatch.RetailerInvoiceHeader)" Nullable="false"/>
+                <Parameter Name="invoiceItem" Type="Collection(ideal_retailer_dispatch.RetailerInvoiceItem)" Nullable="false"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

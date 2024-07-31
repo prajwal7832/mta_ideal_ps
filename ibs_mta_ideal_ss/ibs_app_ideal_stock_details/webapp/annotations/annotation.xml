@@ -1,0 +1,117 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/odata/v4/ideal-grn-acceptance/$metadata">
+        <edmx:Include Namespace="IDEAL_GRN_ACCEPTANCE"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+         <Annotations Target="IDEAL_GRN_ACCEPTANCE.Grn_Stock">
+                <Annotation Term="UI.DeleteHidden" Bool="true"/>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MATERIAL_GROUP"/>
+                            <PropertyValue Property="Label" String="Material Group"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MATERIAL_GROUP_DESC"/>
+                            <PropertyValue Property="Label" String="Material Description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MATERIAL_CODE"/>
+                            <PropertyValue Property="Label" String="Material Code"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MATERIAL_DESC"/>
+                            <PropertyValue Property="Label" String="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="UNIT_OF_MEASURE"/>
+                            <PropertyValue Property="Label" String="UOM"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MATERIAL_STOCK"/>
+                            <PropertyValue Property="Label" String="Available Stock"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="UNIT_PRICE"/>
+                            <PropertyValue Property="Label" String="Unit Price"/> 
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="UPDATED_PRICE"/>
+                            <PropertyValue Property="Label" String="Updated Price "/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>MATERIAL_CODE</PropertyPath>
+                        <PropertyPath>MATERIAL_GROUP</PropertyPath>
+                        </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Grn_Stock/MATERIAL_DESC">
+                <Annotation Term="Common.Label" String="Material Description"/>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Grn_Stock/MATERIAL_GROUP_DESC">
+                <Annotation Term="Common.Label" String="Material Group Description"/>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Grn_Stock/MATERIAL_GROUP">
+                <Annotation Term="Common.Label" String="Material Group"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Material_Group_Master"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MATERIAL_GROUP"/>
+                                    <PropertyValue Property="ValueListProperty" String="MATERIAL_GROUP"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Material Group"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Grn_Stock/MATERIAL_CODE">
+                <Annotation Term="Common.Label" String="Material Code"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Material_Code_Master"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="MATERIAL_CODE"/>
+                                    <PropertyValue Property="ValueListProperty" String="MATERIAL_CODE"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Material Code"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Material_Code_Master/MATERIAL_CODE">
+                <Annotation Term="Common.Text" Path="MATERIAL_DESC"/>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Material_Group_Master/MATERIAL_GROUP_DESC">
+                <Annotation Term="Common.Text" Path="MATERIAL_GROUP"/>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Material_Group_Master/MATERIAL_GROUP">
+                <Annotation Term="Common.Text" Path="MATERIAL_GROUP_DESC"/>
+            </Annotations>
+            <Annotations Target="IDEAL_GRN_ACCEPTANCE.Grn_Stock/UNIT_PRICE">
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

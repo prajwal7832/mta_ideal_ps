@@ -1,0 +1,289 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealsalerorderreport.controller.detailPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <Text text="hjkl;"></Text>
+        </content >
+    </Page>
+</mvc:View> -->
+
+
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+ xmlns:table="sap.ui.table" xmlns:com="sap.suite.ui.commons"
+	controllerName="com.ibs.ibsappidealsalerorderreport.controller.detailPage"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<m:App>
+		<m:Page id="detailPageId" class="sapUiSizeCompact" showHeader="false">
+			<m:content>
+				<layout:DynamicSideContent id="DynamicSideContent" class="sapUiSizeCompact" sideContentFallDown="BelowL"
+					breakpointChanged="handleBreakpointChangeEvent" showSideContent="false">
+					<!--General Section-->
+					<ObjectPageLayout id="ObjectPageLayout" selectedSection="firstSection" enableLazyLoading="false" showEditHeaderButton="false"
+						editHeaderButtonPress="handleEditBtnPress">
+
+						<headerTitle>
+							<ObjectPageDynamicHeaderTitle>
+								<expandedHeading>
+									<m:Title text="Purchase Request No. : {selectOrderData>/PR_NO}" wrapping="true"/>
+								</expandedHeading>
+							
+								
+								<actions>
+									
+									
+					<m:ToolbarSpacer/>
+						<m:Toolbar>
+							<m:Button
+							id="id_cnaBTn"
+                           icon="sap-icon://sys-cancel"
+							text="Cancel Order"
+                            type="Negative"
+							press="RejectOrder"
+							visible="false"
+							/>
+							<m:Button id="idFullSc" press="onFullScreen" icon="sap-icon://full-screen" type="Transparent" visible="{FullScreenButton}" />
+                        <!-- <Button press="onExitScreen" id="idExitScreen" icon="sap-icon://exit-full-screen" type="Transparent" visible="{ExitScreenButton}" /> -->
+						<m:Button icon="sap-icon://decline" type="Transparent" press="onExit" />
+						</m:Toolbar>
+				
+								</actions>
+							</ObjectPageDynamicHeaderTitle>
+						</headerTitle>
+						
+			<headerContent>
+							<m:FlexBox visible="true" wrap="Wrap" fitContainer="true" alignItems="Stretch" class="sapUiMediumMarginBottom">
+			
+					<m:VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<m:Label text="Payment Method" design="Bold"/>
+						<m:Text text="{path:'selectOrderData>/PAYMENT_METHOD',formatter:'.formatter.formadata'}"/>
+					</m:VBox>
+
+					<!-- <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+						<m:Label text="Status" design="Bold"/>
+						<m:ObjectStatus text="{path: 'selectOrderData>/TO_STATUS/DESC',formatter:'.formatter.formatStateText'}"></m:ObjectStatus>
+					</m:VBox> -->
+
+					<m:VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<m:Label text="Status" design="Bold"/>
+							<m:ObjectStatus text="{path: 'selectOrderData>/TO_STATUS/DESC'}" state="{path: 'selectOrderData>/TO_STATUS/CODE',formatter: '.formatter.formatStateText'}" ></m:ObjectStatus>
+						<!-- <m:Text text="{path: 'selectOrderData>/TO_STATUS/DESC',formatter:'.formatter.formatStateText'}"/> -->
+					</m:VBox>
+
+				</m:FlexBox>
+
+
+
+                	<m:FlexBox alignItems="Start" justifyContent="SpaceBetween">         
+					<m:items>
+						<m:Panel backgroundDesign="Transparent" class="sapUiNoContentPadding">
+							<m:content>
+								<layout:HorizontalLayout allowWrapping="true">
+									<layout:VerticalLayout class="sapUiMediumMarginEnd amt">
+										<m:Title class="amt" id="id_totalAmount" text="Total Amount : {path:'iModel>/Totamt',formatter:'.formatter.formatterAmount'} INR" />
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<m:Title id="id_totalTax" class="tax" text="Total Tax :  {path:'iModel>/Totax',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<m:Title id="id_subTotal" class="sub" text="Grand Total : {path:'iModel>/TotalIcTax',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout>
+									<!-- <layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<Title id="id_totalTcs" class="tcs" text="TCS ({total>/0/tcspers} %) : {path:'total>/0/tcsTotal',formatter:'.formatter.formatterAmount'}"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout>
+										<Title id="id_grandTotal" class="grand" text="Grand Total : {path:'total>/0/grandTotal',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout> -->
+								</layout:HorizontalLayout>
+							</m:content>
+						</m:Panel>
+					</m:items>
+				</m:FlexBox>
+
+						</headerContent>
+						<sections>
+
+					
+					   <ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="General Information" titleUppercase="false" mode="Expanded">
+								<blocks>
+                                <m:VBox>
+									<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2">
+										<f:content>
+											<core:Title/>
+											<m:Label text="Ship To" design="Bold"/>
+										<m:Text id="id_Grp" text="{selectOrderData>/SHIP_NAME}" ></m:Text>
+
+											<core:Title/>
+		
+											<m:Label text="Creation Date" design="Bold"/>
+											<m:Text text="{path:'selectOrderData>/PR_CREATION_DATE',formatter: '.formatter.formatDate'}"/>
+
+											<core:Title/>
+											<m:Label text="Update Date" design="Bold"/>
+											<m:Text text="{path:'selectOrderData>/LAST_UPDATED_DATE',formatter: '.formatter.formatDate'}"/>
+										</f:content>
+									</f:SimpleForm>
+
+
+
+        	<table:Table  
+            rows="{iModel>/value}" id="table" selectionBehavior="RowOnly"  
+	        ariaLabelledBy="title" enableColumnFreeze="true" fixedColumnCount="2" >
+         
+				<table:columns>
+
+					<table:Column width="9rem" hAlign="Center">
+						<m:Label text="Material" />
+						<table:template>
+							<m:Text text="{iModel>MATERIAL_DESC}"/>
+						</table:template>
+					</table:Column>
+
+	<table:Column width="9rem"  hAlign="Center">
+						<m:Label text="HSN CODE"  />
+						<table:template>
+							<m:Text text="{iModel>HSN_CODE}" />
+						</table:template>
+					</table:Column>
+					
+						<table:Column width="8rem" hAlign="Right">
+						<m:Label text="Quantity" />
+						<table:template>
+							<m:Text text="{iModel>QUANTITY}" />
+						</table:template>
+					</table:Column>
+					
+					<table:Column width="8rem" hAlign="Right">
+						<m:Label text="UOM" />
+						<table:template>
+							<m:Text text="{iModel>UNIT_OF_MEASURE}" />
+						</table:template>
+					</table:Column>
+
+					<table:Column width="8rem" hAlign="Right">
+						<m:Label text=" Price(₹)" />
+						<table:template>
+						
+							<m:Label text="{path:'iModel>NET_AMOUNT',formatter:'.formatter.formatterAmount'} "/>
+						</table:template>
+					</table:Column>
+
+					<table:Column width="8rem" hAlign="Right" >
+						<m:Label text="CGST (%)" />
+						<table:template>
+							<m:Label text="{iModel>CGST_PERC}"  />
+						</table:template>
+					</table:Column>
+
+               <table:Column width="8rem" hAlign="Right">
+						<m:Label text="SGST (%)" />
+						<table:template>
+							<m:Label text="{iModel>SGST_PERC}"  />
+						</table:template>
+					</table:Column>
+
+
+
+
+         
+					<table:Column width="8rem" hAlign="Right">
+						<m:Label text="TAX (%)" />
+						<table:template>
+							<m:Label text="{path:'iModel>TAXES_AMOUNT', formatter:'.formatter.formatterAmount'}"/>
+						</table:template>
+					</table:Column>
+
+
+					
+
+					<table:Column width="8rem" hAlign="Right">
+						<m:Label text="Total Amount(₹)" />
+						<table:template>
+					
+							<m:Label text="{path:'iModel>TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'} "/>
+						</table:template>
+					</table:Column>
+				
+				</table:columns>
+			</table:Table>
+
+</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+						
+                   <ObjectPageSection  title="PO Status Tracker" titleUppercase="false">
+						<subSections>
+							<ObjectPageSubSection title="PO Status Tracker" titleUppercase="false">
+								<!-- <blocks> -->
+
+                                								<m:Panel>
+										<!-- <m:HBox renderType="Bare"> -->
+			<m:Button text="Zoom In" press="onZoomIn" />
+			<m:Button text="Zoom Out" press="onZoomOut" />
+										<!-- <m:Text text="Priya"/> -->
+
+			<com:ProcessFlow
+			class="processFlow"
+			id="processflow1" 
+			scrollable="true"
+			foldedCorners="true"
+			nodePress="onNodePress"
+			wheelZoomable="false"
+			nodes="{comm>/}"
+			lanes="{comm>/}">
+			<com:nodes>
+				<com:ProcessFlowNode laneId="{comm>LANE_ID}" nodeId="{comm>NODE_ID}"
+				state="{path:'comm>EVENT_CODE', formatter : '.formatter.nodeStateFormat'}"
+				texts="{path:'comm>CREATION_DATE' , formatter : '.formatter.nodeTextFormat'}"
+				stateText="{comm>REMARK}"
+				title="{parts:[{path:'comm>USER_NAME'},{path:'comm>USER_ROLE'},{path:'comm>EVENT_CODE'}], formatter:'.formatter.nodeTitleFormat'}"
+				children="{comm>CHILDREN}"
+				highlighted="true" focused="true" visible="true">
+				<com:customData>
+                    <core:CustomData key="class" value="customNodeWidth" writeToDom="true"/>
+                </com:customData>
+				</com:ProcessFlowNode>
+			</com:nodes>
+
+			<com:lanes>
+				<com:ProcessFlowLaneHeader
+					laneId="{comm>LANE_ID}"
+					iconSrc="{path:'comm>EVENT_CODE', formatter : '.formatter.laneIconFormat'}"
+					text="{path:'comm>EVENT_CODE', formatter : '.formatter.laneTextFormat'}"
+					position="{comm>LANE_ID}" visible="true"/>
+			</com:lanes>
+
+		</com:ProcessFlow>
+		</m:Panel>
+
+							<!-- </blocks> -->
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+			
+
+
+					
+							
+
+
+
+						</sections>
+					</ObjectPageLayout>
+
+					
+				</layout:DynamicSideContent>
+			</m:content>
+	
+		</m:Page>
+		<!--</pages>-->
+	</m:App>
+</mvc:View>

@@ -1,0 +1,136 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealretailerpayment.controller.MasterPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealretailerpayment.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m">
+	<App id="idApp">
+	<pages>
+    <Page id="page" showHeader="false" showFooter="false">
+     <l:VerticalLayout width="100%">
+					<fb:FilterBar id="idFilterBar" class="sapUiSmallMarginTop" visible="{appView>/oFilterBarVisible}" reset="onReset" search="onSearch" 
+					showRestoreButton="false" useToolbar="false" showFilterConfiguration="false" showGoOnFB="false" filterContainerWidth="7rem">
+						<fb:filterItems>
+							
+							<fb:FilterItem name="A" label="Retailer">
+								<fb:control>
+									<Input id="retailerId" placeholder="Select Retailer" width="9%" showSuggestion="true" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onRetailerFrag"></Input>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="B" label="Refresh">
+								<fb:control>
+									<HBox>
+										<Button text="Go" press="onSelectGo" type="Emphasized" visible="false"/>
+										<Button id="refresh" press="handleRefresh" icon="sap-icon://refresh" type="Transparent" visible="true"/>
+									</HBox>
+								</fb:control>
+							</fb:FilterItem>
+						</fb:filterItems>
+					</fb:FilterBar>
+				</l:VerticalLayout>
+        <content>
+		<Table id="idProductsTable" inset="false" items="{retailerPaymentModel>/}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<dependents>
+								<!-- <plugins:ColumnResizer/> hSpacing="2rem" showGoOnFB="false"-->
+							</dependents>
+						<headerToolbar>
+							<OverflowToolbar visible="false" id="idHeaderTollbar">
+								<!-- <Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/> -->
+								<content>
+									<SearchField id="oSearchMasterData" visible="true" width="25%" placeholder="Search by Invoice No"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+									<ToolbarSpacer/>
+									<Title id="idOutstandingAmt" text="Outstanding Amount : null"></Title>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Left">
+								<Label wrapping="true" text="Invoice No" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text="Invoice Date" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label wrapping="true" text="Invoice Amount(₹)" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label wrapping="true" text="Invoice Balance Amount(₹)" design="Bold"/>
+							</Column>
+
+							<!-- <Column hAlign="Right">
+								<Label wrapping="true" text="Declared Amount(₹)" design="Bold"/>
+							</Column> -->
+							<Column hAlign="Right">
+								<Label wrapping="true" text="Your Amount(₹)" design="Bold" required="true"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label wrapping="true" text="Bank Name" design="Bold" required="true"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label wrapping="true" text="Transaction ID" design="Bold" required="true"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label wrapping="true" text="Deposit Date" design="Bold" required="true"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive" press="onPress">
+								<cells>
+									<Text wrapping="true" text="{path:'retailerPaymentModel>INVOICE_NO',formatter:'.formatter.getDataNullValue'}"/>
+									<Text wrapping="true" text="{path:'retailerPaymentModel>INVOICE_DATE',formatter:'.formatter.getDataNullValue',
+									type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd.MM.yyyy' , UTC: false }}"/>
+									
+									<Text wrapping="true" text="{path:'retailerPaymentModel>GROSS_TOTAL',formatter:'.formatter.formatterAmount'}" textAlign="Right"/>
+									
+									<Text wrapping="true" text="{path:'retailerPaymentModel>INVOICE_BAL_AMOUNT',formatter:'.formatter.formatterAmount'}" textAlign="Right"/>
+									
+									<!-- <Text wrapping="true" text="{path:'retailerPaymentModel>DECLARED_AMOUNT',formatter:'.formatter.getDataNullValue'}" textAlign="Right"/> -->
+
+									<Input textAlign="End" value="{retailerPaymentModel>RETAILER_AMOUNT}" width="6rem" type="Number" change="onChangeRetailerAmt"/>
+									<Input value="{retailerPaymentModel>BANK_NAME}" change="handleBankName" />
+									
+									<!-- <Select forceSelection="false" selectedKey="{retailerData>ADDRESS_TYPE}"
+										items="{addreessTypeModel>/}" editable="true" change="handeAddressType">
+											<core:ListItem key="{addreessTypeModel>ADDRESS_TYPE}" text="{addreessTypeModel>ADDRESS_DESC}" additionalText=""/>
+									</Select> -->
+									<Input value="{retailerPaymentModel>TRANSACTION_ID}" change="onChangeTransId"/>
+									
+									 <DatePicker id="idDateRangeSelection" width="7rem" value="{retailerPaymentModel>DEPOSIT_DATE}" change="onChangeDate"/>
+									
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</content>
+			<footer>
+				<Bar>
+					<!-- <contentLeft>
+						<Button id="messagePopoverBtn" visible="false" type="Ghost" icon="sap-icon://message-popup" text="" press=".handleMessagePopoverPress"
+							ariaHasPopup="Dialog"/>
+					</contentLeft> -->
+					<contentRight>
+					
+					<!-- <OverflowToolbar visible="false" id="idHeaderTollbar2">
+						<ToolbarSpacer /> -->
+						<Button id="saveBt" text="Submit" press="onRetailerDataFetch" type="Success" enabled="true"/>
+					<!-- </OverflowToolbar> -->
+					</contentRight>
+				</Bar>
+			</footer>
+    </Page>
+	</pages>
+	</App>
+</mvc:View>
+

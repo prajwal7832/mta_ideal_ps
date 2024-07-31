@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:calendar="sap.ui.unified">
+	<Dialog  title="Select Details" afterClose="onSelectDialogClose" beforeClose="onBeforeClose" class="sapUiSizeCompact">
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<Label text="Transaction Period" required="true"/>
+				<VBox>
+					<RadioButtonGroup id="radioBtnGrpId" columns="3" width="100%" class="sapUiMediumMarginBottom" select="onMonthSelect">
+						<buttons>
+							<RadioButton text="Month" id="id_month" selected="true" />
+							<RadioButton text="Fiscal Year" id="id_fisical"/>
+							<RadioButton text="Date Range" id="id_date"/>
+						</buttons>
+					</RadioButtonGroup>
+					<DatePicker id="monthId" class="disablekb" value="{AccountStatementModel>/MonthPicker}" displayFormat="MMM, yyyy" valueFormat="yyyyMMdd" change="monthSelectF"
+						required="true"  valueStateText="Required" />
+					<DatePicker id="fromdate" class="disablekb" value="{AccountStatementModel>/DateFrom}" valueFormat="yyyyMMdd" visible="false" required="true" valueState="None" change="formdateF" valueStateText="Required"/>
+					<DatePicker id="dateToId" value="{AccountStatementModel>/DateTo}" class="disablekb" valueFormat="yyyyMMdd" visible="false" required="true" valueState="None"  change="datetoF" valueStateText="Required"/>
+					<DatePicker id="yearId" class="disablekb" value="{AccountStatementModel>/Year}" displayFormat="yyyy-yyyy" valueFormat="yyyyMMdd" valueState="None" valueStateText="Required"
+						visible="false" required="true" change="onYearChange"/>
+				</VBox>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button type="Emphasized" icon="sap-icon://message-success" text="Submit" press="onSubmit"></Button>
+		</beginButton>
+		<endButton>
+			<Button type="Reject" icon="sap-icon://sys-cancel" text="Cancel" press="onCancel"></Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

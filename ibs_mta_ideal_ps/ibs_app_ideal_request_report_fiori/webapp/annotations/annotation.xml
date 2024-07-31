@@ -1,0 +1,1296 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/odata/v4/ideal-report-fiori-srv/$metadata">
+        <edmx:Include Namespace="ideal_report_fiori_srv"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+             <Annotations Target="ideal_report_fiori_srv.RequestInfo">
+             <Annotation Term="UI.CreateHidden" Bool="true"/>
+                <Annotation Term="UI.DeleteHidden" Bool="true"/>
+                     
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="REQUEST_NUM"/>
+                            <PropertyValue Property="Label" String="Request No"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DIST_NAME1"/>
+                            <PropertyValue Property="Label" String="Distributor Name"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SAP_DIST_CODE"/>
+                            <PropertyValue Property="Label" String="SAP Dist code"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LIC_NO"/>
+                            <PropertyValue Property="Label" String="License No"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CREATED_ON"/>
+                            <PropertyValue Property="Label" String="Created On"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="STATUS"/>
+                            <PropertyValue Property="Label" String="Status"/>
+                        </Record> -->
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_ADDRESS/COUNTRY"/>
+                            <PropertyValue Property="Label" String="Country"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record> -->
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_ADDRESS/CITY"/>
+                            <PropertyValue Property="Label" String="City"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record> -->
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_STATUS/DESCRIPTION"/>
+                            <PropertyValue Property="Label" String="Status"/>
+                            <PropertyValue Property="Criticality" Path="TO_STATUS/CODE"/>
+                            <PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithoutIcon"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_ADDRESS/TO_COUNTRY/LANDX"/>
+                            <PropertyValue Property="Label" String="Country"/>
+                        </Record> -->
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ENTITY_CODE"/>
+                            <PropertyValue Property="Label" String="Entity Code"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_ENTITY_CODE/BUTXT"/>
+                            <PropertyValue Property="Label" String="Discribtion"/>
+                        </Record> -->
+
+                        <!-- <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#FieldGroup1" />
+                            <PropertyValue Property="Label" String="Type Information"/>
+                        </Record> -->
+
+
+
+                    </Collection>
+                </Annotation>
+
+<!-- <Annotation Term="UI.FieldGroup" Qualifier="FieldGroup1">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ENTITY_CODE/BUTXT"/>
+                                </Record>
+                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ENTITY_CODE"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation> -->
+
+
+                   <Annotation Term="UI.DataPoint" Qualifier="header">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Title" String="Entity :"/>
+                        <PropertyValue Property="Value" Path="ENTITY_CODE"/>
+                    </Record> 
+                </Annotation>
+                     <Annotation Term="UI.DataPoint" Qualifier="header2">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Title" String="Created By :"/>
+                        <PropertyValue Property="Value" Path="CREATED_ON"/>
+                    </Record> 
+                </Annotation>
+                    <Annotation Term="UI.DataPoint" Qualifier="header3">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Title" String="Distributor  Name:"/>
+                        <PropertyValue Property="Value" Path="DIST_NAME1"/>
+                    </Record> 
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="header4">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Title" String="Status"/>
+                        <PropertyValue Property="Value" Path="TO_STATUS/DESCRIPTION"/>
+                    </Record> 
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#header"/>
+                        </Record>
+                         <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#header2"/>
+                        </Record>
+                         <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#header3"/>
+                        </Record>
+                         <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#header4"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
+                 <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Distributor Profile"/>
+                        <PropertyValue Property="TypeNamePlural" String="Request No"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <!-- <PropertyValue Property="Value" Path="REQUEST_NUM"/> -->
+                            <PropertyValue Property="Value">
+                            <Apply Function="odata.concat">
+                                <String>Request Number</String>  
+                                <String> : </String>  
+                                <Path>REQUEST_NUM</Path>            
+                            </Apply>
+                        </PropertyValue>
+                    </Record>
+                    </PropertyValue> 
+                    <PropertyValue Property="Description">
+                    <Record Type="UI.DataField">
+                        <PropertyValue Property="Value" Path="REQUEST_TYPE_HEADER"/>    
+                    </Record>
+                    </PropertyValue>
+                </Record>                    
+                </Annotation>
+
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>CREATED_ON</PropertyPath>
+                        <PropertyPath>REQUEST_NUM</PropertyPath>
+                        <PropertyPath>STATUS</PropertyPath>
+                        <PropertyPath>REQUEST_TYPE</PropertyPath>
+                        <PropertyPath>ENTITY_CODE</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="General Information"/>
+                            <PropertyValue Property="ID" String="GeneralInformation"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Distributor Information"/>
+                                        <PropertyValue Property="ID" String="DistributorInformation"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#DistributorInformation"/>
+                                    </Record>
+                                    <!-- <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Distributor Address"/>
+                                        <PropertyValue Property="ID" String="DistributorAddress"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#DistributorAddress"/>
+                                    </Record> -->
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Office Address"/>
+                                        <PropertyValue Property="ID" String="OtherOfficeAddress"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_ADDRESS/@UI.LineItem#OtherOfficeAddress"/>
+                                    </Record>
+                                    <!-- <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Primary Contact"/>
+                                        <PropertyValue Property="ID" String="PrimaryContact"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PrimaryContact"/>
+                                    </Record> -->
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Contacts"/>
+                                        <PropertyValue Property="ID" String="OtherContacts"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_CONTACTS/@UI.LineItem#OtherContacts"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Business Information"/>
+                                        <PropertyValue Property="ID" String="BusinessInformation"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#BusinessInformation"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Distributor Details"/>
+                                        <PropertyValue Property="ID" String="DistributorDetails"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#DistributorDetails"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Financial Information"/>
+                            <PropertyValue Property="ID" String="FinancialInformation"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <!-- <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Payment Information"/>
+                                        <PropertyValue Property="ID" String="PaymentInformation"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PaymentInformation1"/>
+                                    </Record> -->
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Bank Details"/>
+                                        <PropertyValue Property="ID" String="OtherBankDetails"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_BANKS/@UI.LineItem#OtherBankDetails"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Tax Details"/>
+                                        <PropertyValue Property="ID" String="TaxDetails"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#TaxDetails"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Operational Information"/>
+                            <PropertyValue Property="ID" String="OperationalInformation"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Business History Details"/>
+                                        <PropertyValue Property="ID" String="BusinessHistoryDetails"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_BUSINESS_HISTORY/@UI.LineItem#BusinessHistoryDetails"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Customer Details"/>
+                                        <PropertyValue Property="ID" String="CustomerDetails"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_CUSTOMERS/@UI.LineItem#CustomerDetails"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Management Details"/>
+                                        <PropertyValue Property="ID" String="ManagementDetails"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_PROMOTERS/@UI.LineItem#ManagementDetails"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Attachment"/>
+                            <PropertyValue Property="ID" String="Attachment"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Company Profile"/>
+                                        <PropertyValue Property="ID" String="CompanyProfile"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_ATTACHMENTS/@UI.LineItem#CompanyProfile"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Attachment Table"/>
+                                        <PropertyValue Property="ID" String="AttachmentTable"/>
+                                        <PropertyValue Property="Target" AnnotationPath="TO_ATTACHMENTS/@UI.LineItem#AttachmentTable"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Submission"/>
+                            <PropertyValue Property="ID" String="submission"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#submission"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="DistributorInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DIST_NAME1"/>
+                                    <PropertyValue Property="Label" String="Distributor Name"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G1T1F1" />
+                                </Record>
+                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="WEBSITE"/>
+                                    <PropertyValue Property="Label" String="Website"/>
+                                      <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G1T1F3" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="REGISTERED_ID"/>
+                                    <PropertyValue Property="Label" String="Registered Email ID"/>
+                                      <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G1T1F4" />
+                                </Record>
+                                <!-- <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="DIST_NAME2"/>
+                                    <PropertyValue Property="Label" String="Date Of Proposal"/>
+                                </Record> -->
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <!-- <Annotation Term="UI.FieldGroup" Qualifier="DistributorAddress">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/STREET1"/>
+                                    <PropertyValue Property="Label" String="Street1"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/STREET2"/>
+                                    <PropertyValue Property="Label" String="Street2"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/STREET3"/>
+                                    <PropertyValue Property="Label" String="Street3"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/STREET4"/>
+                                    <PropertyValue Property="Label" String="Street4"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/EMAIL"/>
+                                    <PropertyValue Property="Label" String="Email"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/CONTACT_NO"/>
+                                    <PropertyValue Property="Label" String="Contact No"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/NATIO"/>
+                                    <PropertyValue Property="Label" String="Country"/>
+                                </Record>                                
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/FAX_NO"/>
+                                    <PropertyValue Property="Label" String="Fax No"/>
+                                </Record>
+
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/TO_REGION/BEZEI"/>
+                                    <PropertyValue Property="Label" String="Region"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/TO_REGION/BLAND"/>
+                                    <PropertyValue Property="Label" String="BLAND"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/TO_REGION/LAND1"/>
+                                    <PropertyValue Property="Label" String="LAND1"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="BP_TYPE_CODE"/>
+                                    <PropertyValue Property="Label" String="BP_TYPE_CODE"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation> -->
+
+
+                <Annotation Term="UI.FieldGroup" Qualifier="PrimaryContact">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                               <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/NAME"/>
+                                    <PropertyValue Property="Label" String="Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_CONTACTS/DESIGNATION"/>
+                                    <PropertyValue Property="Label" String="Designation"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/EMAIL"/>
+                                    <PropertyValue Property="Label" String="Email"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_ADDRESS/CONTACT_NO"/>
+                                    <PropertyValue Property="Label" String="Contact No"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="MOBILE_NO"/>
+                                    <PropertyValue Property="Label" String="Mobile No"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/NATIO"/>
+                                    <PropertyValue Property="Label" String="Country"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="PaymentInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <!-- <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/LAND1"/>
+                                    <PropertyValue Property="Label" String="LAND1"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/LANDX"/>
+                                    <PropertyValue Property="Label" String="LANDX"/>
+                                </Record> -->
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/NATIO"/>
+                                    <PropertyValue Property="Label" String="Bank Country"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/SWIFT_CODE"/>
+                                    <PropertyValue Property="Label" String="Swift code"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/NAME"/>
+                                    <PropertyValue Property="Label" String="Bank Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">=
+                                    <PropertyValue Property="Value" Path="TO_BANKS/BRANCH_NAME"/>
+                                    <PropertyValue Property="Label" String="Branch Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/BENEFICIARY"/>
+                                    <PropertyValue Property="Label" String="Beneficiary Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/ACCOUNT_NO"/>
+                                    <PropertyValue Property="Label" String="Account No"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/IBAN_NUMBER"/>
+                                    <PropertyValue Property="Label" String="IBAN No"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/OTHER_CODE_NAME"/>
+                                    <PropertyValue Property="Label" String="Other Code Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/OTHER_CODE_VAL"/>
+                                    <PropertyValue Property="Label" String="Other Code val"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/ROUTING_CODE"/>
+                                    <PropertyValue Property="Label" String="Routing Code"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="OtherBankDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection/>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="BusinessInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                               <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_ACC"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Accounts/Finance Department"/>
+                                      <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F3" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_ADM"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Administration Department"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F4" />
+
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_ANY"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Any Other Department"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F10" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_HR"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Human Resource Department"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F5" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_MAN"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Manufacturing/Product Department"/>
+                                      <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F7" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_QA"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Quality Assurance Department"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F6" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_SAL"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Sales Department"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F8" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="NOE_SEC"/>
+                                    <PropertyValue Property="Label" String="Number of Employees in Security Department"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F9" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TOT_PERM_EMP"/>
+                                    <PropertyValue Property="Label" String="Total Number of Permanent Employees"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F1" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TOT_TEMP_EMP"/>
+                                    <PropertyValue Property="Label" String="Total Number of  Employees"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G7T1F2" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="DistributorDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LIC_NO"/>
+                                    <PropertyValue Property="Label" String="License No"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G6T1F4" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LIC_NO_DATE"/>
+                                    <PropertyValue Property="Label" String="License Expiry Date"/>
+                                      <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G6T1F5" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ORG_ESTAB_YEAR"/>
+                                    <PropertyValue Property="Label" String="Establishment Date"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS1G6T1F1" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+<!--                 
+                <Annotation Term="UI.FieldGroup" Qualifier="PaymentInformation1">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection> -->
+                                <!-- <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/LAND1"/>
+                                    <PropertyValue Property="Label" String="LAND1"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/LANDX"/>
+                                    <PropertyValue Property="Label" String="LANDX"/>
+                                </Record> -->
+                                <!-- <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/TO_COUNTRY/NATIO"/>
+                                    <PropertyValue Property="Label" String="Bank Country"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/SWIFT_CODE"/>
+                                    <PropertyValue Property="Label" String="Swift code"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/NAME"/>
+                                    <PropertyValue Property="Label" String="Bank Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">=
+                                    <PropertyValue Property="Value" Path="TO_BANKS/BRANCH_NAME"/>
+                                    <PropertyValue Property="Label" String="Branch Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/BENEFICIARY"/>
+                                    <PropertyValue Property="Label" String="Beneficiary Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/ACCOUNT_NO"/>
+                                    <PropertyValue Property="Label" String="Account No"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/IBAN_NUMBER"/>
+                                    <PropertyValue Property="Label" String="IBAN No"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/OTHER_CODE_NAME"/>
+                                    <PropertyValue Property="Label" String="Other Code Name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/OTHER_CODE_VAL"/>
+                                    <PropertyValue Property="Label" String="Other Code val"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TO_BANKS/ROUTING_CODE"/>
+                                    <PropertyValue Property="Label" String="Routing Code"/>
+                                </Record> -->
+                            <!-- </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation> -->
+
+                <Annotation Term="UI.FieldGroup" Qualifier="TaxDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="VAT_CHECK"/>
+                                    <PropertyValue Property="Label" String="Tax Registration Details are available?"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS2G2T2F1" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="VAT_REG_DATE"/>
+                                    <PropertyValue Property="Label" String="Tax Registration Date"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS2G2T2F3" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="VAT_REG_NUMBER"/>
+                                    <PropertyValue Property="Label" String="Tax Registration Number"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS2G2T2F2" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="ManagementDetails">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection/>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="submission">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                  <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="ACK_VALIDATION"/>
+                                    <PropertyValue Property="Label" String="I Declare that all the information given in this registration form is, to the best of my knowledge, accurate and complete. If any false information is given, the application is deemed to be invalid and i shall forfeit my right to submit quotation and tender"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS5G1F1" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="COMPLETED_BY"/>
+                                    <PropertyValue Property="Label" String="Completed by"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS5G1F2" />
+
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="COMPLETED_BY_POSITION"/>
+                                    <PropertyValue Property="Label" String="Designation"/>
+                                    <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS5G1F3" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="SUBMISSION_DATE"/>
+                                    <PropertyValue Property="Label" String=" Submission Date"/>
+                                     <Annotation Term="UI.Hidden" Path="TO_VISIBLE_FIELDS/BS5G1F4" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RequestInfo/CREATED_ON">
+                <Annotation Term="Common.Label" String="Created On"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="RequestInfo"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="CREATED_ON"/>
+                                    <PropertyValue Property="ValueListProperty" String="CREATED_ON"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="created"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RequestInfo/STATUS">
+                <Annotation Term="Common.Label" String="Status"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="MasterStatus"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="STATUS"/>
+                                    <PropertyValue Property="ValueListProperty" String="CODE"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Status"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.Text" Path="TO_STATUS/DESCRIPTION">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RequestInfo/REQUEST_NO">
+                <Annotation Term="Common.Label" String="REQUEST_NO"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="RequestInfo"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="REQUEST_NO"/>
+                                    <PropertyValue Property="ValueListProperty" String="REQUEST_NO"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Request No"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegFormAddress">
+                <Annotation Term="UI.LineItem" Qualifier="OtherOfficeAddress">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="STREET1"/>
+                            <PropertyValue Property="Label" String="street 1"/>
+                            <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F1" />
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="STREET2"/>
+                            <PropertyValue Property="Label" String="street 2"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F2" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F2" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="STREET3"/>
+                            <PropertyValue Property="Label" String="street 3"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F3" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F3" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="STREET4"/>
+                            <PropertyValue Property="Label" String="street 4"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F4" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F4" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="COUNTRY"/>
+                            <PropertyValue Property="Label" String="Country"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F6" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F6" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CITY"/>
+                            <PropertyValue Property="Label" String="City"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F8" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F8" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="POSTAL_CODE"/>
+                            <PropertyValue Property="Label" String="Postal Code"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F10" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F10" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CONTACT_NO"/>
+                            <PropertyValue Property="Label" String="Contact No"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F9" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F9" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="EMAIL"/>
+                            <PropertyValue Property="Label" String="Email"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G2T1F5" /> -->
+                             <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G3T1F5" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
+<Annotation Term="UI.SelectionVariant" Qualifier="SimpleFilter">
+<Record>
+         <PropertyValue Property="Text" String="Distributor Address" />
+         <PropertyValue Property="SelectOptions">
+            <Collection>
+               <Record Type="UI.SelectOptionType">
+                  <PropertyValue Property="PropertyName" PropertyPath="ADDRESS_TYPE" />
+                  <PropertyValue Property="Ranges">
+                     <Collection>
+                        <Record Type="UI.SelectionRangeType">
+                           <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                           <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                           <PropertyValue Property="Low" String="HQ" />
+                        </Record>
+                     </Collection>
+                  </PropertyValue>
+               </Record>
+            </Collection>
+         </PropertyValue>
+      </Record>
+</Annotation>
+
+<Annotation Term="UI.SelectionVariant" Qualifier="SimpleFilteroth">
+<Record>
+         <PropertyValue Property="Text" String="Other office addres" />
+         <PropertyValue Property="SelectOptions">
+            <Collection>
+               <Record Type="UI.SelectOptionType">
+                  <PropertyValue Property="PropertyName" PropertyPath="ADDRESS_TYPE" />
+                  <PropertyValue Property="Ranges">
+                     <Collection>
+                        <Record Type="UI.SelectionRangeType">
+                           <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                           <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                           <PropertyValue Property="Low" String="OTH" />
+                        </Record>
+                     </Collection>
+                  </PropertyValue>
+               </Record>
+            </Collection>
+         </PropertyValue>
+      </Record>
+</Annotation>
+
+
+            </Annotations>
+
+            <Annotations Target="ideal_report_fiori_srv.RegFormContacts">
+                <Annotation Term="UI.LineItem" Qualifier="OtherContacts">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DESIGNATION"/>
+                            <PropertyValue Property="Label" String="Designation"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G4T1F2" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_COUNTRY/LAND1"/>
+                            <PropertyValue Property="Label" String="Country"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G4T1F3" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_COUNTRY/LANDX"/>
+                            <PropertyValue Property="Label" String="LANDX"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_COUNTRY/NATIO"/>
+                            <PropertyValue Property="Label" String="NATIO"/>
+                        </Record> -->
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_REGION/BEZEI"/>
+                            <PropertyValue Property="Label" String="BEZEI"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_REGION/BLAND"/>
+                            <PropertyValue Property="Label" String="BLAND"/>
+                        </Record> -->
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="EMAIL"/>
+                            <PropertyValue Property="Label" String="Email"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G4T1F4" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CONTACT_NO"/>
+                            <PropertyValue Property="Label" String="Contact No"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G4T1F5" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MOBILE_NO"/>
+                            <PropertyValue Property="Label" String="Mobile No"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G4T1F6" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
+   <Annotation Term="UI.SelectionVariant" Qualifier="SimpleFilter1">
+         <Record>
+         <PropertyValue Property="Text" String="Primary Contact" />
+         <PropertyValue Property="SelectOptions">
+            <Collection>
+               <Record Type="UI.SelectOptionType">
+                  <PropertyValue Property="PropertyName" PropertyPath="CONTACT_TYPE" />
+                  <PropertyValue Property="Ranges">
+                     <Collection>
+                        <Record Type="UI.SelectionRangeType">
+                           <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                           <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                           <PropertyValue Property="Low" String="HOD" />
+                        </Record>
+                     </Collection>
+                  </PropertyValue>
+               </Record>
+            </Collection>
+         </PropertyValue>
+      </Record>
+      </Annotation>
+
+       <Annotation Term="UI.SelectionVariant" Qualifier="SimpleFilter3">
+         <Record>
+         <PropertyValue Property="Text" String="Other Contact" />
+         <PropertyValue Property="SelectOptions">
+            <Collection>
+               <Record Type="UI.SelectOptionType">
+                  <PropertyValue Property="PropertyName" PropertyPath="CONTACT_TYPE" />
+                  <PropertyValue Property="Ranges">
+                     <Collection>
+                        <Record Type="UI.SelectionRangeType">
+                           <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                           <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                           <PropertyValue Property="Low" String="AUTH" />
+                        </Record>
+                     </Collection>
+                  </PropertyValue>
+               </Record>
+            </Collection>
+         </PropertyValue>
+      </Record>
+      </Annotation>
+
+            </Annotations>
+
+
+            <Annotations Target="ideal_report_fiori_srv.RegFormBanks">
+                <Annotation Term="UI.LineItem" Qualifier="OtherBankDetails">
+                    <Collection>
+                              <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BANK_COUNTRY"/>
+                            <PropertyValue Property="Label" String="Bank Country"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SWIFT_CODE"/>
+                            <PropertyValue Property="Label" String="Swift Code"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="NAME"/>
+                            <PropertyValue Property="Label" String="Name"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BRANCH_NAME"/>
+                            <PropertyValue Property="Label" String="Branch Name"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BENEFICIARY"/>
+                            <PropertyValue Property="Label" String="Beneficiary"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ACCOUNT_NO"/>
+                            <PropertyValue Property="Label" String="Account No"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="IBAN_NUMBER"/>
+                            <PropertyValue Property="Label" String="IBAN No"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ROUTING_CODE"/>
+                            <PropertyValue Property="Label" String="Routing Code"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="OTHER_CODE_NAME"/>
+                            <PropertyValue Property="Label" String="Other Code Name"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="OTHER_CODE_VAL"/>
+                            <PropertyValue Property="Label" String="Other Code Val"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BANK_CURRENCY"/>
+                            <PropertyValue Property="Label" String="Bank Currency"/>
+                            <!-- <Annotation Term="UI.Hidden" Path="TO_MAIN/TO_MANDATOEY_FIELDS/BS1G1T1F1" /> -->
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+
+                    <Annotation Term="UI.SelectionVariant" Qualifier="tablebankdetail">
+                    <Record>
+                            <PropertyValue Property="Text" String="Payment Datails" />
+                            <PropertyValue Property="SelectOptions">
+                                <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="PAYMENT_TYPE" />
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                            <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                                            <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                                            <PropertyValue Property="Low" String="PRI" />
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+
+    <Annotation Term="UI.SelectionVariant" Qualifier="tablebankdetail2">
+                    <Record>
+                            <PropertyValue Property="Text" String="Other Bank Details" />
+                            <PropertyValue Property="SelectOptions">
+                                <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="PAYMENT_TYPE" />
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                            <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                                            <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                                            <PropertyValue Property="Low" String="OTH" />
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+
+
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegformBusinessHistory">
+                <Annotation Term="UI.LineItem" Qualifier="BusinessHistoryDetails">
+                    <Collection>
+                       <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DEALERSHIP"/>
+                            <PropertyValue Property="Label" String="Dealership"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SUPPLIER_NAME"/>
+                            <PropertyValue Property="Label" String="Supplier Name"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+
+                        <!-- <Record Type="UI.DataField" >
+                            <PropertyValue Property="Value" Path="SINCE"/>
+                            <PropertyValue Property="Label" String="Since"  />                           
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />                                 
+                        </Record> -->
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="PROD_GROUP"/>
+                            <PropertyValue Property="Label" String="Product Group"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="PURCHASES"/>
+                            <PropertyValue Property="Label" String="Purchases"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record> -->
+
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegFormCustomers">
+                <Annotation Term="UI.LineItem" Qualifier="CustomerDetails">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CUSTOMER_NAME"/>
+                            <PropertyValue Property="Label" String="Customer Name"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="YEAR2"/>
+                            <PropertyValue Property="Label" String="Last Year Sales"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="YEAR1"/>
+                            <PropertyValue Property="Label" String="Before Last Year Sales"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <!-- <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CUST_NO"/>
+                            <PropertyValue Property="Label" String="Customer Details"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record> -->
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegformPromoters">
+                <Annotation Term="UI.LineItem" Qualifier="ManagementDetails">
+                    <Collection>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="NAME"/>
+                            <PropertyValue Property="Label" String="Name"/>
+                                <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="QUALIFICATION"/>
+                            <PropertyValue Property="Label" String="Qualification"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="WORK_EXP"/>
+                            <PropertyValue Property="Label" String="Work Experience"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="YRS_IN_COMP"/>
+                            <PropertyValue Property="Label" String="Years In Company"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="DESIGNATION"/>
+                            <PropertyValue Property="Label" String="Designation"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ROLE"/>
+                            <PropertyValue Property="Label" String="Role"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <!-- <Annotations Target="ideal_report_fiori_srv.RegFormAttachments">
+                <Annotation Term="UI.LineItem" Qualifier="CompanyProfile">
+                    <Collection>
+                          <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ATTACH_DESC"/>
+                            <PropertyValue Property="Label" String="Certificate No"/>
+                                <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="EXPIRY_DATE"/>
+                            <PropertyValue Property="Label" String="Expiry Date"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="FILE_NAME"/>
+                            <PropertyValue Property="Label" String="File Name"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="FILE_CONTENT"/>
+                            <PropertyValue Property="Label" String="FILE_CONTENT"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations> -->
+
+            <Annotations Target="ideal_report_fiori_srv.RequestInfo/REQUEST_NUM">
+                <Annotation Term="Common.Label" String="Request No"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="RequestInfo"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="REQUEST_NUM"/>
+                                    <PropertyValue Property="ValueListProperty" String="REQUEST_NUM"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Request No"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterStatus/CODE">
+                <Annotation Term="Common.Text" Path="DESCRIPTION">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterStatus/DESCRIPTION">
+                <Annotation Term="Common.Label" String="TO_STATUS/DESCRIPTION"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegFormAttachments">
+                <Annotation Term="UI.LineItem" Qualifier="AttachmentTable">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_CMS/FILE_NAME"/>
+                            <PropertyValue Property="Label" String="FILE_NAME"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_CMS/FILE_CONTENT"/>
+                            <PropertyValue Property="Label" String="FILE_CONTENT"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TO_CMS/UPLOADED_ON"/>
+                            <PropertyValue Property="Label" String="UPLOADED_ON"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RequestInfo/REQUEST_TYPE">
+                <Annotation Term="Common.Label" String="Request Type"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="MasterRequestType"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="REQUEST_TYPE"/>
+                                    <PropertyValue Property="ValueListProperty" String="CODE"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Request Types"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+                <Annotation Term="Common.Text" Path="TO_REQUEST_TYPE/DESCRIPTION">
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRequestType/CODE">
+                <Annotation Term="Common.Text" Path="DESCRIPTION">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RequestInfo/ENTITY_CODE">
+                <Annotation Term="Common.Label" String="Entity"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="MasterEntityCode"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ENTITY_CODE"/>
+                                    <PropertyValue Property="ValueListProperty" String="BUKRS"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Label" String="Entity"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityCode/BUKRS">
+                <Annotation Term="Common.Text" Path="BUTXT">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+            </Annotations>
+
+           
+
+            <!-- <Annotations Target="ideal_report_fiori_srv.RegformBusinessHistory/SINCE">
+                <Annotation Term="Common.Text" Path="DEALERSHIP">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst"/>
+                </Annotation>
+            </Annotations> -->
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

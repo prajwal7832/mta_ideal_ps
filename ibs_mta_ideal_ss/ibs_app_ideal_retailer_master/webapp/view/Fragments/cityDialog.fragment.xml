@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select City"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="citySrchId" liveChange="handleCitySearch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="city_listId" items="{CityMasterModel>/}"
+			mode="SingleSelectMaster" selectionChange="handleCity">
+			<StandardListItem title="{CityMasterModel>CITY_DESC}" description="{CityMasterModel>CITY_CODE}" iconInset="true"/>
+
+		</List>
+		<buttons>
+			<Button text="Cancel" press="closeCityDialog" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

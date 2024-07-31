@@ -1,0 +1,170 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ibs.ibsappidealretailermaster",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.2",
+      "toolsId": "8eeb4d47-6c68-4280-93c8-b6108e4d00cc"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/OData/v4/ideal-retailer-registration/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "RetailerMaster-dispaly": {
+          "semanticObject": "RetailerMaster",
+          "action": "dispaly",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.126.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibs.ibsappidealretailermaster.i18n.i18n"
+        }
+      },
+      "nullRegAddressData":{
+				"type":"sap.ui.model.json.JSONModel",
+				"uri":"model/addressData.json"
+			},
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.ibs.ibsappidealretailermaster.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteApp",
+          "pattern": "",
+          "target": [
+              "TargetApp"
+          ]
+      },
+        {
+          "name": "RouteregistrationForm",
+          "pattern": "Registration Form",
+          "target": [
+            "TargetregistrationForm"
+          ]
+        },
+        {
+          "name": "ServiceMsg",
+          "pattern": "ServiceMsg",
+          "target": [
+              "ServiceMsg"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetApp": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewName": "App"
+      },
+        "TargetregistrationForm": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "registrationForm",
+          "viewName": "registrationForm"
+        },
+        "ServiceMsg": {
+          "viewType": "XML",
+          "viewName": "ServiceMsg"
+      }
+      }
+    },
+    "rootView": {
+      "viewName": "com.ibs.ibsappidealretailermaster.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "ibs_bs_ideal_ss"
+  }
+}

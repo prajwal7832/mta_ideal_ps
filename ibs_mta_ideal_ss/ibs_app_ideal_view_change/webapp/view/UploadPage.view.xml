@@ -1,0 +1,268 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:u="sap.ui.unified"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:table="sap.ui.table" xmlns:l="sap.ui.layout"
+	controllerName="com.ibs.ibsappidealviewchange.controller.UploadPage" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page enableScrolling="true" title="Retailer Onboarding by Uploading Excelsheet" class="sapUiSizeCompact" showHeader="true" showFooter="true">
+				<content>
+					<FlexBox alignItems="Center" justifyContent="End" 
+					alignContent="Stretch" class="sapUiTinyMarginTop">
+						<items>
+							
+							<l:HorizontalLayout allowWrapping="true">
+							<!-- <HBox> -->
+							<!-- <FlexBox alignItems="Center" justifyContent="End"> -->
+							<!-- <Label text="Buyer :" design="Bold" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginBottom"/>
+							<ComboBox class="sapUiTinyMarginEnd" id="Id_BuyerComboBox" width="33%" placeholder="Select Buyer"
+								items="{path: 'matrixJson>/'}" change="handleBuyerSelection">
+								<core:Item text="{matrixJson>USER_NAME} - {matrixJson>EMAIL}" key="{matrixJson>EMAIL}"/>
+							</ComboBox> -->
+							<!-- </FlexBox> -->
+							<Button text="Template" icon="sap-icon://download" press="onTemplateDownload" type="Emphasized"
+								class="sapUiTinyMarginEnd sapUiTinyMarginBottom"></Button>
+							<u:FileUploader id="FileUploaderId" buttonText="Upload" sameFilenameAllowed="true" iconOnly="false" buttonOnly="true" fileType="XLSX,xlsx"
+								icon="sap-icon://upload" iconFirst="true" style="Emphasized" change="onUpload" class="sapUiTinyMarginBottom"/>
+							<Button text="Clear" press="onRefresh" type="Emphasized" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginBottom"/>
+							<Button icon="sap-icon://nav-back" press="onBack" type="Emphasized" class="sapUiTinyMarginEnd sapUiTinyMarginBottom"/>
+							<!-- <Button icon="sap-icon://action-settings" press="onSetting" type="Emphasized"
+								class="sapUiTinyMarginBottom sapUiTinyMarginEnd"></Button> -->
+							<!-- </HBox> -->
+							</l:HorizontalLayout>
+							
+					</items>
+				</FlexBox>
+				<IconTabBar id="iconTabBar">
+					<items>
+						<IconTabFilter text="Retailer Profile" key="retailerProfile">
+							<table:Table id="Table1" rows="{localModel>/}" selectionMode="None" class="sapUiSizeCompact">
+								<table:columns>
+									<!-- <table:Column width="14rem">
+										<Label wrapping="true" text="Distributor ID" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>DISTRIBUTOR ID}"></Text>
+										</table:template>
+									</table:Column> -->
+									<table:Column width="11rem">
+										<Label wrapping="true" text="Retailer ID" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>RETAILER ID}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="12rem">
+										<Label wrapping="true" text="Retailer Name" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>RETAILER NAME}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Retailer Type" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>RETAILER TYPE}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Retailer Classification" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>RETAILER CLASSIFICATION}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Payment Terms" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>PAYMENT TERMS}"></Text>
+										</table:template>
+									</table:Column>
+								</table:columns>
+
+								<!-- Bank Details -->
+
+                                    <table:Column width="13rem">
+										<Label wrapping="true" text="Bank Name" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>BANK NAME}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Account Number" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>ACCOUNT NUMBER}"></Text>
+										</table:template>
+									</table:Column>
+									
+									<table:Column width="11rem">
+										<Label wrapping="true" text="IFSC Code" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>IFSC CODE}"></Text>
+										</table:template>
+									</table:Column>
+                                    <table:Column width="12rem">
+										<Label wrapping="true" text="UPI ID" design="Bold" required="false"/>
+										<table:template>
+											<Text text="{localModel>UPI ID}"></Text>
+										</table:template>
+									</table:Column>
+
+									<!-- Tax Details -->
+
+								
+                                    <table:Column width="14rem">
+										<Label wrapping="true" text="Registered Tax ID" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel>REGISTERED TAX ID}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="12rem">
+										<Label wrapping="true" text="PAN No" design="Bold" required="false"/>
+										<table:template>
+											<Text text="{localModel>PAN NO}"></Text>
+										</table:template>
+									</table:Column>
+									
+									<!-- <table:Column width="17rem">
+										<Label wrapping="true" text="VAT No" design="Bold" required="{parts: [{path: 'oMandatoryFields>/AllMandatoryFieldID'},{value:'B1T1F9'}], formatter : '.formatter.requiredVisibility'}"/>
+										<table:template>
+											<Text text="{localModel>VAT NO}"></Text>
+										</table:template>
+									</table:Column> -->
+								
+								<table:footer>
+									<Bar>
+									<contentMiddle>
+										<Button id="oCountLocalModel" type="Transparent" press="onTableCount" text="More [{localModel>/oCount}/{localModel>/table1Length}]"></Button>
+									</contentMiddle>
+									</Bar>
+                				</table:footer>
+							</table:Table>
+						</IconTabFilter>
+
+						<!-- Address Details -->
+						
+						<IconTabFilter text="Address Details" key="addressDetails">
+							<table:Table id="Table3" rows="{localModel2>/}" selectionMode="None" class="sapUiSizeCompact">
+								<table:columns>
+									<!-- <table:Column width="12rem">
+										<Label wrapping="true" text="Distributor ID" design="Bold" required="{parts: [{path: 'oMandatoryFields>/AllMandatoryFieldID'},{value:'C1T1F1'}], formatter : '.formatter.requiredVisibility'}"/>
+										<table:template>
+											<Text text="{localModel2>DISTRIBUTOR ID}"></Text>
+										</table:template>
+									</table:Column> -->
+									<table:Column width="11rem">
+										<Label wrapping="true" text="Retailer ID" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel2>RETAILER ID}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="14rem">
+										<Label wrapping="true" text="Address Type" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>ADDRESS TYPE}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="7rem">
+										<Label wrapping="true" text="Street No" design="Bold" required="true"/>
+										<table:template>
+											<Text text="{localModel2>STREET NO}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Address Line 1" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>ADDRESS LINE 1}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Address Line 2" design="Bold"  required="false"/>
+										<table:template>
+											<Text text="{localModel2>ADDRESS LINE 2}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Address Line 3" design="Bold"  required="false"/>
+										<table:template>
+											<Text text="{localModel2>ADDRESS LINE 3}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="9rem">
+										<Label wrapping="true" text="Country" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>COUNTRY}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="9rem">
+										<Label wrapping="true" text="Region" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>REGION}"></Text>
+										</table:template>
+									</table:Column>
+                                    <table:Column width="9rem">
+										<Label wrapping="true" text="City" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>CITY}"></Text>
+										</table:template>
+									</table:Column>
+                                    <table:Column width="8rem">
+										<Label wrapping="true" text="Postal Code" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>POSTAL CODE}"></Text>
+										</table:template>
+									</table:Column>
+                                     <table:Column width="9rem">
+										<Label wrapping="true" text="Mobile No" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>MOBILE NO}"></Text>
+										</table:template>
+									</table:Column>
+                                     <table:Column width="10rem">
+										<Label wrapping="true" text="Telephone No" design="Bold"  required="false"/>
+										<table:template>
+											<Text text="{localModel2>TELEPHONE NO}"></Text>
+										</table:template>
+									</table:Column>
+                                    <table:Column width="12rem">
+										<Label wrapping="true" text="Email ID" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>EMAIL ID}"></Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="13rem">
+										<Label wrapping="true" text="Contact Person" design="Bold"  required="true"/>
+										<table:template>
+											<Text text="{localModel2>CONTACT PERSON}"></Text>
+										</table:template>
+									</table:Column>
+                                    <table:Column width="7rem">
+										<Label wrapping="true" text="Fax No" design="Bold"  required="false"/>
+										<table:template>
+											<Text text="{localModel2>FAX NO}"></Text>
+										</table:template>
+									</table:Column>
+								</table:columns>
+								<table:footer>
+								<Bar>
+									<contentMiddle>
+										<Button id="oCountLocalModel2" type="Transparent" press="onTableCount" text="More [{localModel2>/oCount}/{localModel2>/table1Length}]"></Button>
+									</contentMiddle>
+									</Bar>
+                				</table:footer>
+								
+							</table:Table>
+						</IconTabFilter>
+						
+					</items>
+				</IconTabBar>
+			</content>
+			<footer>
+				<Bar>
+					<contentLeft>
+						<Button id="messagePopoverBtn" visible="false" type="Ghost" icon="sap-icon://message-popup" text="" press="handleMessagePopoverPress"
+							ariaHasPopup="Dialog"/>
+					</contentLeft>
+					<contentRight>
+						<Button id="submitId" text="Submit" press="onSubmitData" type="Emphasized" visible="true" enabled="true"></Button>
+					</contentRight>
+				</Bar>
+			</footer>
+		</Page>
+	</pages>
+</App>
+</mvc:View>

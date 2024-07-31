@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Country"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="countrySrchId" liveChange="handleCountrySearch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="cntry_listId" items="{countryDataModel>/}"
+			mode="SingleSelectMaster" selectionChange="handleCountrySelection">
+			<StandardListItem title="{countryDataModel>LANDX}" iconInset="true" description="{countryDataModel>LAND1}"/>
+
+		</List>
+		<buttons>
+			<Button text="Cancel" press="closeCountryDialog" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

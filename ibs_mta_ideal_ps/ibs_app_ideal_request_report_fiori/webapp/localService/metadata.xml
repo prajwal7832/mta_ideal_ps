@@ -1,0 +1,1855 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ideal_report_fiori_srv" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="MasterClientInfo" EntityType="ideal_report_fiori_srv.MasterClientInfo"/>
+                <EntitySet Name="MasterIdealUsers" EntityType="ideal_report_fiori_srv.MasterIdealUsers">
+                    <NavigationPropertyBinding Path="TO_USER_ROLE" Target="MasterUserRole"/>
+                    <NavigationPropertyBinding Path="TO_ENTITY_CODE" Target="MasterEntityCode"/>
+                    <NavigationPropertyBinding Path="TO_USER_ENTITIES" Target="MasterUserEntityUsers"/>
+                </EntitySet>
+                <EntitySet Name="RequestInfo" EntityType="ideal_report_fiori_srv.RequestInfo">
+                    <NavigationPropertyBinding Path="TO_STATUS" Target="MasterStatus"/>
+                    <NavigationPropertyBinding Path="TO_ENTITY_CODE" Target="MasterEntityCode"/>
+                    <NavigationPropertyBinding Path="TO_REQUEST_TYPE" Target="MasterRequestType"/>
+                    <NavigationPropertyBinding Path="TO_ADDRESS" Target="RegFormAddress"/>
+                    <NavigationPropertyBinding Path="TO_CONTACTS" Target="RegFormContacts"/>
+                    <NavigationPropertyBinding Path="TO_BANKS" Target="RegFormBanks"/>
+                    <NavigationPropertyBinding Path="TO_CUSTOMERS" Target="RegFormCustomers"/>
+                    <NavigationPropertyBinding Path="TO_PROMOTERS" Target="RegformPromoters"/>
+                    <NavigationPropertyBinding Path="TO_BUSINESS_HISTORY" Target="RegformBusinessHistory"/>
+                    <NavigationPropertyBinding Path="TO_BANKING_DETAILS" Target="RegformBankingDetails"/>
+                    <NavigationPropertyBinding Path="TO_ATTACH_FIELDS" Target="RegFormAttachFields"/>
+                    <NavigationPropertyBinding Path="TO_ATTACHMENTS" Target="RegFormAttachments"/>
+                    <NavigationPropertyBinding Path="TO_MANDATORY_FIELDS" Target="MasterRegformFieldsConfig"/>
+                    <NavigationPropertyBinding Path="TO_VISIBLE_FIELDS" Target="MasterRegformFieldsConfig"/>
+                    <NavigationPropertyBinding Path="TO_UPDATED_FIELDS" Target="MasterFormFieldsUpdated"/>
+                    <NavigationPropertyBinding Path="TO_REQUEST_ACTIVE_STATUS" Target="RequestActiveStatus"/>
+                </EntitySet>
+                <EntitySet Name="MasterIbanCountry" EntityType="ideal_report_fiori_srv.MasterIbanCountry"/>
+                <EntitySet Name="RegSupplierLog" EntityType="ideal_report_fiori_srv.RegSupplierLog"/>
+                <EntitySet Name="MasterApprovalHierarchy" EntityType="ideal_report_fiori_srv.MasterApprovalHierarchy">
+                    <NavigationPropertyBinding Path="TO_ROLE_DESC" Target="MasterUserRole"/>
+                    <NavigationPropertyBinding Path="TO_ENTITY_HIERARCHY" Target="MasterEntityAndType"/>
+                </EntitySet>
+                <EntitySet Name="ViewRequestActiveStatus" EntityType="ideal_report_fiori_srv.ViewRequestActiveStatus">
+                    <NavigationPropertyBinding Path="TO_STATUS" Target="MasterStatus"/>
+                </EntitySet>
+                <EntitySet Name="RegFormCMS" EntityType="ideal_report_fiori_srv.RegFormCMS"/>
+                <EntitySet Name="MasterEntityAndType" EntityType="ideal_report_fiori_srv.MasterEntityAndType">
+                    <NavigationPropertyBinding Path="TO_ENTITY_CODE" Target="MasterEntityCode"/>
+                    <NavigationPropertyBinding Path="TO_REQUEST_CODE" Target="MasterApprovalTypes"/>
+                    <NavigationPropertyBinding Path="TO_MASTER_APPROVAL_HIERARCHY" Target="MasterApprovalHierarchy"/>
+                </EntitySet>
+                <EntitySet Name="MasterCountry" EntityType="ideal_report_fiori_srv.MasterCountry"/>
+                <EntitySet Name="MasterApprovalTypes" EntityType="ideal_report_fiori_srv.MasterApprovalTypes"/>
+                <EntitySet Name="MasterStatus" EntityType="ideal_report_fiori_srv.MasterStatus"/>
+                <EntitySet Name="RegFormAddress" EntityType="ideal_report_fiori_srv.RegFormAddress">
+                    <NavigationPropertyBinding Path="TO_COUNTRY" Target="MasterCountry"/>
+                    <NavigationPropertyBinding Path="TO_REGION" Target="MasterRegion"/>
+                    <NavigationPropertyBinding Path="TO_ADDR_TYPE" Target="MasterAddressType"/>
+                    <NavigationPropertyBinding Path="TO_MAIN" Target="RequestInfo"/>
+                </EntitySet>
+                <EntitySet Name="RegFormContacts" EntityType="ideal_report_fiori_srv.RegFormContacts">
+                    <NavigationPropertyBinding Path="TO_COUNTRY" Target="MasterCountry"/>
+                    <NavigationPropertyBinding Path="TO_REGION" Target="MasterRegion"/>
+                    <NavigationPropertyBinding Path="TO_MAIN" Target="RequestInfo"/>
+                </EntitySet>
+                <EntitySet Name="RegFormBanks" EntityType="ideal_report_fiori_srv.RegFormBanks">
+                    <NavigationPropertyBinding Path="TO_COUNTRY" Target="MasterCountry"/>
+                    <NavigationPropertyBinding Path="TO_CURRENCY" Target="MasterCurrency"/>
+                    <NavigationPropertyBinding Path="TO_MAIN" Target="RequestInfo"/>
+                </EntitySet>
+                <EntitySet Name="RegFormCustomers" EntityType="ideal_report_fiori_srv.RegFormCustomers">
+                    <NavigationPropertyBinding Path="TO_MAIN" Target="RequestInfo"/>
+                </EntitySet>
+                <EntitySet Name="MasterRegformFieldsConfig" EntityType="ideal_report_fiori_srv.MasterRegformFieldsConfig"/>
+                <EntitySet Name="MasterFormFieldsUpdated" EntityType="ideal_report_fiori_srv.MasterFormFieldsUpdated"/>
+                <EntitySet Name="RegFormAttachFields" EntityType="ideal_report_fiori_srv.RegFormAttachFields"/>
+                <EntitySet Name="RegFormAttachments" EntityType="ideal_report_fiori_srv.RegFormAttachments">
+                    <NavigationPropertyBinding Path="TO_CMS" Target="RegFormCMS"/>
+                </EntitySet>
+                <EntitySet Name="MasterRequestType" EntityType="ideal_report_fiori_srv.MasterRequestType"/>
+                <EntitySet Name="MasterUserEntityUsers" EntityType="ideal_report_fiori_srv.MasterUserEntityUsers"/>
+                <EntitySet Name="MasterCurrency" EntityType="ideal_report_fiori_srv.MasterCurrency"/>
+                <EntitySet Name="MasterEntityCode" EntityType="ideal_report_fiori_srv.MasterEntityCode"/>
+                <EntitySet Name="MasterTelecode" EntityType="ideal_report_fiori_srv.MasterTelecode">
+                    <NavigationPropertyBinding Path="TO_COUNTRY" Target="MasterCountry"/>
+                </EntitySet>
+                <EntitySet Name="MasterPostalcode" EntityType="ideal_report_fiori_srv.MasterPostalcode"/>
+                <EntitySet Name="MasterRegion" EntityType="ideal_report_fiori_srv.MasterRegion"/>
+                <EntitySet Name="MasterUserRole" EntityType="ideal_report_fiori_srv.MasterUserRole"/>
+                <EntitySet Name="RegformBusinessHistory" EntityType="ideal_report_fiori_srv.RegformBusinessHistory">
+                    <NavigationPropertyBinding Path="TO_MAIN" Target="RequestInfo"/>
+                </EntitySet>
+                <EntitySet Name="RegformPromoters" EntityType="ideal_report_fiori_srv.RegformPromoters">
+                    <NavigationPropertyBinding Path="TO_MAIN" Target="RequestInfo"/>
+                </EntitySet>
+                <EntitySet Name="RequestActiveStatus" EntityType="ideal_report_fiori_srv.RequestActiveStatus"/>
+                <EntitySet Name="RegEventsLog" EntityType="ideal_report_fiori_srv.RegEventsLog"/>
+                <EntitySet Name="MasteriDealAttachments" EntityType="ideal_report_fiori_srv.MasteriDealAttachments"/>
+                <EntitySet Name="EmailActionlog" EntityType="ideal_report_fiori_srv.EmailActionlog"/>
+                <EntitySet Name="EmailConfig" EntityType="ideal_report_fiori_srv.EmailConfig"/>
+                <EntitySet Name="MasterAddressType" EntityType="ideal_report_fiori_srv.MasterAddressType"/>
+                <EntitySet Name="RegformBankingDetails" EntityType="ideal_report_fiori_srv.RegformBankingDetails">
+                    <NavigationPropertyBinding Path="TO_MAIN" Target="RequestInfo"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="MasterClientInfo">
+                <Key>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EMAIL_NOTIF_1" Type="Edm.String" MaxLength="100"/>
+                <Property Name="EMAIL_NOTIF_2" Type="Edm.String" MaxLength="100"/>
+                <Property Name="EMAIL_NOTIF_3" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CONTACT_ID_1" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CONTACT_ID_2" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CONTACT_ID_3" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CLIENT_FULL_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CLIENT_SHORT_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CLIENT_COUNTRY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="EMAIL_CC" Type="Edm.String" MaxLength="1000"/>
+            </EntityType>
+            <EntityType Name="MasterIdealUsers">
+                <Key>
+                    <PropertyRef Name="SR_NO"/>
+                    <PropertyRef Name="USER_ROLE"/>
+                    <PropertyRef Name="EMAIL"/>
+                </Key>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="USER_NAME" Type="Edm.String" MaxLength="500"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="150" Nullable="false"/>
+                <Property Name="COMPANY_CODE" Type="Edm.String" MaxLength="500"/>
+                <Property Name="EMP_NO" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="UPDATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="ACTIVE" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="TO_USER_ROLE" Type="ideal_report_fiori_srv.MasterUserRole">
+                    <ReferentialConstraint Property="USER_ROLE" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_ENTITY_CODE" Type="ideal_report_fiori_srv.MasterEntityCode">
+                    <ReferentialConstraint Property="COMPANY_CODE" ReferencedProperty="BUKRS"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_USER_ENTITIES" Type="Collection(ideal_report_fiori_srv.MasterUserEntityUsers)"/>
+            </EntityType>
+            <EntityType Name="RequestInfo">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="MOBILE_NO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="SAP_DIST_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IDEAL_DIST_CODE" Type="Edm.Int64"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <Property Name="REGISTERED_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ENTITY_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="REQUEST_TYPE" Type="Edm.Int32"/>
+                <Property Name="CREATION_TYPE" Type="Edm.Int32"/>
+                <Property Name="DIST_NAME1" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DIST_NAME2" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DIST_CODE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="APPROVER_LEVEL" Type="Edm.Int32"/>
+                <Property Name="APPROVER_ROLE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="REQUESTER_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="BP_TYPE_CODE" Type="Edm.String" MaxLength="4"/>
+                <Property Name="BP_TYPE_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="REQUEST_RESENT" Type="Edm.String" MaxLength="5"/>
+                <Property Name="MDG_CR_NO" Type="Edm.String" MaxLength="15"/>
+                <Property Name="LAST_ACTIVE_REQ_NO" Type="Edm.Int64"/>
+                <Property Name="SECONDARY_EMAILS_ID" Type="Edm.String" MaxLength="500"/>
+                <Property Name="ORG_ESTAB_YEAR" Type="Edm.String" MaxLength="4"/>
+                <Property Name="WEBSITE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="VAT_REG_NUMBER" Type="Edm.String" MaxLength="25"/>
+                <Property Name="VAT_REG_DATE" Type="Edm.Date"/>
+                <Property Name="VAT_CHECK" Type="Edm.String" MaxLength="1"/>
+                <Property Name="LAST_SAVED_STEP" Type="Edm.Int32"/>
+                <Property Name="COMPLETED_BY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="COMPLETED_BY_POSITION" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ACK_VALIDATION" Type="Edm.String" MaxLength="5"/>
+                <Property Name="SUBMISSION_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LAST_UPDATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="OT_PARENT_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="OT_FOLDER1_ID" Type="Edm.String" MaxLength="25"/>
+                <Property Name="OT_FOLDER2_ID" Type="Edm.String" MaxLength="25"/>
+                <Property Name="OT_FOLDER3_ID" Type="Edm.String" MaxLength="25"/>
+                <Property Name="OT_FOLDER4_ID" Type="Edm.String" MaxLength="25"/>
+                <Property Name="NDA_TYPE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="REMINDER_COUNT" Type="Edm.Int32"/>
+                <Property Name="BUYER_ASSIGN_CHECK" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="COMMENT" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="LEGACY_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BU_CODE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="TOT_PERM_EMP" Type="Edm.Int32"/>
+                <Property Name="TOT_TEMP_EMP" Type="Edm.Int32"/>
+                <Property Name="NOE_ACC" Type="Edm.Int32"/>
+                <Property Name="NOE_ADM" Type="Edm.Int32"/>
+                <Property Name="NOE_HR" Type="Edm.Int32"/>
+                <Property Name="NOE_QA" Type="Edm.Int32"/>
+                <Property Name="NOE_MAN" Type="Edm.Int32"/>
+                <Property Name="NOE_SAL" Type="Edm.Int32"/>
+                <Property Name="NOE_SEC" Type="Edm.Int32"/>
+                <Property Name="NOE_ANY" Type="Edm.Int32"/>
+                <Property Name="SAP_DIST_NO" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PROPOSAL_DATE" Type="Edm.Date"/>
+                <Property Name="ENTITY_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="BUSINESS_NATURE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="TERR_HOSP_ACC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="SELLING_POINT" Type="Edm.String" MaxLength="200"/>
+                <Property Name="DIST_RECOMMMEDATION" Type="Edm.String" MaxLength="200"/>
+                <Property Name="DIST_RELATION" Type="Edm.String" MaxLength="200"/>
+                <Property Name="SALES_ASSOCIATE_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="SA_APPROVED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="SAVED_AS_DRAFT" Type="Edm.Int32"/>
+                <Property Name="LIC_NO" Type="Edm.String" MaxLength="50"/>
+                <Property Name="LIC_NO_DATE" Type="Edm.Date"/>
+                <Property Name="REGISTERED_ADDR" Type="Edm.String" MaxLength="10"/>
+                <Property Name="OFFICE_ADDR" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SHIP_TO_ADDR" Type="Edm.String" MaxLength="10"/>
+                <Property Name="WAREHOUSE_ADDR" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="TO_STATUS" Type="ideal_report_fiori_srv.MasterStatus">
+                    <ReferentialConstraint Property="STATUS" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_ENTITY_CODE" Type="ideal_report_fiori_srv.MasterEntityCode">
+                    <ReferentialConstraint Property="ENTITY_CODE" ReferencedProperty="BUKRS"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_REQUEST_TYPE" Type="ideal_report_fiori_srv.MasterRequestType">
+                    <ReferentialConstraint Property="REQUEST_TYPE" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_ADDRESS" Type="Collection(ideal_report_fiori_srv.RegFormAddress)"/>
+                <NavigationProperty Name="TO_CONTACTS" Type="Collection(ideal_report_fiori_srv.RegFormContacts)"/>
+                <NavigationProperty Name="TO_BANKS" Type="Collection(ideal_report_fiori_srv.RegFormBanks)"/>
+                <NavigationProperty Name="TO_CUSTOMERS" Type="Collection(ideal_report_fiori_srv.RegFormCustomers)"/>
+                <NavigationProperty Name="TO_PROMOTERS" Type="Collection(ideal_report_fiori_srv.RegformPromoters)"/>
+                <NavigationProperty Name="TO_BUSINESS_HISTORY" Type="Collection(ideal_report_fiori_srv.RegformBusinessHistory)"/>
+                <NavigationProperty Name="TO_BANKING_DETAILS" Type="Collection(ideal_report_fiori_srv.RegformBankingDetails)"/>
+                <NavigationProperty Name="TO_ATTACH_FIELDS" Type="Collection(ideal_report_fiori_srv.RegFormAttachFields)"/>
+                <NavigationProperty Name="TO_ATTACHMENTS" Type="Collection(ideal_report_fiori_srv.RegFormAttachments)"/>
+                <NavigationProperty Name="TO_MANDATORY_FIELDS" Type="ideal_report_fiori_srv.MasterRegformFieldsConfig">
+                    <ReferentialConstraint Property="ENTITY_CODE" ReferencedProperty="CCODE"/>
+                    <ReferentialConstraint Property="CREATION_TYPE" ReferencedProperty="REQ_TYPE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_VISIBLE_FIELDS" Type="ideal_report_fiori_srv.MasterRegformFieldsConfig">
+                    <ReferentialConstraint Property="ENTITY_CODE" ReferencedProperty="CCODE"/>
+                    <ReferentialConstraint Property="CREATION_TYPE" ReferencedProperty="REQ_TYPE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_UPDATED_FIELDS" Type="ideal_report_fiori_srv.MasterFormFieldsUpdated">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQ_NO"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_REQUEST_ACTIVE_STATUS" Type="ideal_report_fiori_srv.RequestActiveStatus">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+                <Property Name="REQUEST_NUM" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="MasterIbanCountry">
+                <Key>
+                    <PropertyRef Name="LAND1"/>
+                    <PropertyRef Name="LANDX"/>
+                    <PropertyRef Name="LENGTH"/>
+                </Key>
+                <Property Name="LAND1" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="LANDX" Type="Edm.String" MaxLength="25" Nullable="false"/>
+                <Property Name="LENGTH" Type="Edm.Int32" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="RegSupplierLog">
+                <Key>
+                    <PropertyRef Name="SAP_DIST_CODE"/>
+                    <PropertyRef Name="EVENT_NO"/>
+                </Key>
+                <Property Name="SAP_DIST_CODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="EVENT_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EVENT_CODE" Type="Edm.Int32"/>
+                <Property Name="EVENT_TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="USER_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="REMARK" Type="Edm.String" MaxLength="100"/>
+                <Property Name="COMMENT" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="UPDATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="UPDATED_FIELD_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CHANGE_VALUE" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="ORG_VALUE" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="REQUEST_NO" Type="Edm.Int64"/>
+            </EntityType>
+            <EntityType Name="MasterApprovalHierarchy">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ENTITY_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="LEVEL" Type="Edm.Int32"/>
+                <Property Name="ROLE_CODE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="USER_IDS" Type="Edm.String"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ACCESS_EDIT" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="ACCESS_APPROVE" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="ACCESS_SENDBACK" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="ACCESS_REJECT" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="ACCESS_HOLD" Type="Edm.Boolean" DefaultValue="false"/>
+                <NavigationProperty Name="TO_ROLE_DESC" Type="ideal_report_fiori_srv.MasterUserRole">
+                    <ReferentialConstraint Property="ROLE_CODE" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_ENTITY_HIERARCHY" Type="ideal_report_fiori_srv.MasterEntityAndType" Partner="TO_MASTER_APPROVAL_HIERARCHY">
+                    <ReferentialConstraint Property="TO_ENTITY_HIERARCHY_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="TO_ENTITY_HIERARCHY_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="ViewRequestActiveStatus">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SAP_DIST_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IDEAL_DIST_CODE" Type="Edm.Int64"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <Property Name="REGISTERED_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ENTITY_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="REQUEST_TYPE" Type="Edm.Int32"/>
+                <Property Name="CREATION_TYPE" Type="Edm.Int32"/>
+                <Property Name="DIST_NAME1" Type="Edm.String" MaxLength="100"/>
+                <Property Name="REQUESTER_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="BP_TYPE_CODE" Type="Edm.String" MaxLength="4"/>
+                <Property Name="BP_TYPE_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="BUYER_ASSIGN_CHECK" Type="Edm.String" MaxLength="1"/>
+                <Property Name="COMMENT" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="LEGACY_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DIST_CODE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="NDA_TYPE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="REMINDER_COUNT" Type="Edm.Int32"/>
+                <Property Name="REQUEST_NO_1" Type="Edm.Int64"/>
+                <Property Name="ACTIVE" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MOBILE_NO" Type="Edm.String" MaxLength="30"/>
+                <NavigationProperty Name="TO_STATUS" Type="ideal_report_fiori_srv.MasterStatus">
+                    <ReferentialConstraint Property="STATUS" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="RegFormCMS">
+                <Key>
+                    <PropertyRef Name="DOC_ID"/>
+                </Key>
+                <Property Name="DOC_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_MIMETYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_CONTENT" Type="Edm.Stream"/>
+                <Property Name="UPLOADED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="ACTIVE_FLAG" Type="Edm.String" MaxLength="1"/>
+                <Property Name="URL" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="MasterEntityAndType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ENTITY_CODE" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="TO_ENTITY_CODE" Type="ideal_report_fiori_srv.MasterEntityCode">
+                    <ReferentialConstraint Property="ENTITY_CODE" ReferencedProperty="BUKRS"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_REQUEST_CODE" Type="ideal_report_fiori_srv.MasterApprovalTypes">
+                    <ReferentialConstraint Property="TYPE" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_MASTER_APPROVAL_HIERARCHY" Type="Collection(ideal_report_fiori_srv.MasterApprovalHierarchy)" Partner="TO_ENTITY_HIERARCHY">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MasterCountry">
+                <Key>
+                    <PropertyRef Name="LAND1"/>
+                    <PropertyRef Name="LANDX"/>
+                    <PropertyRef Name="NATIO"/>
+                </Key>
+                <Property Name="LAND1" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="LANDX" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="NATIO" Type="Edm.String" MaxLength="25" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="MasterApprovalTypes">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="MasterStatus">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="50"/>
+                <Property Name="CRITICALITY" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="RegFormAddress">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ADDRESS_TYPE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ADDRESS_DESC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="HOUSE_NUM1" Type="Edm.String" MaxLength="10"/>
+                <Property Name="STREET1" Type="Edm.String" MaxLength="60"/>
+                <Property Name="STREET2" Type="Edm.String" MaxLength="40"/>
+                <Property Name="STREET3" Type="Edm.String" MaxLength="40"/>
+                <Property Name="STREET4" Type="Edm.String" MaxLength="40"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="COUNTRY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="POSTAL_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CONTACT_NO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="CONTACT_TELECODE" Type="Edm.String" MaxLength="4"/>
+                <Property Name="FAX_NO" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="241"/>
+                <Property Name="DISTRICT" Type="Edm.String" MaxLength="35"/>
+                <Property Name="ADDR_CODE" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="TO_COUNTRY" Type="ideal_report_fiori_srv.MasterCountry">
+                    <ReferentialConstraint Property="COUNTRY" ReferencedProperty="LAND1"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_REGION" Type="ideal_report_fiori_srv.MasterRegion">
+                    <ReferentialConstraint Property="COUNTRY" ReferencedProperty="LAND1"/>
+                    <ReferentialConstraint Property="STATE" ReferencedProperty="BLAND"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_ADDR_TYPE" Type="ideal_report_fiori_srv.MasterAddressType">
+                    <ReferentialConstraint Property="ADDR_CODE" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_MAIN" Type="ideal_report_fiori_srv.RequestInfo">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="RegFormContacts">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="NAME1" Type="Edm.String" MaxLength="35"/>
+                <Property Name="NAME2" Type="Edm.String" MaxLength="35"/>
+                <Property Name="HOUSE_NUM1" Type="Edm.String" MaxLength="10"/>
+                <Property Name="STREET1" Type="Edm.String" MaxLength="40"/>
+                <Property Name="STREET2" Type="Edm.String" MaxLength="40"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="POSTAL_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DESIGNATION" Type="Edm.String" MaxLength="50"/>
+                <Property Name="NATIONALITY" Type="Edm.String" MaxLength="30"/>
+                <Property Name="PASSPORT_NO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="241"/>
+                <Property Name="CONTACT_NO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="MOBILE_NO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="CONTACT_TYPE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CONTACT_TELECODE" Type="Edm.String" MaxLength="4"/>
+                <Property Name="MOBILE_TELECODE" Type="Edm.String" MaxLength="4"/>
+                <Property Name="BP_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="LOC_NO" Type="Edm.Int32"/>
+                <Property Name="LOC_TYPE" Type="Edm.String" MaxLength="2"/>
+                <Property Name="BR_WH_NO" Type="Edm.Int32"/>
+                <Property Name="ADDR_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CONCERN_TYPE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="INFRA_DETAIL" Type="Edm.String" MaxLength="50"/>
+                <Property Name="TEMP_DETAIL" Type="Edm.Int32"/>
+                <Property Name="PROPERTY_TYPE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ON_LEASE" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ATTACH_CODE" Type="Edm.Int32"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_MIMETYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_CONTENT" Type="Edm.Binary"/>
+                <Property Name="UPLOAD_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="TO_COUNTRY" Type="ideal_report_fiori_srv.MasterCountry">
+                    <ReferentialConstraint Property="NATIONALITY" ReferencedProperty="LAND1"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_REGION" Type="ideal_report_fiori_srv.MasterRegion">
+                    <ReferentialConstraint Property="NATIONALITY" ReferencedProperty="LAND1"/>
+                    <ReferentialConstraint Property="STATE" ReferencedProperty="BLAND"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_MAIN" Type="ideal_report_fiori_srv.RequestInfo">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="RegFormBanks">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="BENEFICIARY" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ACCOUNT_NO" Type="Edm.String" MaxLength="38"/>
+                <Property Name="ACCOUNT_NAME" Type="Edm.String" MaxLength="40"/>
+                <Property Name="ACCOUNT_HOLDER" Type="Edm.String" MaxLength="60"/>
+                <Property Name="BANK_ID" Type="Edm.String" MaxLength="4"/>
+                <Property Name="BANK_KEY" Type="Edm.String" MaxLength="15"/>
+                <Property Name="BANK_COUNTRY" Type="Edm.String" MaxLength="50"/>
+                <Property Name="BRANCH_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="IBAN_NUMBER" Type="Edm.String" MaxLength="34"/>
+                <Property Name="SWIFT_CODE" Type="Edm.String" MaxLength="15"/>
+                <Property Name="BIC_CODE" Type="Edm.String" MaxLength="15"/>
+                <Property Name="ROUTING_CODE" Type="Edm.String" MaxLength="15"/>
+                <Property Name="OTHER_CODE" Type="Edm.String" MaxLength="1"/>
+                <Property Name="OTHER_CODE_NAME" Type="Edm.String" MaxLength="15"/>
+                <Property Name="OTHER_CODE_VAL" Type="Edm.String" MaxLength="15"/>
+                <Property Name="PAYMENT_METHOD" Type="Edm.String" MaxLength="25"/>
+                <Property Name="PAYMENT_METHOD_DESC" Type="Edm.String" MaxLength="30"/>
+                <Property Name="PAYMENT_TERMS" Type="Edm.String" MaxLength="25"/>
+                <Property Name="PAYMENT_TERMS_DESC" Type="Edm.String" MaxLength="30"/>
+                <Property Name="INVOICE_CURRENCY" Type="Edm.String" MaxLength="25"/>
+                <Property Name="VAT_REG_NUMBER" Type="Edm.String" MaxLength="25"/>
+                <Property Name="VAT_REG_DATE" Type="Edm.Date"/>
+                <Property Name="DUNS_NUMBER" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BANK_CURRENCY" Type="Edm.String" MaxLength="5"/>
+                <Property Name="BANK_NO" Type="Edm.String" MaxLength="15"/>
+                <Property Name="PAYMENT_TYPE" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="TO_COUNTRY" Type="ideal_report_fiori_srv.MasterCountry">
+                    <ReferentialConstraint Property="BANK_COUNTRY" ReferencedProperty="LAND1"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_CURRENCY" Type="ideal_report_fiori_srv.MasterCurrency">
+                    <ReferentialConstraint Property="BANK_CURRENCY" ReferencedProperty="WAERS"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_MAIN" Type="ideal_report_fiori_srv.RequestInfo">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="RegFormCustomers">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="CUST_NO" Type="Edm.Int32"/>
+                <Property Name="CUSTOMER_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="YEAR1" Type="Edm.String" MaxLength="4"/>
+                <Property Name="YEAR2" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="TO_MAIN" Type="ideal_report_fiori_srv.RequestInfo">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MasterRegformFieldsConfig">
+                <Key>
+                    <PropertyRef Name="CCODE"/>
+                    <PropertyRef Name="REQ_TYPE"/>
+                    <PropertyRef Name="TYPE"/>
+                </Key>
+                <Property Name="CCODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="REQ_TYPE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="1" Nullable="false"/>
+                <Property Name="S1G1T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F13" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F13" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F13" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F14" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T3F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T3F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A2F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A3F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A4F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A5F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A6F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A7F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A8F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A9F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A10F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A11F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="BS1G1T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS1G1T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS1G1T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS1G1T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS1G1T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS1G1T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS1G1T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS1G1T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F9" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F10" Type="Edm.Boolean"/>
+                <Property Name="BS1G2T1F11" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F9" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F10" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F11" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F12" Type="Edm.Boolean"/>
+                <Property Name="BS1G3T1F13" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F9" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F10" Type="Edm.Boolean"/>
+                <Property Name="BS1G4T1F11" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F1" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F2" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F3" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F4" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F5" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F6" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F7" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F8" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F9" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F11" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F12" Type="Edm.Boolean"/>
+                <Property Name="BS1G5T2F13" Type="Edm.Boolean"/>
+                <Property Name="BS1G6T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS1G6T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS1G6T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS1G6T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS1G6T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS1G6T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F9" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F10" Type="Edm.Boolean"/>
+                <Property Name="BS1G7T1F11" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F9" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F10" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F11" Type="Edm.Boolean"/>
+                <Property Name="BS2G1T1F12" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F9" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F10" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F12" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F13" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T1F14" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T2F1" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T2F2" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T2F3" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T2F4" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T3F1" Type="Edm.Boolean"/>
+                <Property Name="BS2G2T3F2" Type="Edm.Boolean"/>
+                <Property Name="BS2G3T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS2G3T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS2G3T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS2G3T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS2G3T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS2G3T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS2G3T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS3G1T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS3G2T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS3G2T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS3G2T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS3G2T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS3G2T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS3G2T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F1" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F2" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F3" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F4" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F5" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F6" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F7" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F8" Type="Edm.Boolean"/>
+                <Property Name="BS3G3T1F9" Type="Edm.Boolean"/>
+                <Property Name="BS4A1F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A2F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A3F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A4F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A5F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A6F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A7F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A8F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A9F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A10F1" Type="Edm.Boolean"/>
+                <Property Name="BS4A11F1" Type="Edm.Boolean"/>
+                <Property Name="BS5G1F1" Type="Edm.Boolean"/>
+                <Property Name="BS5G1F2" Type="Edm.Boolean"/>
+                <Property Name="BS5G1F3" Type="Edm.Boolean"/>
+                <Property Name="BS5G1F4" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="MasterFormFieldsUpdated">
+                <Key>
+                    <PropertyRef Name="REQ_NO"/>
+                </Key>
+                <Property Name="REQ_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="S1G1T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G1T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G2T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G3T1F13" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G4T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G5T2F13" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G6T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S1G7T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F11" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G1T1F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F10" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F12" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F13" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T1F14" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T2F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T3F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G2T3F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S2G3T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G1T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G2T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F4" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F5" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F6" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F7" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F8" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S3G3T1F9" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A2F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A3F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A4F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A5F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A6F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A7F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A8F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A9F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A10F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S4A11F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F2" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F3" Type="Edm.String" MaxLength="1"/>
+                <Property Name="S5G1F4" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityType Name="RegFormAttachFields">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="IS_UAE_COMPANY" Type="Edm.String" MaxLength="5"/>
+                <Property Name="ISSUE_ELEC_TAX_INV" Type="Edm.String" MaxLength="100"/>
+                <Property Name="SOLE_DIST_MFG_SER" Type="Edm.String" MaxLength="5"/>
+                <Property Name="PASSPORT_OF_AUTH_SIGNATORY" Type="Edm.String" MaxLength="5"/>
+                <Property Name="PASSPORT_REPR_AUTH_PERSON" Type="Edm.String" MaxLength="5"/>
+            </EntityType>
+            <EntityType Name="RegFormAttachments">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ATTACH_CODE" Type="Edm.Int32"/>
+                <Property Name="ATTACH_GROUP" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ATTACH_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ATTACH_VALUE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="EXPIRY_DATE" Type="Edm.Date"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_MIMETYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_CONTENT" Type="Edm.Binary"/>
+                <Property Name="UPLOADED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="OT_DOC_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="OT_LAST_DOC_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UPDATE_FLAG" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DELETE_FLAG" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ATTACH_SHORT_DEC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ATTACH_FOR" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="TO_CMS" Type="ideal_report_fiori_srv.RegFormCMS">
+                    <ReferentialConstraint Property="OT_DOC_ID" ReferencedProperty="DOC_ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MasterRequestType">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="50"/>
+                <Property Name="SUPPLIER_TYPE" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="MasterUserEntityUsers">
+                <Key>
+                    <PropertyRef Name="USER_ID"/>
+                    <PropertyRef Name="USER_ROLE"/>
+                    <PropertyRef Name="ENTITY_CODE"/>
+                </Key>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="ENTITY_CODE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="150"/>
+                <Property Name="ENTITY_DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="MasterCurrency">
+                <Key>
+                    <PropertyRef Name="WAERS"/>
+                </Key>
+                <Property Name="WAERS" Type="Edm.String" MaxLength="5" Nullable="false"/>
+                <Property Name="LTEXT" Type="Edm.String" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="MasterEntityCode">
+                <Key>
+                    <PropertyRef Name="BUKRS"/>
+                </Key>
+                <Property Name="BUKRS" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="BUTXT" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ORT01" Type="Edm.String" MaxLength="25"/>
+                <Property Name="WAERS" Type="Edm.String" MaxLength="5"/>
+            </EntityType>
+            <EntityType Name="MasterTelecode">
+                <Key>
+                    <PropertyRef Name="LAND1"/>
+                </Key>
+                <Property Name="LAND1" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="TELEFTO" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="TO_COUNTRY" Type="ideal_report_fiori_srv.MasterCountry">
+                    <ReferentialConstraint Property="LAND1" ReferencedProperty="LAND1"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MasterPostalcode">
+                <Key>
+                    <PropertyRef Name="LAND1"/>
+                </Key>
+                <Property Name="LAND1" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="REGEX" Type="Edm.String" MaxLength="250"/>
+                <Property Name="REGEX_EXP" Type="Edm.String" MaxLength="250"/>
+            </EntityType>
+            <EntityType Name="MasterRegion">
+                <Key>
+                    <PropertyRef Name="LAND1"/>
+                    <PropertyRef Name="BLAND"/>
+                    <PropertyRef Name="BEZEI"/>
+                </Key>
+                <Property Name="LAND1" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="BLAND" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="BEZEI" Type="Edm.String" MaxLength="20" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="MasterUserRole">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.String" MaxLength="25" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="RegformBusinessHistory">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DEALERSHIP" Type="Edm.String" MaxLength="50"/>
+                <Property Name="SUPPLIER_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="SINCE" Type="Edm.Int32"/>
+                <Property Name="PROD_GROUP" Type="Edm.String" MaxLength="50"/>
+                <Property Name="PURCHASES" Type="Edm.Int32"/>
+                <NavigationProperty Name="TO_MAIN" Type="ideal_report_fiori_srv.RequestInfo">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="RegformPromoters">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="QUALIFICATION" Type="Edm.String" MaxLength="20"/>
+                <Property Name="WORK_EXP" Type="Edm.String" MaxLength="10"/>
+                <Property Name="YRS_IN_COMP" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DESIGNATION" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ROLE" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="TO_MAIN" Type="ideal_report_fiori_srv.RequestInfo">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="RequestActiveStatus">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="ACTIVE" Type="Edm.String" MaxLength="1"/>
+                <Property Name="TYPE" Type="Edm.Int32"/>
+                <Property Name="UPDATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="IDEAL_DIST_CODE" Type="Edm.Int64"/>
+            </EntityType>
+            <EntityType Name="RegEventsLog">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="EVENT_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="EVENT_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EVENT_CODE" Type="Edm.Int32"/>
+                <Property Name="EVENT_TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="USER_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="REMARK" Type="Edm.String" MaxLength="100"/>
+                <Property Name="COMMENT" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <EntityType Name="MasteriDealAttachments">
+                <Key>
+                    <PropertyRef Name="SR_NO"/>
+                    <PropertyRef Name="ENTITY_CODE"/>
+                    <PropertyRef Name="ATTACH_CODE"/>
+                </Key>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ENTITY_CODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="ATTACH_CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ATTACH_GROUP" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ATTACH_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_MIMETYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_CONTENT" Type="Edm.Binary"/>
+                <Property Name="UPLOADED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="ATTACH_TYPE_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ATTACH_TYPE_DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="EmailActionlog">
+                <Key>
+                    <PropertyRef Name="LOG_ID"/>
+                </Key>
+                <Property Name="LOG_ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <Property Name="STATUS_DSC" Type="Edm.String" MaxLength="50"/>
+                <Property Name="LOG" Type="Edm.String"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CREATED_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="TO_EMAIL" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="CC_EMAIL" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="SUBJECT" Type="Edm.String" MaxLength="100"/>
+                <Property Name="BODY" Type="Edm.String"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="EmailConfig">
+                <Key>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="HOST" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PORT" Type="Edm.Int32"/>
+                <Property Name="SECURE" Type="Edm.Boolean"/>
+                <Property Name="SENDER_EMAIL" Type="Edm.String" MaxLength="100"/>
+                <Property Name="USERNAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PASSWORD" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <EntityType Name="MasterAddressType">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="30"/>
+            </EntityType>
+            <EntityType Name="RegformBankingDetails">
+                <Key>
+                    <PropertyRef Name="REQUEST_NO"/>
+                    <PropertyRef Name="SR_NO"/>
+                </Key>
+                <Property Name="REQUEST_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SR_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="BRANCH_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FACILTY" Type="Edm.String" MaxLength="20"/>
+                <Property Name="AMOUNT_LIMIT" Type="Edm.Double"/>
+                <Property Name="ASSO_SINCE" Type="Edm.Int32"/>
+                <NavigationProperty Name="TO_MAIN" Type="ideal_report_fiori_srv.RequestInfo">
+                    <ReferentialConstraint Property="REQUEST_NO" ReferencedProperty="REQUEST_NO"/>
+                </NavigationProperty>
+            </EntityType>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/ENTITY_CODE">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/LEVEL">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/ROLE_CODE">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/USER_IDS">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterApprovalHierarchy/TYPE">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/REQUEST_NO">
+                <Annotation Term="Common.Label" String="REQUEST_NO: REQUEST_NO"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/SAP_DIST_CODE">
+                <Annotation Term="Common.Label" String="SAP_DIST_CODE: SAP_DIST_CODE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/IDEAL_DIST_CODE">
+                <Annotation Term="Common.Label" String="IDEAL_DIST_CODE: IDEAL_DIST_CODE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/STATUS">
+                <Annotation Term="Common.Label" String="STATUS: STATUS"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/REGISTERED_ID">
+                <Annotation Term="Common.Label" String="REGISTERED_ID: REGISTERED_ID"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/ENTITY_CODE">
+                <Annotation Term="Common.Label" String="ENTITY_CODE: ENTITY_CODE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/REQUEST_TYPE">
+                <Annotation Term="Common.Label" String="REQUEST_TYPE: REQUEST_TYPE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/CREATION_TYPE">
+                <Annotation Term="Common.Label" String="CREATION_TYPE: CREATION_TYPE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/DIST_NAME1">
+                <Annotation Term="Common.Label" String="DIST_NAME1: DIST_NAME1"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/REQUESTER_ID">
+                <Annotation Term="Common.Label" String="REQUESTER_ID: REQUESTER_ID"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/CREATED_ON">
+                <Annotation Term="Common.Label" String="CREATED_ON: CREATED_ON"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/BP_TYPE_CODE">
+                <Annotation Term="Common.Label" String="BP_TYPE_CODE: BP_TYPE_CODE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/BP_TYPE_DESC">
+                <Annotation Term="Common.Label" String="BP_TYPE_DESC: BP_TYPE_DESC"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/BUYER_ASSIGN_CHECK">
+                <Annotation Term="Common.Label" String="BUYER_ASSIGN_CHECK: BUYER_ASSIGN_CHECK"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/COMMENT">
+                <Annotation Term="Common.Label" String="COMMENT: COMMENT"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/LEGACY_ID">
+                <Annotation Term="Common.Label" String="LEGACY_ID: LEGACY_ID"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/DIST_CODE">
+                <Annotation Term="Common.Label" String="DIST_CODE: DIST_CODE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/NDA_TYPE">
+                <Annotation Term="Common.Label" String="NDA_TYPE: NDA_TYPE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/REMINDER_COUNT">
+                <Annotation Term="Common.Label" String="REMINDER_COUNT: REMINDER_COUNT"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/REQUEST_NO_1">
+                <Annotation Term="Common.Label" String="REQUEST_NO_1: REQUEST_NO"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/ACTIVE">
+                <Annotation Term="Common.Label" String="ACTIVE: ACTIVE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.ViewRequestActiveStatus/MOBILE_NO">
+                <Annotation Term="Common.Label" String="MOBILE_NO: MOBILE_NO"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegFormCMS/FILE_MIMETYPE">
+                <Annotation Term="Core.IsMediaType" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegFormCMS/FILE_CONTENT">
+                <Annotation Term="Core.ContentDisposition">
+                    <Record Type="Core.ContentDispositionType">
+                        <PropertyValue Property="Filename" Path="FILE_NAME"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Core.MediaType" Path="FILE_MIMETYPE"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.RegFormCMS/URL">
+                <Annotation Term="Core.IsURL" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityAndType/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityAndType/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityAndType/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityAndType/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityAndType/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityAndType/TYPE">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterEntityAndType/ENTITY_CODE">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterStatus/CRITICALITY">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G1T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F10">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G2T1F11">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F10">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F11">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F12">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G3T1F13">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F10">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G4T1F11">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F11">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F12">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G5T2F13">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G6T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G6T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G6T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G6T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G6T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G6T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F10">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS1G7T1F11">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F10">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F11">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G1T1F12">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F10">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F12">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F13">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T1F14">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T2F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T2F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T2F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T2F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T3F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G2T3F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G3T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G3T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G3T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G3T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G3T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G3T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS2G3T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G1T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G2T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G2T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G2T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G2T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G2T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G2T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F5">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F6">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F7">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F8">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS3G3T1F9">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A2F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A3F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A4F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A5F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A6F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A7F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A8F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A9F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A10F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS4A11F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS5G1F1">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS5G1F2">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS5G1F3">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.MasterRegformFieldsConfig/BS5G1F4">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_report_fiori_srv.EmailActionlog/LOG_ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

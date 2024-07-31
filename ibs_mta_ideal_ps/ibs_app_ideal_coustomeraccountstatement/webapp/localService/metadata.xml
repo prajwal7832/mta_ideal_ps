@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZDMS_ACCOUNT_STATEMENT_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="CheckOptions" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Option"/>
+                </Key>
+                <Property Name="Option" Type="Edm.String" Nullable="false" MaxLength="1" sap:text="Desc" sap:value-list="fixed-values"/>
+                <Property Name="Desc" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Date" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="From_Date"/>
+                </Key>
+                <Property Name="From_Date" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="Division" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Spart"/>
+                </Key>
+                <Property Name="Spart" Type="Edm.String" Nullable="false" sap:text="Ltext" sap:value-list="fixed-values"/>
+                <Property Name="Ltext" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="DocType" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Blart"/>
+                </Key>
+                <Property Name="Blart" Type="Edm.String" Nullable="false" sap:text="Desc" sap:value-list="fixed-values"/>
+                <Property Name="Desc" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="DownloadDoc" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Doc_No"/>
+                    <PropertyRef Name="Doc_Type"/>
+                    <PropertyRef Name="Down_Key"/>
+                    <PropertyRef Name="DocDate"/>
+                </Key>
+                <Property Name="Doc_No" Type="Edm.String" Nullable="false"/>
+                <Property Name="Doc_Type" Type="Edm.String" Nullable="false"/>
+                <Property Name="Down_Key" Type="Edm.String" Nullable="false"/>
+                <Property Name="DocDate" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="HeaderDetails" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="From_Date"/>
+                    <PropertyRef Name="To_Date"/>
+                    <PropertyRef Name="Otf"/>
+                    <PropertyRef Name="Type"/>
+                    <PropertyRef Name="Year"/>
+                </Key>
+                <Property Name="Option" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="From_Date" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="To_Date" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Doc_Type" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="Open_Bal" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="Close_Bal" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="Debit_Note" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="Credit_Note" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="Invoice_Amt" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="Spart" Type="Edm.String" Nullable="false"/>
+                <Property Name="Prctr" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Blart" Type="Edm.String" Nullable="false"/>
+                <Property Name="Otf" Type="Edm.String" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false"/>
+                <Property Name="Binary" Type="Edm.Binary" Nullable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false"/>
+                <Property Name="Year" Type="Edm.String" Nullable="false"/>
+                <Property Name="AddDeposit" Type="Edm.String" Nullable="false"/>
+                <Property Name="SecDeposit" Type="Edm.String" Nullable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false"/>
+                <Property Name="Download" Type="Edm.String" Nullable="false"/>
+                <Property Name="Email_Message" Type="Edm.String" Nullable="false"/>
+                <Property Name="SalesReturn" Type="Edm.String" Nullable="false"/>
+                <Property Name="Collection" Type="Edm.String" Nullable="false"/>
+                <Property Name="FlagIndOpen" Type="Edm.String" Nullable="false"/>
+                <Property Name="FlagIndClose" Type="Edm.String" Nullable="false"/>
+                <Property Name="FlagIndSales" Type="Edm.String" Nullable="false"/>
+                <Property Name="FlagIndSalRet" Type="Edm.String" Nullable="false"/>
+                <Property Name="FlagIndColl" Type="Edm.String" Nullable="false"/>
+                <Property Name="Reference" Type="Edm.String" Nullable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="ItemDetails" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Invoice"/>
+                    <PropertyRef Name="Belnr"/>
+                    <PropertyRef Name="Option"/>
+                    <PropertyRef Name="From_Date"/>
+                    <PropertyRef Name="To_Date"/>
+                    <PropertyRef Name="Posnr"/>
+                </Key>
+                <Property Name="Invoice" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Belnr" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Date" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="TDS_TCS" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="CD_Per" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="CD_Amt" Type="Edm.String" Nullable="false" MaxLength="31"/>
+                <Property Name="Debit" Type="Edm.String" Nullable="false" MaxLength="31"/>
+                <Property Name="Credit" Type="Edm.String" Nullable="false" MaxLength="31"/>
+                <Property Name="Option" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="From_Date" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="To_Date" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Blart" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="Prctr" Type="Edm.String" Nullable="false"/>
+                <Property Name="Spart" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false"/>
+                <Property Name="Balance" Type="Edm.String" Nullable="false" MaxLength="31"/>
+                <Property Name="Flag" Type="Edm.String" Nullable="false"/>
+                <Property Name="Reference" Type="Edm.String" Nullable="false"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false"/>
+                <Property Name="Email_Message" Type="Edm.String" Nullable="false"/>
+                <Property Name="GraceMsg" Type="Edm.String" Nullable="false" MaxLength="600"/>
+                <Property Name="GraceMsgExp" Type="Edm.String" Nullable="false" MaxLength="600"/>
+            </EntityType>
+            <EntityType Name="Otf" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Down_Key"/>
+                </Key>
+                <Property Name="Down_Key" Type="Edm.String" Nullable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="From_Date" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="To_Date" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Doc_Type" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Prctr" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Blart" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZDMS_ACCOUNT_STATEMENT_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="CheckOptionsSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.CheckOptions" sap:content-version="1" sap:semantics="fixed-values"/>
+                <EntitySet Name="DateSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.Date" sap:content-version="1"/>
+                <EntitySet Name="DivisionSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.Division" sap:content-version="1" sap:semantics="fixed-values"/>
+                <EntitySet Name="DocTypeSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.DocType" sap:content-version="1" sap:semantics="fixed-values"/>
+                <EntitySet Name="DownloadDocSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.DownloadDoc" sap:content-version="1"/>
+                <EntitySet Name="HeaderDetailsSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.HeaderDetails" sap:content-version="1"/>
+                <EntitySet Name="ItemDetailsSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.ItemDetails" sap:content-version="1"/>
+                <EntitySet Name="OtfSet" EntityType="ZDMS_ACCOUNT_STATEMENT_SRV.Otf" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="SHIV.DMS_ACCOUNT_STATEMENT_SRV.ItemDetails" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="com.sap.vocabularies.UI.v1.LineItem">
+                    <Collection>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Doc Type"/>
+                            <PropertyValue Property="Value" Path="Blart"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Invoice No."/>
+                            <PropertyValue Property="Value" Path="Invoice"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Document Number"/>
+                            <PropertyValue Property="Value" Path="Belnr"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Division"/>
+                            <PropertyValue Property="Value" Path="Spart"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Date"/>
+                            <PropertyValue Property="Value" Path="Date"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="CD Amount"/>
+                            <PropertyValue Property="Value" Path="CD_Amt"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Debit"/>
+                            <PropertyValue Property="Value" Path="Debit"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Credit"/>
+                            <PropertyValue Property="Value" Path="Credit"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Location"/>
+                            <PropertyValue Property="Value" Path="Location"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="TDS/TCS"/>
+                            <PropertyValue Property="Value" Path="TDS_TCS"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Option"/>
+                            <PropertyValue Property="Value" Path="Option"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="From Date"/>
+                            <PropertyValue Property="Value" Path="From_Date"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="To Date"/>
+                            <PropertyValue Property="Value" Path="To_Date"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Profit Center"/>
+                            <PropertyValue Property="Value" Path="Prctr"/>
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                            <PropertyValue Property="Label" String="Line Item"/>
+                            <PropertyValue Property="Value" Path="Posnr"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://portal.intellectbizware.com:80/sap/opu/odata/sap/ZDMS_ACCOUNT_STATEMENT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://portal.intellectbizware.com:80/sap/opu/odata/sap/ZDMS_ACCOUNT_STATEMENT_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

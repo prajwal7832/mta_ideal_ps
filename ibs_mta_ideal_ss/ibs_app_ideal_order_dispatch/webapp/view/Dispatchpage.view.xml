@@ -1,0 +1,161 @@
+<mvc:View controllerName="com.ibs.ibsappidealorderdispatch.controller.Dispatchpage"
+     xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+	xmlns:t="sap.suite.ui.commons" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout">
+	<m:App id="idApp">
+	<!-- <m:pages> -->
+    <m:Page id="page" showHeader="false">
+	<m:content>
+    <!-- <FlexBox alignItems="Center" justifyContent="End" alignContent="Stretch" class="sapUiTinyMarginTop">
+		<items>
+			<l:HorizontalLayout allowWrapping="true">
+				<m:Button icon="sap-icon://nav-back" press="onBack" type="Emphasized"
+				class="sapUiTinyMarginEnd sapUiTinyMarginBottom"/>	
+			</l:HorizontalLayout>
+		</items>
+	</FlexBox> -->
+	<ObjectPageLayout id="idObj">
+				<headerTitle>
+				<ObjectPageDynamicHeaderTitle class="sapUiNoMarginBottom">
+				<actions>
+					<m:Title text="Order Dispatch" class="titleWeight"/>
+					<m:ToolbarSpacer />
+					<m:Button icon="sap-icon://nav-back" type="Emphasized" press="onBack" class="sapUiNoMarginTop sapUiNoMarginBottom"/>
+			 	
+				</actions>
+				</ObjectPageDynamicHeaderTitle>
+				</headerTitle>
+				<sections>
+					<ObjectPageSection title = "Header" showTitle="true">
+					
+					<subSections>
+					<ObjectPageSubSection title="Header" showTitle="true">
+    <f:SimpleForm id="simpleForm1" labelSpanL="4" labelSpanM="2" labelSpanXL="2" editable="false" layout="ResponsiveGridLayout" columnsM="2"
+												columnsL="3" columnsXL="4" class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+					<f:content>
+					<core:Title/>
+					<m:Label text="Sales Order No" design="Bold" wrapping="true"/>
+					<m:Text text="{path:'retailerDetailModel>/0/SO_NO', formatter:'.formatter.getDataNullValue'}"/>
+
+					<m:Label required="false" text="Transporter" design="Bold" wrapping="true"/>
+					<m:Input value="" id="idTransporter" placeholder="Please enter Transporter" change="onChangeTransport"/>
+					
+					<m:Label required="false" text="Way BillNo" design="Bold" wrapping="true"/>
+					<m:Input value="" maxLength="12" id="idWayBill" placeholder="Please enter way bill No" change="onChangeWayBill"/>
+
+					<m:Label required="false" text="Shipping Charges(₹)" design="Bold" wrapping="true"/>
+					<m:Input type="Number" value="" id="idShippingChrg" placeholder="Please enter shipping charges" change="onChangeShippingChrg"/>
+
+					<m:Label required="false" text="Destination" design="Bold" wrapping="true"/>
+					<m:Input value="" id="idDestination" placeholder="Please enter destination" change="onChangeDestination"/>
+
+                    <core:Title/>
+					<m:Label text="Retailer " design="Bold" wrapping="true"/>
+					<m:Text text="{path:'retailerHeaderModel>/0/RETAILER_NAME', formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+					
+					<m:Label required="false" text="Vehicle No" design="Bold" wrapping="true"/>
+					<m:Input value="" id="idVehicleNo" placeholder="Please enter vehicle no" change="onChangeVehicleNo"/>
+
+					<m:Label required="false" text="Gross Weight(kg)" design="Bold" wrapping="true"/>
+					<m:Input type="Number" value="" id="idGrossWgt" placeholder="Please enter gross weight" change="onChangeGrossWgt"/>
+					
+                    <m:Label required="false" text="Reference" design="Bold" wrapping="true"/>
+					<m:Input value="" id="idReference" placeholder="Please enter reference" change="onChangeRef"/>
+					
+					<core:Title/>
+                    <m:Label required="false" text="Total no of pakages" design="Bold" wrapping="true"/>
+					<m:Input value="" id="idTotalPkg" placeholder="Please enter total packages" change="onChangeTotalPkg"/>
+					
+                    <m:Label required="false" text="LR No" design="Bold" wrapping="true"/>
+					<m:Input type="Number" value="" id="idLrNo" placeholder="Please enter LR No" change="onChangeLRNo"/>
+					
+					<!-- <l:HorizontalLayout> -->
+					<!-- <HBox> -->
+                    <m:Label text="LR Date" design="Bold" required="false"/>
+        			<m:DatePicker id="idDateRangeSelection" change="onChangeDate"/>
+					<!-- </HBox> -->
+					<!-- </l:HorizontalLayout> -->
+					</f:content>
+			</f:SimpleForm>
+			</ObjectPageSubSection>
+							</subSections>
+							</ObjectPageSection>
+
+		<ObjectPageSection title="Items" showTitle="true">
+		<subSections>
+		<ObjectPageSubSection title="Items" showTitle="true">
+
+        <!-- <content> -->
+		<m:Table id="idProductsTable" inset="false" items="{retailerDetailModel>/}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<!-- <dependents> -->
+								<!-- <plugins:ColumnResizer/> hSpacing="2rem" showGoOnFB="false"-->
+							<!-- </dependents> -->
+						<!-- <headerToolbar>
+							<OverflowToolbar visible="false">
+								<Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/>
+								<content>
+									<ToolbarSpacer/>
+									<SearchField id="oSearchMasterData" visible="true" width="40%" placeholder="Search"
+									 showRefreshm:Button="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar> -->
+						<m:columns>
+							<m:Column hAlign="Left" width="8rem">
+								<m:Label text="Material" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Center" visible="false">
+								<m:Label text="Batch" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Right">
+								<m:Label text="Order Qty" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Right">
+								<m:Label text="Dispatch Qty" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Right">
+								<m:Label text="Net Amount(₹)" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Right">
+								<m:Label text="Total Amount(₹)" design="Bold" wrapping="true"/>
+							</m:Column>
+							
+						</m:columns>
+						<m:items>
+							<m:ColumnListItem type="Inactive">
+								<m:cells>
+								<m:ObjectIdentifier title="{path:'retailerDetailModel>MATERIAL_DESC',formatter:'.formatter.getDataNullValue'}"
+                                     text="{path:'retailerDetailModel>MATERIAL_CODE',formatter:'.formatter.getDataNullValue'}"/>
+									
+									<m:Text text="{path:'retailerDetailModel>BATCH',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<m:Text textAlign="End" text="{path:'retailerDetailModel>QUANTITY',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<m:Text textAlign="End" text="{path:'retailerDetailModel>DISPATCH_QTY',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<m:Text textAlign="End" text="{path:'retailerDetailModel>STD_PRICE',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<m:Text textAlign="End" text="{path:'retailerDetailModel>TOTAL_AMOUNT',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+					</m:Table>
+					</ObjectPageSubSection>
+				</subSections>
+							</ObjectPageSection>
+						</sections>
+					</ObjectPageLayout>
+			</m:content>
+			<m:footer>
+				<m:Bar>
+					
+					<m:contentRight>
+						<m:Button id="saveBt" text="Submit" press="onDataFetch" type="Success" enabled="true"/>
+					</m:contentRight>
+				</m:Bar>
+			</m:footer>
+    </m:Page>
+	<!-- </pages> -->
+	</m:App>
+</mvc:View>

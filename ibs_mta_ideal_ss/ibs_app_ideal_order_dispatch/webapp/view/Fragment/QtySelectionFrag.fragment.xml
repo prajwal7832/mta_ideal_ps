@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="idlogDialog" contentHeight="40%" title="Dispatch Quantity" draggable="true" resizable="true" titleAlignment="Center" class="sapUiSizeCompact">
+
+     <f:SimpleForm id="simpleForm2" editable="true" layout="ResponsiveGridLayout" columnsM="3" columnsL="3" columnsXL="4"
+			class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+			
+		<core:Title text=""/>
+        <Label text = "Material Code"/>
+        <Text text = "{path:'selectedQtyModel>/0/MATERIAL_CODE',formatter:'.formatter.getDataNullValue'}"/>
+
+        <!-- <Label text = "Order Quantity"/>
+        <Text text = "{selectedQtyModel>/0/QUANTITY',formatter:'.formatter.getDataNullValue'}"/> -->
+        
+		<core:Title text=""/>
+        <Label text = "Material"/>
+        <Text text="{path:'selectedQtyModel>/0/MATERIAL_DESC',formatter:'.formatter.getDataNullValue'}" />
+
+    </f:SimpleForm>
+		<Table id="idLogTable" sticky="ColumnHeaders,HeaderToolbar"
+		items="{selectedQtyModel>/}" inset="false" autoPopinMode="true" fixedLayout="true"
+					class="sapUiContentPadding">
+						
+						<columns>
+							<Column hAlign="Center" visible="false">
+								<Label text="Batch" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Right" width="7rem">
+								<Label text="Order Qty." design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Pending Qty." design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Price(₹)" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Dispatch Qty" design="Bold" required="true"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{path:'selectedQtyModel>BATCH',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<Text text="{path:'selectedQtyModel>QUANTITY',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<Text text="{path:'selectedQtyModel>PENDING_QUANTITY',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<Text text="{path:'selectedQtyModel>TOTAL_AMOUNT',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<Input textAlign="End" width="7rem" value="{selectedQtyModel>DISPATCH_QTY}" id="idDispatchQty" type="Number"
+										liveChange="onChangeDispatchQty" placeholder="Please enter dispatch Qty"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+		<buttons>
+			<Button text="Submit" id="id_submitPdc" press="submitQtyDialog" type="Emphasized"/>
+			<Button text="Cancel" id="id_logcancel" press="closeQtyDialog" icon="sap-icon://cancel" type="Emphasized"/>
+			
+		</buttons>
+		
+	</Dialog>
+</core:FragmentDefinition>

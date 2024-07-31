@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<!-- <Button core:require="{ handler: 'com/ibspl/ideal/idealrequestfiorireport/ext/fragment/Fragmententity'}" text="Sample Text" press="handler.onPress" /> -->
+
+<Label core:require="{ handler: 'com/ibs/ibsappidealrequestreportfiori/ext/fragment/Fragmententity'}"   
+text="{TO_ENTITY_CODE/BUTXT} ({ENTITY_CODE})" width="100px"/> 
+</core:FragmentDefinition>

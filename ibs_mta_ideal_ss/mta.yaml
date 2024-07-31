@@ -1,0 +1,176 @@
+_schema-version: "3.2"
+ID: ibs_mta_ideal_ss
+version: 0.0.1
+modules:
+- name: ibs_mta_ideal_ss-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: ibs_mta_ideal_ss-destination-service
+    parameters:
+      content-target: true
+  - name: ibs_mta_ideal_ss_html_repo_host
+    parameters:
+      service-key:
+        name: ibs_mta_ideal_ss_html_repo_host-key
+  - name: uaa_ibs_mta_ideal_ss
+    parameters:
+      service-key:
+        name: uaa_ibs_mta_ideal_ss-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: ibs_bs_ideal_ss_ibs_mta_ideal_ss_html_repo_host
+          ServiceInstanceName: ibs_mta_ideal_ss-html5-app-host-service
+          ServiceKeyName: ibs_mta_ideal_ss_html_repo_host-key
+          sap.cloud.service: ibs_bs_ideal_ss
+        - Authentication: OAuth2UserTokenExchange
+          Name: ibs_bs_ideal_ss_uaa_ibs_mta_ideal_ss
+          ServiceInstanceName: ibs_mta_ideal_ss-xsuaa-service
+          ServiceKeyName: uaa_ibs_mta_ideal_ss-key
+          sap.cloud.service: ibs_bs_ideal_ss
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: ibs_mta_ideal_ss-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: ibs_mta_ideal_ss_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comibsibsappidealretailermaster.zip
+      name: comibsibsappidealretailermaster
+      target-path: resources/
+    - artifacts:
+      - comibsibsappidealviewchange.zip
+      name: comibsibsappidealviewchange
+      target-path: resources/
+    - artifacts:
+      - comibsibsappidealretailerinvoice.zip
+      name: comibsibsappidealretailerinvoice
+      target-path: resources/
+    - artifacts:
+      - comibsibsappidealretailerpayment.zip
+      name: comibsibsappidealretailerpayment
+      target-path: resources/
+    - artifacts:
+      - comibsibsappidealorderdispatch.zip
+      name: comibsibsappidealorderdispatch
+      target-path: resources/
+    - artifacts:
+      - comibsibsappidealstockdetails.zip
+      name: comibsibsappidealstockdetails
+      target-path: resources/
+    - artifacts:
+      - comibsibsappidealcollectionreport.zip
+      name: comibsibsappidealcollectionreport
+      target-path: resources/
+- name: comibsibsappidealretailermaster
+  type: html5
+  path: ibs_app_ideal_retailer_master
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comibsibsappidealviewchange
+  type: html5
+  path: ibs_app_ideal_view_change
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comibsibsappidealretailerinvoice
+  type: html5
+  path: ibs_app_ideal_retailer_invoice
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comibsibsappidealretailerpayment
+  type: html5
+  path: ibs_app_ideal_retailer_payment
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comibsibsappidealorderdispatch
+  type: html5
+  path: ibs_app_ideal_order_dispatch
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comibsibsappidealstockdetails
+  type: html5
+  path: ibs_app_ideal_stock_details
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comibsibsappidealcollectionreport
+  type: html5
+  path: ibs_app_ideal_collection_report
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: ibs_mta_ideal_ss-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: ibs_mta_ideal_ss-destination-service
+    service-plan: lite
+- name: ibs_mta_ideal_ss_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: ibs_mta_ideal_ss-html5-app-host-service
+    service-plan: app-host
+- name: uaa_ibs_mta_ideal_ss
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: ibs_mta_ideal_ss-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
