@@ -1,0 +1,326 @@
+<mvc:View controllerName="com.ibs.ibsappidealpaymentforcast.controller.PaymentForecastDetails" xmlns="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:u="sap.ui.unified" xmlns:c="sap.ui.core" xmlns:m="sap.m" height="100%">
+	<m:Page showHeader="true" title="Details" enableScrolling="false" showNavButton="true" navButtonPress="onNavBack" class="sapUiSizeCompact">
+		<m:content>
+			<Table selectionMode="None" visibleRowCount="12" rows="{/modelData}">
+				<columns>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Invoice No" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{Invoice No}"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="PL" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{PL}"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Invoice Date" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{Invoice Date}"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Amount" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{Amount}"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Due Date" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{Due Date}"/>
+						</template>
+					</Column>
+					<Column width="11rem" id="multiheader1">
+						<multiLabels>
+							<m:Label id="date1" textAlign="Center" width="100%"/>
+							<m:Label text="Discount %" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Discount %}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Cash Discount" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Cash Discount}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Net Amount Payable" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Net Amount Payable}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue Days" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue Days}" wrapping="false"/>
+						</template>
+					</Column>
+					<!--spacer-->
+					<Column width="11rem" id="multiheader2">
+						<multiLabels>
+							<m:Label id="date2" textAlign="Center" width="100%"/>
+							<m:Label text="Discount %" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Discount %}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Cash Discount" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Cash Discount}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Net Amount Payable" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Net Amount Payable}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue Days" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue Days}" wrapping="false"/>
+						</template>
+					</Column>
+					<!--spacer-->
+					<Column width="11rem" id="multiheader3">
+						<multiLabels>
+							<m:Label id="date3" textAlign="Center" width="100%"/>
+							<m:Label text="Discount %" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Discount %}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Cash Discount" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Cash Discount}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Net Amount Payable" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Net Amount Payable}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue Days" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue Days}" wrapping="false"/>
+						</template>
+					</Column>
+					<!--spacer-->
+					<Column width="11rem" id="multiheader4">
+						<multiLabels>
+							<m:Label id="date4" textAlign="Center" width="100%"/>
+							<m:Label text="Discount %" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Discount %}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Cash Discount" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Cash Discount}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Net Amount Payable" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Net Amount Payable}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue Days" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue Days}" wrapping="false"/>
+						</template>
+					</Column>
+					<!--spacer-->
+					<Column width="11rem" id="multiheader5">
+						<multiLabels>
+							<m:Label id="date5" textAlign="Center" width="100%"/>
+							<m:Label text="Discount %" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Discount %}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Cash Discount" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Cash Discount}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Net Amount Payable" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Net Amount Payable}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue Days" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue Days}" wrapping="false"/>
+						</template>
+					</Column>
+					<!--spacer-->
+					<Column width="11rem" id="multiheader6">
+						<multiLabels>
+							<m:Label id="date6" textAlign="Center" width="100%"/>
+							<m:Label text="Discount %" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Discount %}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Cash Discount" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Cash Discount}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Net Amount Payable" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Net Amount Payable}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue}" wrapping="false"/>
+						</template>
+					</Column>
+					<Column width="11rem">
+						<multiLabels>
+							<m:Label text="Contact"/>
+							<m:Label text="Overdue Days" textAlign="Center" width="100%"/>
+						</multiLabels>
+						<template>
+							<m:Text text="{day1/Overdue Days}" wrapping="false"/>
+						</template>
+					</Column>
+				</columns>
+			</Table>
+		</m:content>
+	</m:Page>
+</mvc:View>

@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m"
+xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+xmlns:l="sap.ui.layout">
+<Dialog>
+
+<l:VerticalLayout>
+<Label text="Reason for action:"></Label>
+<TextArea  id="orderApproveComment"   rows="5" cols="100" maxLength="1000" width="100%"></TextArea>
+</l:VerticalLayout>
+
+<OverflowToolbar>
+<ToolbarSpacer/>
+<Button text="Submit" press="approveOrderSubmit" />
+<Button text="Cancel" press="CancelOrder2" ></Button>
+</OverflowToolbar>
+
+</Dialog>
+
+
+
+</core:FragmentDefinition>

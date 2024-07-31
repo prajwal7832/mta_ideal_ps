@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+        id="settingsDialog"
+        confirm="handleConfirm2"
+        cancel="handleCancel">
+        <filterItems>
+            <ViewSettingsFilterItem text="PPR Request Number" key="PPR_NO" items="{path:'supplier>/value',sorter : { path : 'PPR_NO',descending : true}}">
+                <items>
+                    <ViewSettingsItem text="{supplier>PPR_NO}" key="{supplier>PPR_NO}" />
+                        </items>
+                </ViewSettingsFilterItem>  
+
+                <!-- <ViewSettingsCustomItem text="Creation Date" key="3">
+                <customControl>
+                <FlexBox justifyContent="Center">
+                   <DateRangeSelection id="date_fId" placeholder="Select Date Range" maxDate="{minDateModel>/minDate}"/>
+                   </FlexBox>
+                </customControl>
+            </ViewSettingsCustomItem> -->
+
+        </filterItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,208 @@
+<mvc:View controllerName="com.ibs.ibsappidealordercreation.controller.Creationpage"
+    xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+	xmlns:t="sap.suite.ui.commons" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout">
+
+	<m:App id="idApp">
+	<!-- <m:pages> -->
+    <m:Page id="page" showHeader="false">
+	<m:content>
+    <!-- <l:VerticalLayout width="100%" >
+			<m:OverflowToolbar>
+			<m:Title text="Retailer Order Creation" class="titleWeight"/>
+			<m:ToolbarSpacer />
+				<m:Button icon="sap-icon://decline" type="Transparent" press="onBack"/>
+			 </m:OverflowToolbar> -->
+			 	<ObjectPageLayout id="idObj">
+				<headerTitle>
+				<ObjectPageDynamicHeaderTitle>
+				<actions>
+				<!-- <OverflowToolbar> -->
+					<m:Title text="Retailer Order Creation" class="titleWeight"/>
+					<m:ToolbarSpacer />
+					<m:Button icon="sap-icon://decline" type="Transparent" press="onBack"/>
+			 	<!-- </OverflowToolbar> -->
+				</actions>
+				</ObjectPageDynamicHeaderTitle>
+				</headerTitle>
+				<sections>
+					<ObjectPageSection title = "Header" showTitle="true">
+					
+					<subSections>
+					<ObjectPageSubSection title="Header" showTitle="true">
+
+					<fb:FilterBar id="idFilterBar" class="sapUiNoMarginTop" visible="true" reset="onReset" search="onSearch" showRestoreButton="false" useToolbar="false" showFilterConfiguration="false"
+						 showGoOnFB="false" filterContainerWidth="7rem" >
+						<fb:filterItems>
+						
+							<fb:FilterItem name="A" label="Retailer">
+								<fb:control>
+									<m:Input id="idRetailer" change="handleRetailer" placeholder="Select Retailer" showSuggestion="true" showValueHelp="true" valueHelpOnly="true"
+										valueHelpRequest="onRetailer"/>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="B" label="Ship to Address">
+								<fb:control>
+									<m:Input id="idShipTo" placeholder="Select ship to address" showSuggestion="true" showValueHelp="true"
+									 valueHelpOnly="true" valueHelpRequest="onShipToAddress"></m:Input>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="BT" label="Total Amount" id="idTotalAmt" visible="false">
+								<fb:control>
+							<m:Title text = "{path:'retailerInfoModel>/MaterialAmount/0/TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'} INR"  class="sapUiTinyMarginTop"/>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="BTT" label="Total Taxes" id="idTotalTaxes" visible="false">
+								<fb:control>
+							<m:Text text = "{path:'retailerInfoModel>/MaterialAmount/0/TOTAL_TAXES',formatter:'.formatter.formatterAmount'} INR" class="amt sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+								</fb:control>
+							</fb:FilterItem>
+							
+                            </fb:filterItems>
+                            </fb:FilterBar>
+							</ObjectPageSubSection>
+							</subSections>
+							</ObjectPageSection>
+
+						<ObjectPageSection title="Items" showTitle="true">
+						<subSections>
+						<ObjectPageSubSection title="Items" showTitle="true">
+                        <fb:FilterBar id="idFilterBar2" visible="true" reset="onReset" search="onSearch" showRestoreButton="false" useToolbar="false" showFilterConfiguration="false"
+						 showGoOnFB="false" filterContainerWidth="7rem">
+                            <fb:filterItems>
+							<fb:FilterItem name="D" label="Material Group">
+								<fb:control>
+									<m:Input id="idMaterialGrp" placeholder="Select material group" showSuggestion="true" showValueHelp="true" valueHelpOnly="true"
+										valueHelpRequest="onMaterialGrp"></m:Input>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="E" label="Material">
+								<fb:control>
+									<m:Input id="idMaterial" placeholder="Select material" showSuggestion="true" showValueHelp="true" valueHelpOnly="true"
+										valueHelpRequest="onMaterial"></m:Input>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="F" label="Material Qty" id="idMaterialQty">
+								<fb:control>
+									<m:Input id="materialQty" type="Number" placeholder="Enter material Qty" liveChange="onQuantityChange"></m:Input>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem id="idAvlQtyFilter" name="G" label="Available Quantity">
+								<fb:control>
+									<m:Input width="3rem" id="idAvlQtyTxt" editable="false"/>
+								</fb:control>
+							</fb:FilterItem>
+					<fb:FilterItem name="H" label="Add Material/Reset">
+						<fb:control>
+						<l:HorizontalLayout>
+							<m:Button id="idAddMaterial" icon="sap-icon://add-activity" tooltip="Add Material" type="Emphasized" press="handleAddMaterial"/>
+							<m:Button id="reset" press="onReset" icon="sap-icon://refresh" tooltip="reset" type="Transparent" visible="true"/>
+						</l:HorizontalLayout>
+						</fb:control>
+					</fb:FilterItem>	
+						</fb:filterItems>
+					</fb:FilterBar>
+					</ObjectPageSubSection>
+							</subSections>
+							</ObjectPageSection>
+
+		<ObjectPageSection showTitle="false">
+		<subSections>
+		<ObjectPageSubSection showTitle="false">
+		<m:Table id="idProductsTable" inset="false" items="{retailerTblModel>/visibleRowCountArr}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<!-- <dependents>
+							</dependents> -->
+						<m:headerToolbar>
+							<m:OverflowToolbar visible="false">
+								<m:Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/>
+								<m:content>
+									<m:ToolbarSpacer/>
+									<m:SearchField id="oSearchMasterData" visible="true" width="40%" placeholder="Search"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <m:layoutData>
+										<m:OverflowToolbarLayoutData priority="NeverOverflow" />
+									</m:layoutData>
+									</m:SearchField>
+									<m:Button icon="" press="onRefresh"/>
+								</m:content>
+							</m:OverflowToolbar>
+						</m:headerToolbar>
+						<m:columns>
+							<m:Column hAlign="Center" width="5rem">
+								<m:Label text="Material" design="Bold" wrapping="true"/>
+							</m:Column>
+							<m:Column hAlign="Center" width="5rem">
+								<m:Label text="HSN Code" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Right" width="5rem">
+								<m:Label text="Material Qty" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Right" width="5rem">
+								<m:Label text="UOM" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Right" width="5rem">
+								<m:Label text="Price(₹)" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Right" width="5rem" visible="false">
+								<m:Label text="Net Amount(₹)" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Right" width="6rem">
+								<m:Label text="Taxes Amount(₹)" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Right" width="6rem">
+								<m:Label text="Total Amount(₹)" wrapping="true" design="Bold"/>
+							</m:Column>
+							<m:Column width="4rem" hAlign="Right">
+								<m:Label text="" design="Bold" />
+							</m:Column>
+							<!-- <m:Column hAlign="Right">
+								<m:Label text="Material Qty" wrapping="true" design="Bold"/>
+							</m:Column> -->
+							
+						</m:columns>
+						<m:items>
+							<m:ColumnListItem type="Inactive" press="onPress">
+								<m:cells>
+									<m:ObjectIdentifier title="{retailerTblModel>MATERIAL_DESC}" 
+										text="{retailerTblModel>MATERIAL_CODE}"/>
+									<!-- <m:Text text="{retailerTblModel>MATERIAL_DESC}"/> -->
+									<m:Text text="{retailerTblModel>HSN_CODE}" wrapping="true"/>
+									<m:Input width="5rem" type="Number" value="{retailerTblModel>QUANTITY}" 
+									textAlign="Right" liveChange="handleMaterialQty"/>
+									<m:Text text="{retailerTblModel>UNIT_OF_MEASURE}" wrapping="true"/>
+									<m:Text text="{path:'retailerTblModel>STD_PRICE',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									<m:Text text ="{path:'retailerTblModel>NET_AMOUNT',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									<m:Text text ="{path:'retailerTblModel>TAXES_AMOUNT',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									<m:Text text="{path:'retailerTblModel>TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									<m:Button icon="sap-icon://delete" type="Negative" press="handleDeleteEntries" class="sapUiTinyMarginEnd"/>
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+					</m:Table>
+				</ObjectPageSubSection>
+				</subSections>
+							</ObjectPageSection>
+						</sections>
+					</ObjectPageLayout>
+			</m:content>
+			<m:footer>
+				<m:Bar>
+					<m:contentLeft>
+						<m:Button id="messagePopoverBtn" visible="false" type="Ghost" icon="sap-icon://message-popup" text="" press="handleMessagePopoverPress"
+							ariaHasPopup="Dialog"/>
+						<!-- <Title text = "Total Amount : {path:'retailerInfoModel>/MaterialAmount/0/TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'} INR"  class="sapUiMediumMarginEnd"/>
+						<Text text = "Total Taxes : {path:'retailerInfoModel>/MaterialAmount/0/TOTAL_TAXES',formatter:'.formatter.formatterAmount'} INR" class="amt"/> -->
+					</m:contentLeft>
+					<m:contentRight>
+						<m:Button id="saveBt" text="Submit" press="onRetailerDataFetch" type="Success" enabled="false"/>
+					</m:contentRight>
+				</m:Bar>
+			</m:footer>
+					
+        <!-- </m:content> -->
+	<!-- </m:content> -->
+    </m:Page>
+	<!-- </m:pages> -->
+	</m:App>
+</mvc:View>

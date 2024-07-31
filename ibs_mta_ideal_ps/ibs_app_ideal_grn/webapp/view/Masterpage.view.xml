@@ -1,0 +1,106 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealgrn.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+
+<mvc:View controllerName="com.ibs.ibsappidealgrn.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m">
+	<App id="idApp">
+	<pages>
+    <Page id="page" showHeader="false">
+    
+        <content>
+		<Table id="idOrdersTable" inset="false" items="{path:'grnHeaderSet>/', sorter : { path : 'DeliveryNumber',descending : true}}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="20" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<dependents>
+								<!-- <plugins:ColumnResizer/> hSpacing="2rem" showGoOnFB="false"-->
+							</dependents>
+						<headerToolbar>
+							<OverflowToolbar visible="true">
+								<Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/>
+								<content>
+									<ToolbarSpacer/>
+									<!-- <Button id="idCreate" text="Create Order" type="Emphasized" icon="sap-icon://add-activity" press="onCreate"> -->
+									<!-- <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button> -->
+									<SearchField id="oSearchMasterData" visible="true" width="39%" placeholder="Search by Delivery No,Invoice No,Sales Order No"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+									<Button visible="false" id="idFilterBtn" icon="sap-icon://filter" press="onFilter" type="Transparent" class="sapUiNoMarginEnd sapUiTinyMarginBegin">
+									<layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button>
+									
+									<Button id="idSortBtn" icon="sap-icon://sort" press="handleSort" type="Transparent" class="sapUiNoMarginEnd">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button>
+									<Button icon="sap-icon://refresh" press="onRefresh">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<!-- <Column hAlign="Left" width="11rem" visible="false">
+								<Label text="Retailer" design="Bold" wrapping="true"/>
+							</Column> -->
+							
+							<Column hAlign="Center" width="9rem">
+								<Label text="Delivery Number" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center" >
+								<Label text="Delivery Date" design="Bold" wrapping="true"/>
+							</Column>
+							
+							<Column hAlign="Center">
+								<Label text="Invoice Number" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text="Invoice Date" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center" >
+								<Label text="Sales Order No" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Delivery Amount(₹)" design="Bold" wrapping="true"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="onPress">
+								<cells>
+									<Text text="{path:'grnHeaderSet>DeliveryNumber',formatter:'.formatter.getDataNullValue'}"/>
+									<Text text="{path:'grnHeaderSet>DeliveryDate',formatter:'.formatter.getDataNullValue',
+									type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd.MM.yyyy' , UTC: false }}"/>
+									<Text text="{path:'grnHeaderSet>InvoiceNumber',formatter:'.formatter.getDataNullValue'}"/>
+									
+									<Text text="{path:'grnHeaderSet>InvoiceDate' ,formatter:'.formatter.getDataNullValue',
+									type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd.MM.yyyy' , UTC: false }}"/>
+									<Text text = "{path:'grnHeaderSet>SalesOrder',formatter:'.formatter.getDataNullValue'}" />
+									<Text text = "{path:'grnHeaderSet>DeliveryValue',formatter:'.formatter.formatterAmount'}" />
+									
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</content>
+    </Page>
+	</pages>
+	</App>
+</mvc:View>
+

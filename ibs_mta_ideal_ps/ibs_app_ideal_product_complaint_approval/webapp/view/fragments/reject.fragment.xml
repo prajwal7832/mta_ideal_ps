@@ -1,0 +1,37 @@
+<!-- <core:FragmentDefinition xmlns="sap.m"
+xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+xmlns:l="sap.ui.layout" width="20%">
+<Dialog title="Reject " draggable="true" resizable="true" titleAlignment="Center" contentWidth="30rem" class="sapUiSizeCompact">
+
+<l:VerticalLayout>
+<Label text="Reason for Rejection:"></Label>
+<TextArea  id="inputcomment"   rows="5" cols="100" maxLength="1000" width="100%"></TextArea>
+</l:VerticalLayout>
+
+<OverflowToolbar>
+<ToolbarSpacer/>
+<Button text="Submit" press="SubmitrejectOrder" />
+<Button text="Cancel" press="CancelOrder1" ></Button>
+</OverflowToolbar>
+
+</Dialog>
+</core:FragmentDefinition> -->
+
+
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="idApproveDialog" title="Reject" draggable="true" resizable="true" titleAlignment="Center" contentWidth="30rem" class="sapUiSizeCompact">
+
+		<f:SimpleForm id="simpleform1" editable="false" maxContainerCols="2" layout="ResponsiveGridLayout" labelSpanL="3"
+			labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1">
+			<f:content>
+				<Label text="Comment" id="id_lable" required="false"/>
+				<TextArea id="inputcomment" value="" rows="4" maxLength="1000" showExceededText="true" required="false" liveChange="handleLiveChange"/>
+			</f:content>
+		</f:SimpleForm>
+		<buttons>
+			<Button text="Submit" id="id_approve" press="SubmitrejectOrder" icon="sap-icon://accept"></Button>
+			
+			<Button text="Close" press="CancelOrder1" icon="sap-icon://cancel"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

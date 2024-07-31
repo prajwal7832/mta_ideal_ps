@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Division" contentHeight="50%" contentWidth="25%"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="divisionSrch" liveChange="handledivisionSrch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="division_listId" items="{divisionData>/}"
+			mode="SingleSelectMaster" selectionChange="handleDivision">
+			<StandardListItem title="{divisionData>DIVISION_DESC}"
+			description="{divisionData>DIVISION}" iconInset="true"/>
+
+		</List>
+		<buttons>
+			<Button text="Cancel" press="closeDivision" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

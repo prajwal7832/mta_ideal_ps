@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+        id="settingsDialog"
+        confirm="handleConfirm2" filterSearchOperator="Contains"
+        cancel="handleCancel">
+        <filterItems>
+            <ViewSettingsFilterItem text="Payment Request No" key="PR_NO" items="{path:'supplier>/value' ,sorter : { path : 'POP_NO',descending : true}}">
+                <items>
+                    <ViewSettingsItem text="{supplier>POP_NO}" key="{supplier>POP_NO}" />
+                        </items>
+                </ViewSettingsFilterItem>       
+        </filterItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

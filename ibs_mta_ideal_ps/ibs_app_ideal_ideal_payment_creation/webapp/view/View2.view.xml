@@ -1,0 +1,341 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealidealpaymentcreation.controller.View2"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <Text text="hjk"></Text>
+          </content >
+    </Page>
+</mvc:View> -->
+
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+	xmlns:t="sap.suite.ui.commons" 
+	controllerName="com.ibs.ibsappidealidealpaymentcreation.controller.View2"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<!-- <m:App> -->
+		<m:Page id="detailPageId" class="sapUiSizeCompact" showHeader="false" showFooter="false">
+			<m:content>
+				<layout:DynamicSideContent id="DynamicSideContent" class="sapUiSizeCompact" sideContentFallDown="BelowM"
+					breakpointChanged="handleBreakpointChangeEvent" showSideContent="false">
+					<!--General Section-->
+					<ObjectPageLayout id="ObjectPageLayout" selectedSection="firstSection" enableLazyLoading="false" showEditHeaderButton="true"
+						editHeaderButtonPress="handleEditBtnPress" showTitleInHeaderContent="true">
+
+						<headerTitle>
+							<ObjectPageDynamicHeaderTitle>
+								<expandedHeading>
+									<m:Title text="" id="reqno" wrapping="true"/>
+								</expandedHeading>
+								
+								<snappedHeading>
+									<m:FlexBox fitContainer="true" alignItems="Center">
+										<m:Title text="Claim Request No. : {cModel>/CR_NO}" wrapping="true"/>
+									</m:FlexBox>
+								</snappedHeading>
+								<actions>
+	                 <m:Button text="Edit" press="editValues" id="edtBTn" type="Emphasized" visible="false"></m:Button>
+                                    <m:Button text="View Events" press="Content" type="Emphasized"></m:Button>
+						<m:Button id="idFullScreen" press="onFullScreen" icon="{appView>/icon}" type="Transparent" visible="{FullScreenButton}" />
+                        <!-- <Button press="onExitScreen" id="idExitScreen" icon="sap-icon://exit-full-screen" type="Transparent" visible="{ExitScreenButton}" /> -->
+						<m:Button icon="sap-icon://decline" type="Transparent" press="onExit" />
+								</actions>
+							</ObjectPageDynamicHeaderTitle>
+						</headerTitle>
+						<sections>
+
+	               <ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="SO Details" titleUppercase="false" mode="Expanded">
+								<blocks>
+									<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2">
+										<f:content>
+											<core:Title/>
+											<m:Label text="Sales Order" design="Bold"/>
+										<m:Text id="id_Grp"  text="{iModel>/value/0/SAP_SO_NO}" ></m:Text>
+											<m:Label text="Creation Date" design="Bold"/>
+											<m:Text text="{path:'iModel>/value/0/PR_CREATION_DATE',formatter: '.formatter.formatDate'}"/>
+											<core:Title/>
+											<m:Label text="Payment Method" design="Bold"/>
+											<m:Text text="{path:'iModel>/value/0/PAYMENT_METHOD' ,formatter: '.formatter.formadata'}"/>
+											<m:Label text="Last Update Date" design="Bold"/>
+											<m:Text text="{path: 'iModel>/value/0/LAST_UPDATED_DATE', formatter: '.formatter.formatDate'}"/>
+											<core:Title/>
+											<m:Label text="SAP Document No" design="Bold" id="id_sapDoucment" visible="false"/> 
+											 <m:Text text="{path: 'popread>/value/0/SAP_ORDER_NO'}"  id="sapDO_NO" visible="false"/>
+											<!-- <m:ObjectStatus text="{path: 'popread>/value/0/TO_STATUS/DESC'}" state="{path: 'popread>/value/0/TO_STATUS/CODE',formatter: '.formatter.formatStateText'}"  ></m:ObjectStatus> -->
+
+											<m:Label text="Total Amount" design="Bold"/>
+											<m:Text text="{path:'iModel>/value/0/GRAND_TOTAL',formatter: '.formatter.formatterAmount'} INR"/>
+										</f:content>
+									</f:SimpleForm>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="{popread>/value/0/PAYMENT_TYPE}" titleUppercase="false">
+								<blocks>
+
+                           		  <m:Table id="fullpaymet" growing="true" items="{path : 'popread>/value',sorter : { path : 'PR_NO',descending : true}}" 
+								  mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true" visible="false" sticky="HeaderToolbar">
+											<m:columns>
+												<m:Column>
+													<m:Text text="UTR No."/>
+												</m:Column>
+												<m:Column>
+													<m:Text text="Amount"/>
+												</m:Column>
+												<m:Column>
+													<m:Text text="Date"/>
+												</m:Column>
+											
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+														<m:Input value="{popread>OFFLINE_FP_UTR}" id="iD_FPutr" width="50%" editable="false" liveChange="utrInput"/>
+														
+														<m:Text text="{path: 'popread>OFFLINE_FP_AMOUNT',formatter: '.formatter.formatterAmount'} INR"/>
+														
+												  <!-- <m:DatePicker
+												editable="false" width="50%" id="iD_fpDate"
+												placeholder="Enter Date"
+												change="fullpayhandleChange"
+												class="sapUiSmallMarginBottom"
+												value="{path: 'popread>OFFLINE_FP_DATE',
+												'type':'sap.ui.model.type.Date',
+																'formatOptions': {
+																	'pattern': 'dd.MM.YYYY'
+																}}"   /> -->
+
+
+
+																	<m:DatePicker
+															id="DP3" editable="false" 
+															value="{
+																'path':'popread>OFFLINE_FP_DATE',
+																'type':'sap.ui.model.type.Date',
+																'formatOptions': {
+																	'pattern': 'dd.MM.YYYY'
+																}
+															}"
+															width="70%"
+															change="handleChange"
+															class="sapUiSmallMarginBottom"/>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+
+
+
+  <m:Table id="particalPay" growing="true" items="{path : 'popread>/value',sorter : { path : 'PR_NO',descending : true}}" 
+								  mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true" visible="false">
+											<m:columns>
+												<m:Column>
+													<m:Text text="UTR No."/>
+												</m:Column>
+
+											
+
+												<m:Column>
+													<m:Text text="Amount"/>
+												</m:Column>
+												<m:Column>
+													<m:Text text="Date"/>
+												</m:Column>
+												<m:Column>
+													<m:Text text="Credit Note AMT"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Text text="Credit Note"/>
+												</m:Column>
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+														<m:Input value="{popread>OFFLINE_PP_UTR}" editable="false" width="50%" id="iD_PPutr" liveChange="pp_utr"   />
+														<!-- <m:Text text="{supplier>DISTRIBUTOR_ID}"/> -->
+														<m:Text text="{path: 'popread>OFFLINE_PP_UTR_AMT',formatter: '.formatter.formatterAmount'} INR"/>
+
+														<m:DatePicker
+															id="DP2" editable="false" 
+															value="{
+																'path':'popread>OFFLINE_PP_DATE',
+																'type':'sap.ui.model.type.Date',
+																'formatOptions': {
+																	'pattern': 'dd.MM.YYYY'
+																}
+															}"
+															width="70%"
+															change="handleChange"
+															class="sapUiSmallMarginBottom"/>
+												
+														<m:Input  value="{path: 'popread>OFFLINE_PP_CREDIT_NOTE_AMT',formatter: '.formatter.formatterAmount'}" editable="false" width="50%" id="iD_ppcreditamt"/>
+														<m:Input  value="{path: 'popread>OFFLINE_PP_CREDIT_NOTE_NO'}" editable="false" width="50%" id="iD_ppnote"/>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+
+
+										  <m:Table id="pdc" growing="true" items="{path : 'popread>/value',sorter : { path : 'PR_NO',descending : true}}" 
+								  mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true" visible="false">
+											<m:columns>
+												<m:Column>
+													<m:Text text="PDC No."/>
+												</m:Column>
+
+												<!-- <m:Column>
+													<m:Text text="Distributor ID"/>
+												</m:Column> -->
+
+												<m:Column>
+													<m:Text text="PDC Amount"/>
+												</m:Column>
+												<m:Column>
+													<m:Text text="Date"/>
+												</m:Column>
+												<!-- <m:Column>
+													<m:Text text="Status"/>
+												</m:Column> -->
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+														<m:Input value="{popread>PDC_NO}"  editable="false" width="50%" id="iD_Pdcutr" liveChange="pdc_utr"/>
+														<!-- <m:Text text="{supplier>DISTRIBUTOR_ID}"/> -->
+														<m:Text text="{path: 'popread>PDC_AMT', formatter: '.formatter.formatterAmount'} INR"/>
+													 <m:DatePicker
+												editable="false" width="50%" id="iD_pdcDate"
+												placeholder="Enter Date"
+												change="handleChange"
+												class="sapUiSmallMarginBottom"
+												value="{path: 'popread>PDC_DATE',
+												'type':'sap.ui.model.type.Date',
+																'formatOptions': {
+																	'pattern': 'dd.MM.YYYY'
+																}}" />
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+
+
+													  <m:Table id="exdays" growing="true" items="{path : 'popread>/value',sorter : { path : 'PR_NO',descending : true}}" 
+								  mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true" visible="false">
+											<m:columns>
+												<m:Column>
+													<m:Text text="Number of days"/>
+												</m:Column>
+											
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+														
+													<m:Input value="{popread>EXCRDT_DAYS}" editable="false" liveChange="exciedDays"/>
+														
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+	
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Attachment" titleUppercase="false">
+								<blocks>
+									
+                   <m:Table id="priceDifferentTable" class="sapUiSmallMarginBottom" autoPopinMode="true" 
+				   contextualWidth="auto" items="{fileModel>/value}">
+											<m:columns>
+												<!-- <m:Column>
+													<m:Label text="File Type" design="Bold"/>
+												</m:Column> -->
+
+												<m:Column>
+													<m:Label text="File Name" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Download" design="Bold"/>
+												</m:Column>
+
+												
+											</m:columns>
+
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+													<!-- <m:Text text="Invoice"/> -->
+													<m:Text text="{fileModel>FILE_NAME}"/>
+													<m:Button press="f_download" type="Transparent" tooltip="Download" icon="sap-icon://download"
+													enabled="true"></m:Button>
+													<!-- <m:Button press="onDelete" type="Reject" enabled="false" tooltip="Delete" icon="sap-icon://delete"></m:Button> -->
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>		
+													
+									
+
+
+
+											
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+						</sections>
+					</ObjectPageLayout>
+
+					<layout:sideContent>
+						<m:Toolbar>
+							<m:Title text="Events"/>
+							<m:ToolbarSpacer/>
+							<!-- <m:Button icon="sap-icon://refresh" type="Transparent" press="handleRefreshEvents"/> -->
+							<m:Button text="Close" type="Transparent" press="CloseEvent"/>
+						</m:Toolbar>
+						<!-- <m:FeedInput id="emailTextId" post="onPostMessage" showIcon="false" placeholder="Enter query here"/> -->
+						<layout:VerticalLayout width="100%">
+							<t:Timeline id="idTimeline" showHeaderBar="false" showSearch="false" showSort="false" sortOldestFirst="false" sort="false"
+								enableScroll="false" lazyLoading="false" growingThreshold="0" showItemFilter="false"
+								content="{path : 'eventData>/value',sorter : { path : 'EVENT_NO',descending : true}}" showIcons="false"
+								 width="100%">
+								<t:content>
+									<t:TimelineItem id="idTemplateItem" userNameClickable="true"
+										text="Event : {eventData>COMMENTS}"
+										dateTime="{path:'eventData>CREATION_DATE'}"
+										userName="{eventData>USER_NAME}" title="{eventData>USER_ROLE}"/>
+								</t:content>
+							</t:Timeline>
+						</layout:VerticalLayout>
+					</layout:sideContent>
+                    <!-- Event : {path:'eventData>TO_EVENT_STATUS/DESC'} {i18n>newLine}  -->
+				</layout:DynamicSideContent>
+				</m:content>
+				<m:footer >
+				<m:Bar>
+					<m:contentRight>
+						<m:Button id="save"  text="Save" press="Saveeditable" type="Emphasized"  visible="false"/>
+					</m:contentRight>
+				</m:Bar>
+			</m:footer>
+			</m:Page>
+		</mvc:View>

@@ -1,0 +1,256 @@
+
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" controllerName="com.ibs.ibsappidealidealpaymentcreation.controller.DetailPage"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.uxap"
+	xmlns:u="sap.ui.unified" class="viewPadding" xmlns:ui="sap.ui.table" >
+	<m:Page showHeader="false" showNavButton="false" navButtonPress="onBack" class="sapUiSizeCompact">
+		<m:content>
+			<ObjectPageLayout class="sapUiSizeCompact">
+				<headerTitle>
+					<ObjectPageHeader objectTitle="Create Payment Request">
+						
+						<m:Button icon="sap-icon://nav-back" type="Emphasized" press="navigateToView1"></m:Button>
+					</ObjectPageHeader>
+				</headerTitle>
+			
+				<sections>
+				
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="SO Details" titleUppercase="false" mode="Expanded">
+								<blocks>
+									<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2">
+										<f:content>
+											<core:Title/>
+											<m:Label text="Sales Order" design="Bold" required="true"/>
+										<m:Input id="id_Grp" enabled="true" change="onGrpChange"  valueHelpRequest="handleValueGroupHelp"
+								             placeholder="Select Sales Order" showValueHelp="true" valueState="None" value="{Select_po>/SAP_SO_NO}" ></m:Input>
+											 
+											<m:Label text="Creation Date" design="Bold"/>
+											<m:Input id="id_creDate" value="{path:'Select_po>/PR_CREATION_DATE',formatter: '.formatter.formatDate'}" editable="false"/>
+											<core:Title/>
+											<m:Label text="Payment Method" design="Bold"/>
+											<m:Input id="id_payMeth" value="{path:'Select_po>/PAYMENT_METHOD',formatter: '.formatter.formadata'}" editable="false"/>
+											<!-- <m:Label text="Order Type" design="Bold"/>
+											<m:Input id="id_OrdTy" value="{iModel>/ORDER_TYPE}" editable="false"/> -->
+											<m:Label text="Total Amount" design="Bold"/>
+											<m:Input id="id_toAmo" value="{path:'Select_po>/GRAND_TOTAL' ,formatter: '.formatter.formatterAmount'} INR" editable="false"/>
+											<core:Title/>
+											<m:Label text="Order Date" design="Bold" />
+											<m:Input id="id_OrdDate" value="{ path: 'Select_po>/LAST_UPDATED_DATE',formatter: '.formatter.formatDate'}" editable="false"/>
+											
+										</f:content>
+									</f:SimpleForm>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Payment Type" titleUppercase="false">
+								<blocks>
+                                       <m:VBox>
+												
+	                    <m:RadioButtonGroup id="rbg1" columns="5" width="100%" select="onRadioButtonSelect">
+						
+                                <m:RadioButton id="RB1-4" text="Full Payment" selected="true"/>
+                                <m:RadioButton id="RB1-5" text="Partial Payment" />
+                                <m:RadioButton id="RB1-6" text="Exceptional Credit" />
+								<m:RadioButton id="RB1-7" text="Post Dated Cheques" />
+								<!-- <m:RadioButton id="RB1-8" text="Letter of Credi" /> -->
+							
+                            </m:RadioButtonGroup>
+												
+												
+												
+	
+
+                 <f:SimpleForm id="f_full" title="Full Payment"  layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" visible="true">
+										<f:content>
+											<core:Title/>
+										<m:Label text="UTR No" design="Bold" required="true" id="fullUtr"/>
+											<m:Input value="{iModel>/Paymentterms}" editable="{viewModel>/inputEnable}" id="id_payment" maxLength="22"   />
+											
+											<core:Title/>
+											<m:Label text="Amount" design="Bold" required="true" id="fullAmount"/>
+											<m:Input value="{path:'Select_po>/GRAND_TOTAL',formatter: '.formatter.formatterAmount'} INR" editable="false" id="id_fdate"/>
+											
+											<core:Title/>
+											<m:Label text="Date" design="Bold" required="true" id="FullDate"/>
+											<!-- <m:DatePicker id="DP1" placeholder="Enter Date" change="handleChange"
+												class="sapUiSmallMarginBottom"/> -->
+
+												<m:DatePicker
+													id="DP1"
+													placeholder="Enter Date" 
+													
+													change="handleChange"
+													class="sapUiSmallMarginBottom"
+													maxDate="{maxDateModel>/maxDate}"/>
+										</f:content>
+									</f:SimpleForm>
+
+
+
+                  <f:SimpleForm id="f_partial" editable="true" title="Partial Payment" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2" visible="false">
+										<f:content>
+											<core:Title/>
+											<m:Label text="UTR No" design="Bold" required="true" />
+											<m:Input value="{iModel>/Supplierquotation}" id="f_utr" maxLength="22" />
+											<m:Label text="Credit Note Amount" design="Bold" required="true"/>
+											<m:Input value="INR" id="f_credit" type="Number"/>
+											<core:Title/>
+											<m:Label text="Amount" design="Bold" required="true"/>
+											<m:Input value="{path:'Select_po>/GRAND_TOTAL',formatter: '.formatter.formatterAmount'} INR"   id="partAmount"  editable="false" />
+											<m:Label text="Credit Note" design="Bold" required="true"/>
+											<m:Input value="{iModel>/Quotationsubmissiondate}" id="f_note"/>
+											<core:Title/>
+											<m:Label text="Date" design="Bold" required="true"/>
+										    <m:DatePicker
+												id="DP4"
+												placeholder="Enter Date"
+												change="handleChange"
+												class="sapUiSmallMarginBottom"
+												maxDate="{maxDateModel>/maxDate}"/>														
+										</f:content>
+									</f:SimpleForm>
+
+
+                  <f:SimpleForm id="f_Excep" editable="true" title="Exceptional Credit" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2" visible="false">
+										<f:content>
+											<core:Title/>
+											<m:Label text="Number of days" design="Bold" required="true"/>
+											<m:Input value="{iModel>/Supplierquotation}" id="E_number" type="Number"/>
+										
+											<core:Title/>
+											<m:Label text="Details" design="Bold" />
+											<m:Input value="{iModel>/Purchasingorganization}" id="E_details"/>
+										
+											<core:Title/>												
+										</f:content>
+									</f:SimpleForm>
+
+                        <f:SimpleForm id="f_Cheques" editable="true" title="Post Dated Cheques" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2" visible="false">
+										<f:content>
+											<core:Title/>
+											<m:Label text="PDC No" design="Bold" required="true"/>
+											<m:Input value="{iModel>/Supplierquotation}" id="cque" type="Number"/>
+											
+											<core:Title/>
+											<m:Label text="Amount" design="Bold" required="true"/>
+											<m:Input value="{path:'Select_po>/GRAND_TOTAL',formatter: '.formatter.formatterAmount'} INR" editable="false" id="pdc_amount" required="true"  />
+											
+											<core:Title/>
+											<m:Label text=" PDC Date" design="Bold" required="true"/>
+											<m:DatePicker
+												id="DP5"
+												placeholder="Enter Date"
+												change="handleChange"
+												class="sapUiSmallMarginBottom"
+												maxDate="{maxDateModel>/maxDate}"/>														
+																		
+										</f:content>
+									</f:SimpleForm>
+
+
+								  <f:SimpleForm id="f_letter" editable="true" title="Letter of Credi" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2" visible="false">
+										<f:content>
+											<core:Title/>
+											<m:Label text="LOC No." design="Bold" required="true"/>
+											<m:Input value="{iModel>/Supplierquotation}" />
+											<m:Label text="Amount" design="Bold" required="true"/>
+											<m:Input value="{iModel>/Supplierquotation}" />
+											
+											<core:Title/>
+											<m:Label text="LOC Date" design="Bold" required="true"/>
+											<m:Input value="{iModel>/Purchasingorganization}"/>
+											
+											<core:Title/>
+											<m:Label text="Last Date" design="Bold" required="true"/>
+											<m:Input value="{iModel>/Documentcurrency}"/>							
+										</f:content>
+									</f:SimpleForm>
+
+
+
+								</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+	
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Attachment" titleUppercase="false">
+								<blocks>
+									
+
+
+											<m:VBox>
+										
+
+									<u:FileUploader
+										id="fileUploader"
+										placeholder="Upload File"
+										name="myFileUpload" change="handleUpload"
+										uploadUrl="upload/"
+										tooltip="Upload your file to the local server"
+										uploadComplete="handleUploadComplete"
+										icon="sap-icon://attachment"/>
+												
+											<m:Table id="priceDifferentTable" class="sapUiSmallMarginBottom" autoPopinMode="true" contextualWidth="auto" items="{attachJson1>/}">
+											<m:columns>
+												<!-- <m:Column>
+													<m:Label text="File Type" design="Bold"/>
+												</m:Column> -->
+
+												<m:Column>
+													<m:Label text="File Name" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Download" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Action" design="Bold"/>
+												</m:Column>
+											</m:columns>
+
+											<m:items>
+												<m:ColumnListItem visible="{= ${vendorDetails>/TO_VISIBLE_FIELDS/S1G7T1F1} === 'X' ? true : false}">
+													<m:cells>
+													<!-- <m:Text text="Invoice"/> -->
+													<m:Text text="{attachJson1>FILE_NAME}"/>
+													<m:Button press="downloadFileContent" type="Transparent" tooltip="Download" icon="sap-icon://download"
+													enabled="true"></m:Button>
+													<m:Button press="onDelete" type="Reject" enabled="true" tooltip="Delete" icon="sap-icon://delete"></m:Button>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+										</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+	       </ObjectPageLayout >
+	    </m:content>
+	    <m:footer>
+			<m:Bar>
+				<m:contentRight>
+					<!-- <m:Button text="Save" type="Emphasized" press="onSave" visible="{viewModel>/BtnEnable}" enabled="{viewModel>/Enabled}"/> -->
+					<m:Button text="Submit" type="Success" press="openSaveFragment" visible="{viewModel>/BtnEnable1}"/>
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+	</m:Page>    
+</mvc:View>

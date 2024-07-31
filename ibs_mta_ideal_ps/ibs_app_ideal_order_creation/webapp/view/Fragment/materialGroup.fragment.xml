@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Material Group" contentHeight="50%" contentWidth="25%"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="materialGrpSrch" liveChange="handleMaterialGrpSrch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="materialGrp_listId" items="{materialGrpMaster>/}"
+			mode="SingleSelectMaster" selectionChange="handleMaterialGrp">
+			<StandardListItem title="{materialGrpMaster>MATERIAL_GROUP_DESC}" description="{materialGrpMaster>MATERIAL_GROUP}" iconInset="true"/>
+
+		</List>
+		<buttons>
+			<Button text="Cancel" press="closeMaterialGrp" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

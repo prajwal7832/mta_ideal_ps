@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ideal_product_complaint_srv" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="PprHeader" EntityType="ideal_product_complaint_srv.PprHeader">
+                    <NavigationPropertyBinding Path="TO_STATUS" Target="MasterPPrStatus"/>
+                    <NavigationPropertyBinding Path="TO_ATTACHMENT" Target="PprAttachment"/>
+                    <NavigationPropertyBinding Path="TO_EVENT" Target="PprEvent"/>
+                </EntitySet>
+                <EntitySet Name="PprAttachment" EntityType="ideal_product_complaint_srv.PprAttachment"/>
+                <EntitySet Name="PprEvent" EntityType="ideal_product_complaint_srv.PprEvent">
+                    <NavigationPropertyBinding Path="TO_STATUS" Target="MasterPPrEventStatus"/>
+                </EntitySet>
+                <EntitySet Name="MasterPPrStatus" EntityType="ideal_product_complaint_srv.MasterPPrStatus"/>
+                <EntitySet Name="MasterPPrEventStatus" EntityType="ideal_product_complaint_srv.MasterPPrEventStatus"/>
+                <ActionImport Name="createProductComplaint" Action="ideal_product_complaint_srv.createProductComplaint"/>
+            </EntityContainer>
+            <EntityType Name="PprHeader">
+                <Key>
+                    <PropertyRef Name="PPR_NO"/>
+                    <PropertyRef Name="PROD_GRP"/>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="FACTORY_NAME"/>
+                </Key>
+                <Property Name="PPR_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="PROD_GRP" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DISTRIBUTOR_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PROD_CODE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PROD_UNKNOWN" Type="Edm.String" MaxLength="1"/>
+                <Property Name="FACTORY_NAME" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="100"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <Property Name="SALES_ASSOCIATE_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="APPROVER_ROLE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="APPROVER_LEVEL" Type="Edm.Int32"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="TO_STATUS" Type="ideal_product_complaint_srv.MasterPPrStatus">
+                    <ReferentialConstraint Property="STATUS" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_ATTACHMENT" Type="Collection(ideal_product_complaint_srv.PprAttachment)"/>
+                <NavigationProperty Name="TO_EVENT" Type="Collection(ideal_product_complaint_srv.PprEvent)"/>
+            </EntityType>
+            <EntityType Name="PprAttachment">
+                <Key>
+                    <PropertyRef Name="PPR_NO"/>
+                    <PropertyRef Name="FORM_ID"/>
+                    <PropertyRef Name="FILE_ID"/>
+                </Key>
+                <Property Name="PPR_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="ATTACH_CODE" Type="Edm.Int32"/>
+                <Property Name="FORM_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="FILE_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_MIMETYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_CONTENT" Type="Edm.Stream"/>
+                <Property Name="UPLOAD_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <EntityType Name="PprEvent">
+                <Key>
+                    <PropertyRef Name="PPR_NO"/>
+                    <PropertyRef Name="EVENT_NO"/>
+                </Key>
+                <Property Name="PPR_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="EVENT_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EVENT_CODE" Type="Edm.Int32"/>
+                <Property Name="USER_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="REMARK" Type="Edm.String" MaxLength="100"/>
+                <Property Name="COMMENT" Type="Edm.String" MaxLength="200"/>
+                <Property Name="CREATION_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="TO_STATUS" Type="ideal_product_complaint_srv.MasterPPrEventStatus">
+                    <ReferentialConstraint Property="EVENT_CODE" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MasterPPrStatus">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="MasterPPrEventStatus">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <ComplexType Name="User_Details">
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="50"/>
+            </ComplexType>
+            <Action Name="createProductComplaint" IsBound="false">
+                <Parameter Name="action" Type="Edm.String"/>
+                <Parameter Name="appType" Type="Edm.String"/>
+                <Parameter Name="PprHeader" Type="Collection(ideal_product_complaint_srv.PprHeader)" Nullable="false"/>
+                <Parameter Name="PprAttachment" Type="Collection(ideal_product_complaint_srv.PprAttachment)" Nullable="false"/>
+                <Parameter Name="PprEvent" Type="Collection(ideal_product_complaint_srv.PprEvent)" Nullable="false"/>
+                <Parameter Name="userDetails" Type="ideal_product_complaint_srv.User_Details"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Annotations Target="ideal_product_complaint_srv.PprAttachment/FILE_MIMETYPE">
+                <Annotation Term="Core.IsMediaType" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ideal_product_complaint_srv.PprAttachment/FILE_CONTENT">
+                <Annotation Term="Core.ContentDisposition">
+                    <Record Type="Core.ContentDispositionType">
+                        <PropertyValue Property="Filename" Path="FILE_NAME"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Core.MediaType" Path="FILE_MIMETYPE"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

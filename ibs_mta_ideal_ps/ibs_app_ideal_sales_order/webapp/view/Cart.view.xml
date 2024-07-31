@@ -1,0 +1,235 @@
+<mvc:View controllerName="com.ibs.ibsappidealsalesorder.controller.Cart" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:f="sap.f" xmlns:cards="sap.f.cards" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:grid="sap.ui.layout.cssgrid">
+	<!--<Shell id="shell">-->
+	<App id="app">
+		<!-- <pages> -->
+			<Page id="pageDesk" visible="true" showHeader="true" enableScrolling="true">
+				<customHeader>
+					<Bar class="headerBar">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back"    type="Transparent" press="navigateToView1" class="backBtn"></Button>
+							<Text text="Cart ({path:'addCardData>/lengthItems'})" class="titleHeaderClass"></Text>
+						</contentLeft>
+						<!-- <contentRight>
+							<Button text="Cart" icon="sap-icon://cart" class="cartButton">
+								<customData>
+									<BadgeCustomData key="badge" value="{/finalCounter}"/>
+								</customData>
+							</Button>
+						</contentRight> -->
+					</Bar>
+				</customHeader>
+				<!-- <VBox class="VboxSearch" justifyContent="center">
+					<SearchField placeholder="Search..." search="onSearch" width="92%"
+						class="sapUiContentPadding sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginLeft sapUiLargeMarginRight" liveChange="onSearch"/>
+				</VBox> -->
+				<HBox justifyContent="SpaceBetween" class="searchHeader">
+					<!-- <HBox class="searchHBox">
+						<SearchField placeholder="Search by Material Name" search="onSearch" width="200%" liveChange="onSearch" id="MaterialSearch"/>
+					</HBox> -->
+					<HBox>
+						<!-- <Button text="Save as Draft" icon="sap-icon://save" press="handleDraft" class="draftBtn"></Button> -->
+						<!-- <Button text="Delete Cart" icon="sap-icon://delete" press="onDeleteCart" class="sapUiSmallMarginBegin"> </Button> -->
+					</HBox>
+				</HBox>	
+			<!-- <content> -->
+				<!-- <l:DynamicSideContent id="DynamicSideContent" class="sapUiDSCExplored sapUiContentPadding leftSidePanel" sideContentFallDown="BelowM"
+					sideContentPosition="End" containerQuery="true" breakpointChanged="handleBreakpointChanged"> -->
+					<!-- <f:Card class="itemsHeader">
+						<f:header class="itemCardHeader">
+							<HBox justifyContent="SpaceBetween"> -->
+								<!-- <HBox> -->
+									<!-- <Label  text="Cart Items ({path:'addCardData>/lengthItems'})" class="itemText" design="Bold"/> -->
+								<!-- </HBox> -->
+								<!-- <HBox>
+									<Button text="Save as Draft" type="Transparent" press="handleDraft" class="draftBtn"></Button>
+									<Button text="Delete Cart" type="Transparent" press="onDeleteCart" class="sapUiSmallMarginBegin"> </Button>
+								</HBox> -->
+							<!-- </HBox>	
+						</f:header>
+					</f:Card> -->
+					<!-- <List id="list1" items="{addCardData>/value}" width="100%">
+						<items>
+							<CustomListItem>
+								<f:Card class="sapUiTinyMarginBottom" width="100%"> -->
+									<!-- <f:header> -->
+										<!-- <VBox>
+											<HBox justifyContent="SpaceBetween">
+												<Label text="" width="100%"/>
+												<HBox> -->
+													<!--<Button icon="sap-icon://edit" type="Transparent" press="onEditPress"/>-->
+													<!-- <Button icon="sap-icon://delete" type="Reject" press="onDeletePress"/>
+												</HBox>
+											</HBox>
+										</VBox> -->
+									<!-- </f:header> -->
+									<!-- <f:content>
+										<VBox class="sapUiContentPadding" width="100%">
+											<HBox justifyContent="SpaceBetween" class="sapUiContentPadding">
+												<HBox>
+													<Image src="{addCardData>IMAGE_URL}" width="100px" height="100px" class="sapUiSmallMarginEnd"/>
+													<VBox>
+														<Title text="{addCardData>MATERIAL_DESC}" class="sapUiTinyMarginBottom"/>
+														<Text text="{path:'addCardData>NET_AMOUNT' } INR"/>
+														<StepInput value="{addCardData>QUANTITY}" width="40%" change="onStepInputChange" class="sapUiTinyMarginTop" id="step1"/> -->
+														
+														<!-- <Text text="Total : {path:'addCardData>TOTAL_AMOUNT',formatter:'.formatter.getNumber'} INR" class="total"  /> -->
+													<!-- </VBox>
+												</HBox>
+												<HBox>
+												<Text text="Total : {path:'addCardData>TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'} INR" class="total"  />
+												</HBox>
+											</HBox>
+										</VBox>
+									</f:content> -->
+								<!-- </f:Card>
+							</CustomListItem>
+						</items>
+					</List> -->
+					
+					
+					<!-- <l:sideContent> -->
+						<!-- <f:Card> -->
+							<!-- <f:content> -->
+
+								<!-- <VBox width="100%" class="sapUiContentPadding customOrderClass">		
+								<Label text="Ship To" design="Bold" required="true"/>
+							<ComboBox items="{path: 'shipDetail>/results'}" selectionChange="handleHQCountry" id="shiftdetail" >
+								<core:Item key="{shipDetail>Kunnr}" text="{shipDetail>Name1}" />
+							</ComboBox>
+								</VBox> -->
+
+
+					<!-- <VBox class="sapUiSmallMargin">
+						<Label text="Ship To" labelFor="GroupA"/>
+						<RadioButtonGroup id="GroupA">
+						<buttons>
+							<RadioButton text="{shipDetail>/results/0/Name1}" selected="true"  id="shipdetail2" />
+							<RadioButton text="{shipDetail>/results/1/Name1}" selected="true" id="shipdetail1"/>
+							
+							</buttons>
+						</RadioButtonGroup>
+					</VBox> -->
+
+
+							<!-- </f:content> -->
+						<!-- </f:Card> -->
+					<!-- </l:sideContent> -->
+
+				<!-- </l:DynamicSideContent> -->
+			<!-- </content> -->
+
+				<!-- <footer>
+			<Toolbar>
+				<Button text="Next" type="Accept" press="handleToggleClick" id="equalSplitToggleButton"/>
+			</Toolbar>
+		</footer> -->
+<!-- GrandTotal -->
+
+			<footer>
+
+			<!-- <Bar> -->
+		        <!-- <Text text="Grand Total {addCardData>/GrandTotal}"></Text> -->
+				<!-- <contentRight>
+				<Text text="Grand Total {addCardData>/GrandTotal}"></Text>
+				<Button text="Delete Cart" icon="sap-icon://delete" press="onDeleteCart" class="sapUiSmallMarginBegin"> </Button>
+					<Button text="Place Order" type="Emphasized" press="handleToggleClick"  id="submittted"/>
+				</contentRight>
+			</Bar> -->
+
+			<OverflowToolbar>
+			<Label text="Grand Total {path:'addCardData>/GrandTotal',formatter:'.formatter.formatterAmount'} INR"  design="Bold"></Label>
+			<ToolbarSpacer/>
+			<Button text="Delete Cart" icon="sap-icon://delete" press="onDeleteCart" class="sapUiSmallMarginBegin" id="deleteCart"> </Button>
+			<Button text="Review Order" type="Emphasized" press="handleToggleClick"  id="submittted"/>
+			</OverflowToolbar>
+		</footer>
+
+<!-- <App id="app1"> -->
+<!-- <Page showHeader="false" showNavButton="false" enableScrolling="true" class="sapUiSizeCompact"> -->
+					<!-- <content> -->
+          <HBox   class="searchbarpadding" justifyContent="SpaceBetween">
+    <VBox class="VboxSearch sapUiSmallMargin" justifyContent="Start" width="80%">
+        <SearchField  placeholder="Search by Material Name" search="onSearch" liveChange="onSearch"  id="MaterialSearch" width="70%" class="searchbar"/>
+    </VBox>
+    <!-- <VBox  justifyContent="End" width="40%"> -->
+        <Label text="Ship To:" design="Bold" required="true" class="shiptoType"  />
+        <ComboBox items="{path: 'shipDetail>/results'}" selectionChange="handleHQCountry" id="shiftdetail" valueState="None" class="shipInput" >
+            <core:Item key="{shipDetail>Kunnr}" text="{shipDetail>Name1}"/>
+        </ComboBox>
+    <!-- </VBox> -->
+</HBox>
+<!-- 
+						<VBox class="favHead">
+						
+							<Title text="" class="favHeader"></Title> -->
+							
+						<!-- <Carousel> -->
+
+											<!-- <customLayout>
+												<CarouselLayout visiblePagesCount="{addCardData>/cardCount}" />					
+											</customLayout> -->
+
+				 <f:GridContainer
+                class="idGrid sapUiResponsiveContentPadding" id="list"
+                width="105%"
+                snapToRow="true" 
+                items="{
+                    path: 'addCardData>/value',
+                    sorter : { path : 'MATERIAL_DESC',descending : true}}">
+ 
+            <f:layout>
+                <f:GridContainerSettings columns="5" rowSize="0rem" columnSize="18%" gap="1rem"/>
+            </f:layout>
+ 
+     <f:layoutXS>
+                <f:GridContainerSettings columns="2" rowSize="0rem" columnSize="13rem" gap="1rem" />
+            </f:layoutXS>
+ 
+            <f:layoutS>
+                <f:GridContainerSettings columns="2" rowSize="0rem" columnSize="13rem" gap="1rem" />
+            </f:layoutS>
+ 
+            <f:layoutM>
+                <f:GridContainerSettings columns="3" rowSize="0rem" columnSize="8rem" gap="5rem" />
+            </f:layoutM>
+ 
+            <f:items>
+											<f:Card >
+												<f:content>
+												
+													<VBox>
+														<HBox justifyContent="Center" class="imageContainer sapUiTinyMarginTop" >
+															<Image src="{addCardData>IMAGE_URL}" width="180px" height="140px"/>
+														</HBox>
+														<VBox class="nameText" justifyContent="Start" alignContent="SpaceBetween" alignItems="Start">
+															<!-- <Title text="{addCardData>MATERIAL_DESC}" class="sapUiTinyMarginBottom desText" /> -->
+															<ExpandableText overflowMode="Popover" text="{addCardData>MATERIAL_DESC}" class="titleProp" maxCharacters="15"/> 
+															<Text text=" Net Amount : {path:'addCardData>NET_AMOUNT',formatter:'.formatter.formatterAmount' } INR"/>
+															<Text text="Total : {path:'addCardData>TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'} INR" class="total"/>
+														</VBox>
+														<HBox class="cbuttons">
+															<StepInput value="{addCardData>QUANTITY}" width="40%" change="onStepInputChange"  id="step1"/> 
+															<Button icon="sap-icon://delete" type="Reject" press="onDeletePress"  />
+														</HBox>
+														
+													</VBox>
+												</f:content>
+											</f:Card>
+											</f:items>
+        						</f:GridContainer>
+
+
+						<!-- </Carousel> -->
+						<!-- </VBox> -->
+
+					<!-- </content>
+				</Page>
+</App> -->
+
+			</Page>
+		<!-- </pages> -->
+	</App>
+	<!--</Shell>-->
+</mvc:View>

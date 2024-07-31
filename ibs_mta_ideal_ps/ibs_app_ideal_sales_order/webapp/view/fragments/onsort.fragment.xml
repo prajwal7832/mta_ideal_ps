@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+        id="idSort"
+        title="Sorting"
+        sortDescending="true"
+        groupDescending="true"
+        confirm="handleConfirm"
+        selectedSortItem="sortItem3">
+        <sortItems>
+            <ViewSettingsItem text="Purchase Request Number" key="PR_NO" selected="true" />
+          
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>
+

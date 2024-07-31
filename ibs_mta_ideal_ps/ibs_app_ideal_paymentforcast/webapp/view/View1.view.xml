@@ -1,0 +1,94 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealpaymentforcast.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealpaymentforcast.controller.View1"
+   xmlns="sap.suite.ui.commons" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:f="sap.ui.layout.form"
+	xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
+	<m:App id="app1">
+    <m:pages>
+			<m:Page id="page123" showHeader="false">
+				<f:SimpleForm>
+					<f:content>
+						<m:Table selectionChange="selection" mode="SingleSelectMaster" visible="true" items="{path :'civilServicesClassified>/'}">
+							<m:columns>
+								<m:Column demandPopin="true">
+									<m:Label text="" design="Bold"/>
+								</m:Column>
+								<m:Column demandPopin="true" minScreenWidth="Tablet">
+									<m:Label id="date1" text="" design="Bold"/>
+								</m:Column>
+								<m:Column demandPopin="true">
+									<m:Label id="date2" text="" design="Bold"/>
+								</m:Column>
+								<m:Column demandPopin="true" minScreenWidth="Tablet">
+									<m:Label id="date3" text="" design="Bold"/>
+								</m:Column>
+								<m:Column demandPopin="true" minScreenWidth="Tablet">
+									<m:Label id="date4" text="" design="Bold"/>
+								</m:Column>
+								<m:Column demandPopin="true">
+									<m:Label id="date5" text="" design="Bold"/>
+								</m:Column>
+								<m:Column demandPopin="true" minScreenWidth="Tablet">
+									<m:Label id="date6" text="" design="Bold"/>
+								</m:Column>
+							</m:columns>
+							<m:items>
+								<m:ColumnListItem>
+									<m:cells>
+										<m:Text text="{civilServicesClassified>category}"/>
+										<m:Text text="{civilServicesClassified>day1}"/>
+										<m:Text text="{civilServicesClassified>day2}"/>
+										<m:Text text="{civilServicesClassified>day3}"/>
+										<m:Text text="{civilServicesClassified>day4}"/>
+										<m:Text text="{civilServicesClassified>day5}"/>
+										<m:Text text="{civilServicesClassified>day6}"/>
+									</m:cells>
+								</m:ColumnListItem>
+							</m:items>
+						</m:Table>
+					</f:content>
+				</f:SimpleForm>
+				<layout:FixFlex id='chartFixFlex' minFlexSize="500">
+					<layout:flexContent>
+						<ChartContainer showZoom="false" showLegendButton="true" showFullScreen="false" showPersonalization="false" autoAdjustHeight="false">
+							<content>
+								<ChartContainerContent icon="sap-icon://bar-chart">
+									<content>
+										<viz:VizFrame id="idVizFrame" selectData="showTooltip" vizProperties="{ title: {visible : false}}" uiConfig="{applicationSet:'fiori'}"
+											vizType='stacked_column'>
+											<viz:dataset>
+												<viz.data:FlattenedDataset data="{graph>/}">
+													<viz.data:dimensions>
+														<viz.data:DimensionDefinition name="Day" value="{graph>day}"/>
+													</viz.data:dimensions>
+													<viz.data:measures>
+														<viz.data:MeasureDefinition name="Eligible For CD" value="{graph>OEFCD}"/>
+														<viz.data:MeasureDefinition name="OverDue" value="{graph>OD}"/>
+														<viz.data:MeasureDefinition name="CD Amt Eligible" value="{graph>CDAE}"/>
+														<viz.data:MeasureDefinition name="Not Due" value="{graph>ND}"/>
+													</viz.data:measures>
+												</viz.data:FlattenedDataset>
+											</viz:dataset>
+											<viz:feeds>
+												<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Eligible For CD,OverDue,CD Amt Eligible,Not Due"/>
+												<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Day"/>
+											</viz:feeds>
+										</viz:VizFrame>
+									</content>
+								</ChartContainerContent>
+							</content>
+						</ChartContainer>
+					</layout:flexContent>
+				</layout:FixFlex>
+			</m:Page>
+		</m:pages>
+		</m:App>
+</mvc:View>
+

@@ -1,0 +1,148 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealdistributorstockdata.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealdistributorstockdata.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	  xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified">
+	<Page id="idMasterPage" showFooter="true" showHeader="false">
+    <IconTabBar
+		id="idIconTabBar"
+		select=".onFilterSelect"
+    	selectedKey="Pending_Orders"
+		class="sapUiResponsiveContentPadding">
+		<items>	
+			<IconTabFilter
+				icon="sap-icon://status-in-process"
+				iconColor="Negative"
+				count="{defaultDataModel>/oCountPending}"
+				text="PENDING"
+				key="Pending_Orders" >
+
+			</IconTabFilter>
+			<IconTabFilter
+				icon="sap-icon://accept"
+				iconColor="Positive"
+				count = "{defaultDataModel>/oCountUpdated}"
+				text="UPDATED"
+				key="Updated_Orders">
+
+			</IconTabFilter>
+			<IconTabSeparator />
+			<IconTabFilter visible="true"
+				showAll="true"
+				text="All Orders"
+				key="ALL_Orders" 
+        		count="{defaultDataModel>/oCountAll}">
+			</IconTabFilter>
+			
+		</items>
+
+		<content>
+    <fb:FilterBar id="idFilterBar" visible="true" reset="onReset" search="onSearch" showRestoreButton="false" useToolbar="false" showFilterConfiguration="false"
+						 showGoOnFB="false" filterContainerWidth="9rem">
+						<fb:filterItems>
+          <fb:FilterItem name="A" label="Material Group">
+								<fb:control>
+									<Input id="idMaterialGrp" change="onChangeMaterialGrp" placeholder="Select Material Group" showSuggestion="true" showValueHelp="true" valueHelpOnly="true"
+										valueHelpRequest="onMaterialGrp"/>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="B" label="Material">
+								<fb:control>
+									<Input id="idMaterial" placeholder="Select Material" showSuggestion="true" showValueHelp="true"
+									 valueHelpOnly="true" valueHelpRequest="onMaterial"></Input>
+								</fb:control>
+							</fb:FilterItem>
+							<fb:FilterItem name="H" label="Submit/Refresh">
+								<fb:control>
+									<l:HorizontalLayout>
+										<Button text="Go" press="onSelectGo" type="Emphasized" visible="true"/>
+										<Button id="refresh" press="handleRefresh" icon="sap-icon://refresh" type="Transparent" visible="true"/>
+									</l:HorizontalLayout>
+								</fb:control>
+							</fb:FilterItem>
+              </fb:filterItems>
+                      <!-- <core:Title text="" /> -->
+              </fb:FilterBar>
+		
+		<Table id="distributorTblData" items = "{distributorData>/}" growing="true"
+     		growingThreshold="10" autoPopinMode="true" sticky="HeaderToolbar,ColumnHeaders" fixedLayout="true"> 
+            <!-- 
+            
+            <Toolbar>
+            <Text text="{distributorData>/status} ({distributorData>/itemsLength})" /> -->
+			<headerToolbar>
+			<Toolbar>
+             <ToolbarSpacer/>
+			
+            <SearchField id="idSearchValue" width="29%" class="sapUiMediumMarginTopBottom" placeholder="Search by Material Group,Material" liveChange="onSearch"/>
+            <Button icon="sap-icon://excel-attachment" press="onExport" visible="true" />
+			<u:FileUploader id="FileUploaderId" buttonText="Upload" sameFilenameAllowed="true" iconOnly="false"
+			 buttonOnly="true" fileType="XLSX,xlsx" icon="sap-icon://upload" iconFirst="true" 
+			 style="Emphasized" change="onUpload" class="sapUiTinyMarginBottom"/>
+            </Toolbar>
+            </headerToolbar>
+              <columns>
+              <Column hAlign="Center">
+                <Text text="Material Group" wrapping="true"/>
+              </Column>
+              <Column hAlign="Center">
+                <Text text="Material"/>
+              </Column>
+              <!-- <Column hAlign="Right" width="12rem">
+                <Text text="Stock" />
+              </Column> -->
+              <Column hAlign="Right">
+                <Text text="Unit Price(₹)" wrapping="true"/>
+              </Column>
+              <Column id="idTextPrice" visible="false" hAlign="Right">
+                <Text text="Updated Price(₹)" wrapping="true"/>
+              </Column>   
+			  <Column id="idInpPrice" visible="false" hAlign="Right" width="19rem">
+                <Text text="Updated Price(₹)" wrapping="true"/>
+              </Column>
+			  <Column id="idStatus" visible="false" hAlign="Center">
+                <Text text="Status" wrapping="true"/>
+              </Column>    
+               <Column id="idEditBtn" hAlign="Center" >
+                <Text text="" />
+              </Column>            
+              </columns>
+
+              <items>
+              <ColumnListItem type="Inactive" press="onPress">
+                <cells><Text text="{path:'distributorData>MATERIAL_GROUP_DESC'}({path:'distributorData>MATERIAL_GROUP'})" textAlign="Left"/></cells>
+                 
+                <cells><Text text ="{path:'distributorData>MATERIAL_DESC'}({path:'distributorData>MATERIAL_CODE'})" textAlign="Left"/></cells>
+                <!-- <cells><Text text="{distributorData>MATERIAL_STOCK}" /></cells> -->
+                <cells> <Text text ="{path:'distributorData>UNIT_PRICE',formatter:'.formatter.formatterAmount'}" textAlign="Right"/></cells>
+                <cells><Text text="{path:'distributorData>UPDATED_PRICE',formatter:'.formatter.formatterAmount'}" textAlign="Right"/></cells>
+                <cells><Input width="8rem" value="{distributorData>UPDATED_PRICE}" type ="Number" textAlign="Right" liveChange="onChangeUpdPrice"/></cells>
+                <cells><ObjectStatus text="{path:'distributorData>STATUS',formatter:'.formatter.getStatusDesc'}"
+					state="{path:'distributorData>STATUS', formatter:'.formatter.getStatus'}"/></cells>
+                <cells><Button icon="sap-icon://edit" press="onEdit" type="Transparent"/></cells>
+              </ColumnListItem>
+              </items>
+
+            </Table>
+			</content>
+	</IconTabBar>
+			 <footer>
+				<Bar>
+					<contentRight>
+						<Button id="saveBt" text="Save" press="onDistributorDataFetch" type="Success" enabled="false"/>
+					</contentRight>
+				</Bar>
+			</footer>
+		
+	</Page>
+</mvc:View>
+

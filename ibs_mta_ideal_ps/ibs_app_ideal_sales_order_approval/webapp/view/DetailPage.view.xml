@@ -1,0 +1,403 @@
+<mvc:View controllerName="com.ibs.ibsappidealsalesorderapproval.controller.DetailPage" xmlns="sap.m" xmlns:semantic="sap.f.semantic"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:ui="sap.ui.table" xmlns:u="sap.suite.ui.commons" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:layout="sap.ui.layout">
+	<layout:DynamicSideContent id="DynamicSideContent" class="sapUiSizeCompact" containerQuery="true" sideContentFallDown="BelowM"
+		breakpointChanged="handleBreakpointChangeEvent" showSideContent="false">
+		<semantic:SemanticPage id="detailPage" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}" showFooter="false" >
+			<semantic:titleHeading>
+				<!--<HBox justifyContent="SpaceAround">-->
+				<Title text="Purchase Request No : {headerData>/0/PR_NO}" class="sapUiTinyMarginEnd" wrapping="true" id="reqno"/>
+				<!--<Text text="{oredrHeaderData>/results/0/PR_NO}" />-->
+				<!-- <ToolbarSpacer/>
+            <Link text="Po"/> -->
+				<!--</HBox>-->
+			</semantic:titleHeading>
+			<semantic:headerContent>
+			
+				<FlexBox visible="true" wrap="Wrap" fitContainer="true" alignItems="Stretch" class="sapUiMediumMarginBottom">
+					<!-- <VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Distributor" design="Bold"/>
+						<ObjectStatus text="{oredrHeaderData>/results/0/PrHeaderDistributor/results/0/NAME}" wrapping="true" state="Information"></ObjectStatus>
+					</VBox>
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Payment Term" design="Bold"/>
+						<ObjectStatus text="{oredrHeaderData>/results/0/PrDistributorDetails/results/0/PAYMENT_METHOD_DESC}" wrapping="true" state="Warning"></ObjectStatus>
+					</VBox> -->
+					<!-- <VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+							<Label text="Last Updated Date" design="Bold"/>
+							<ObjectStatus text="{path:'oredrHeaderData>/results/0/LAST_UPDATED_DATE' , type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}" wrapping="true" state="Information"></ObjectStatus>
+						</VBox> -->
+					<!-- <VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+							<Label text="Last Updated Date" design="Bold"/>
+							<Text text="{path:'oredrHeaderData>/results/0/LAST_UPDATED_DATE' , type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', UTC: true }}"/>
+						</VBox> -->
+					<!-- <VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Order Type" design="Bold" id="order"/>
+						<Text text="{headerData>/0/ORDER_TYPE}"/>
+					</VBox> -->
+
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Payment Method" design="Bold"/>
+						<!-- <Text text="{headerData>/0/PAYMENT_METHOD}"/> -->
+						<Text text="{path:'headerData>/0/PAYMENT_METHOD',formatter:'.formatter.formadata'}"/>
+			
+
+					</VBox>
+					<VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+						<Label text="Ship From" design="Bold"/>
+						<Text text="{shipDetail>/results/0/Shipfrom}"/> 
+                       <!-- <ComboBox items="{path: 'shipDetail>/results'}" selectionChange="handleHQCountry" id="shipfrom" >
+								<core:Item key="{shipDetail>Kunnr}" text="{shipDetail>Shipfrom}" />
+							</ComboBox> -->
+						
+					</VBox>
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Ship To" design="Bold"/>
+						<ObjectNumber number="{headerData>/0/SHIP_NAME}" emphasized="false"/>
+					</VBox>
+					<!-- <VBox justifyContent="Center" class="sapUiSmallMarginEnd" id="id_kitType">
+						<Label text="Kit Type" design="Bold"/>
+						<Text id="id_kitDesc"/>
+					</VBox>
+					<VBox justifyContent="Center" class="sapUiSmallMarginEnd" id="id_orderVbox">
+						<Label text="Purchase Order No." design="Bold"/>
+						<ObjectStatus id="id_order" state="Success"/>
+					</VBox> -->
+				</FlexBox>                                             
+				<FlexBox alignItems="Start" justifyContent="SpaceBetween">
+					<items>
+						<Panel backgroundDesign="Transparent" class="sapUiNoContentPadding">
+							<content>
+								<layout:HorizontalLayout allowWrapping="true">
+									<layout:VerticalLayout class="sapUiMediumMarginEnd amt">
+										<Title class="amt" id="id_totalAmount" text="Total Amount : {path:'iModel>/Totamt',formatter:'.formatter.formatterAmount'} INR" />
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<Title id="id_totalTax" class="tax" text="Total Tax : {path:'iModel>/Totax',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<Title id="id_subTotal" class="sub" text="Grand Total : {path:'iModel>/TotalIcTax',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout>
+									<!-- <layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<Title id="id_totalTcs" class="tcs" text="TCS ({total>/0/tcspers} %) : {path:'total>/0/tcsTotal',formatter:'.formatter.formatterAmount'}"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout>
+										<Title id="id_grandTotal" class="grand" text="Grand Total : {path:'total>/0/grandTotal',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout> -->
+								</layout:HorizontalLayout>
+							</content>
+						</Panel>
+					</items>
+				</FlexBox>
+			</semantic:headerContent>
+			<semantic:content>
+				<VBox>
+
+					<f:SimpleForm id="id_TableHead" layout="ResponsiveGridLayout" editable="true" visible="false" columnsXL="3" columnsL="3" columnsM="3">
+						<f:content>
+							<core:Title/>
+							<Label text="Material Group" required="true" design="Bold" wrapping="true"  id="textgrup"/>
+							<Input id="id_Grp" enabled="true" change="onGrpChange" valueHelpOnly="true" width="100%" valueHelpRequest="handleValueGroupHelp"
+								placeholder="Select Material Group" showValueHelp="true" valueState="None" ></Input>
+							<core:Title/>
+							<Label text="Material" required="true" design="Bold" id="textpro"/>
+							<Input id="id_Item" value="" enabled="{val>/val}" valueHelpOnly="true" width="100%" valueHelpRequest="handleValueProductHelp"
+								placeholder="Select Material" showValueHelp="true" valueState="None" ></Input>
+							<core:Title/>
+							<Label text="Quantity"  required="true" design="Bold" id="textqut"/>
+							<Input id="id_Qty"  value="" enabled="{val>/val}" width="100%" change="checkquntity" type="Number"></Input>
+							<Button enabled="{val>/val}" width="70%" id="cartCountId" text="Add" tooltip="Add Item" type="Emphasized" press="onAddItem"/>
+						</f:content>
+					</f:SimpleForm>
+
+					<ui:Table  id="lineItemsList" enableCellFilter="true" enableColumnFreeze="true" visible="true" fixedColumnCount="2" visibleRowCount="11"
+						rows="{iModel>/value}" selectionMode="None" ariaLabelledBy="title" >
+						<ui:extension>
+							<OverflowToolbar style="Clear">
+								<Title id="lineItemsTitle" text="" titleStyle="H3" level="H3"/>
+								<ToolbarSpacer/>
+								<Button text="Add Product" id="id_add" type="Ghost" press="addItems" visible="false"/>
+								<Button text="Check Stock" id="id_stock" type="Ghost" press="onMaterialstock" visible="false"/>
+								<!-- <Button text="Sync Price" id="id_price" type="Ghost" press="handleCorrectQty"/> -->
+								<Button icon="sap-icon://excel-attachment" tooltip="Export to Excel" press="onExport" type="Transparent"/>
+							</OverflowToolbar>
+						</ui:extension>
+						<ui:columns>
+							<ui:Column width="10rem" filterProperty="MATERIAL_CODE" sortProperty="MATERIAL_CODE" hAlign="Center" >
+								<Label text="Material" design="Bold"/>
+								<ui:template>
+									<Text text="{iModel>MATERIAL_DESC}" class="text-dark" textAlign="Center"/>
+								</ui:template>
+							</ui:Column>
+							<ui:Column width="12rem" filterProperty="ITEM" sortProperty="ITEM" hAlign="Center" >
+								<Label text="HSN Code" design="Bold"/>
+								<ui:template>
+									<Text text="{iModel>HSN_CODE}" wrapping="true"/>
+								</ui:template>
+							</ui:Column>
+						
+							<ui:Column width="6rem"  hAlign="Right" filterProperty="APPROVED_QTY" filterType="sap.ui.model.type.Integer" sortProperty="APPROVED_QTY">
+								<Label text="Quantity" design="Bold" wrapping="true" />
+								<ui:template>
+									<Input value="{path:'iModel>QUANTITY'}" change="quntityChange" id="inputQyt" textAlign="End" valueState="None"/>
+								</ui:template>
+							</ui:Column>
+							
+								<ui:Column width="9rem" hAlign="Right" filterProperty="STOCK" filterType="sap.ui.model.type.Integer" sortProperty="STOCK" visible="false" id="stockColumn" class="highlightstock" >
+								<Label text="Stock" design="Bold" wrapping="true" visible="false" id="stockText" class="highlightstock" />
+								<ui:template>
+									<!-- <core:Icon id="id_icon" src="sap-icon://edit" class="sapUiTinyMarginEnd" press="handleEditListItem" tooltip="Edit" color="blue"/> -->
+									<!-- <Text text="{path:'iModel>STOCK'}" visible="false" id="StockValue"/> -->
+									<ObjectStatus text="{path:'iModel>STOCK',formatter:'.formatter.stockFramte'}" state="Error" visible="false" id="StockValue"/>
+									<!-- <core:Icon src="sap-icon://check-availability" press="onMaterialstock"  color="blue" tooltip="Press to Check" /> -->
+								</ui:template>
+							</ui:Column>
+							
+							<ui:Column width="6rem" hAlign="Right" filterProperty="APPROVED_QTY" filterType="sap.ui.model.type.Integer" sortProperty="APPROVED_QTY">
+								<Label text="UOM" design="Bold" wrapping="true"/>
+								<ui:template>
+									<Text text="{path:'iModel>UNIT_OF_MEASURE'}"/>
+								</ui:template>
+							</ui:Column>
+							
+						
+							
+							
+							<ui:Column width="7rem"  hAlign="Right" filterProperty="HSN_CODE" sortProperty="HSN_CODE">
+								<Label text="Price(₹)" design="Bold"/>
+								<ui:template>
+									<!-- <Text text="{iModel>NET_AMOUNT}" wrapping="false"/> -->
+									<Text text="{path:'iModel>NET_AMOUNT',formatter:'.formatter.formatterAmount'} "/>
+								</ui:template>
+							</ui:Column >
+
+							<ui:Column width="6rem" hAlign="Right"  filterProperty="SHIPPING_CODE" sortProperty="SHIPPING_CODE">
+								<Label text="CGST(%)" design="Bold"/>
+								<ui:template>
+									<Text text="{iModel>CGST_PERC}"/>
+								</ui:template>
+							</ui:Column>
+
+							<ui:Column width="6rem" hAlign="Right"  filterProperty="SHIPPING_CODE" sortProperty="SHIPPING_CODE">
+								<Label text="SGST(%)" design="Bold"/>
+								<ui:template>
+									<Text text="{iModel>SGST_PERC}"/>
+								</ui:template>
+							</ui:Column>
+
+							<ui:Column width="6rem" hAlign="Right"  filterProperty="SHIPPING_CODE" sortProperty="SHIPPING_CODE">
+								<Label text="Tax (%)" design="Bold"/>
+								<ui:template>
+									<!-- <Text text="{iModel>TAXES_AMOUNT}"/> -->
+									<Text text="{path:'iModel>TAXES_AMOUNT',formatter:'.formatter.formatterAmount'} "/>
+									
+								</ui:template>
+							</ui:Column>
+
+							<!-- <ui:Column width="7rem" hAlign="Center" filterProperty="SHIPPING_CODE" sortProperty="SHIPPING_CODE">
+								<Label text="CGST(%)" design="Bold"/>
+								<ui:template>
+									<Text text="{iModel>DISC_PERC}"/>
+								</ui:template>
+							</ui:Column> -->
+
+							<ui:Column width="9rem" hAlign="Right"  filterProperty="SHIPPING_CODE" sortProperty="SHIPPING_CODE">
+								<Label text="Total Amount (₹)" design="Bold"/>
+								<ui:template>
+									<!-- <Text text="{iModel>TOTAL_AMOUNT}"/> -->
+									<Text text="{path:'iModel>TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'} "/>
+								</ui:template>
+							</ui:Column>
+
+							<ui:Column width="7rem" visible="true" id="deletColumn" hAlign="Center" >
+								<Label text="Action" wrapping="true" design="Bold"  id="deleteButton"/>
+								<ui:template>
+									<!-- <core:Icon id="id_icon" src="sap-icon://edit" class="sapUiTinyMarginEnd" press="handleEditListItem" tooltip="Edit" color="blue"/> -->
+									<core:Icon src="sap-icon://delete" press="handleDeleteListItem"  color="red" tooltip="Delete" id="actionDelet" />
+								</ui:template>
+							</ui:Column>
+						
+						</ui:columns>
+					</ui:Table>
+
+
+
+
+<!-- <Table id="idMTable" inset="false" items="{iModel>/value}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true" visible="false">
+					
+						<columns>
+							<Column hAlign="Left" width="9rem">
+								<Label id="MS2G2T1F1" text="Material" design="Bold"/>
+							</Column>
+							<Column hAlign="Left" width="7rem">
+								<Label id="MS2G2T1F2" text="HSN CODE" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F3" text="Quantity" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F4" text="UOM" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F5" text="Price(₹)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F6" text="CGST (%)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MtableIbanId" text="SGST (%)" design="Bold"/>
+							</Column>
+
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F8" text="TAX (%)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F9_name" text="Total Amount(₹)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F9_nam2" text="Action" design="Bold"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive">
+								<cells>	
+									<Text text="{iModel>MATERIAL_DESC}"/>
+									<Text text="{iModel>HSN_CODE}"/>									
+									<Text text="{iModel>QUANTITY}"/>
+									<Text text="{path:'iModel>UNIT_OF_MEASURE', formatter:'.formatter.formatDate'}"/>
+									<Text text="{path:'iModel>NET_AMOUNT', formatter : '.formatter.formatterAmount' }"/>
+									<Text text="{path:'iModel>CGST_PERC'}"/>
+									<Text text="{path:'iModel>SGST_PERC'}"/>
+									<Text text="{path:'iModel>TAXES_AMOUNT', formatter : '.formatter.formatterAmount' }"/>
+									<Text text="{path:'iModel>TOTAL_AMOUNT', formatter : '.formatter.formatterAmount' }"/>
+											<core:Icon src="sap-icon://delete" press="handleDeleteListItem"  color="red" tooltip="Delete" id="actionDelete" />
+									</cells>
+							</ColumnListItem>
+						</items>
+					</Table> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<BusyDialog id="BusyDialog"/>
+					<RadioButtonGroup visible="false" class="sapUiSmallMarginBegin" columns="3" id="rbg4" select="radioButtonSelect">
+						<buttons>
+							<RadioButton valueState="Information" id="id_primeRBN" text="Add Primary Products" selected="true" class="sapUiSmallMarginEnd"/>
+							<RadioButton valueState="Information" id="id_sec1RBN" text="Add Secondary 1 Products" selected="false" class="sapUiSmallMarginEnd"/>
+							<RadioButton valueState="Information" id="id_sec2RBN" text="Add Secondary 2 Products" selected="false"/>
+						</buttons>
+					</RadioButtonGroup>
+					<f:SimpleForm id="id_primekitTableHead" layout="ResponsiveGridLayout" editable="true" visible="false" columnsXL="3" columnsL="3"
+						columnsM="3">
+						<f:content>
+							<core:Title/>
+							<Label text="Product Group"/>
+							<Input id="id_kitGrp" editable="false"></Input>
+							<core:Title/>
+							<Label text="Product" required="true" design="Bold"/>
+							<Input id="id_primekitItem" valueHelpOnly="true" width="100%" valueHelpRequest="handleValueKitProductHelp('P')" placeholder="Select Product"
+								showValueHelp="true"></Input>
+							<core:Title/>
+							<Label text="QTY" required="true" design="Bold"/>
+							<Input id="id_primekitQty" width="100%" placeholder="Enter Quantity"></Input>
+							<Button width="70%" id="id_kitAdd" text="Add Item" tooltip="Add Item" type="Emphasized" press="onAddKitOrderItem('P')"/>
+						</f:content>
+					</f:SimpleForm>
+
+				</VBox>
+			</semantic:content>
+			<!--Semantic ShareMenu Buttons-->
+			<!-- <semantic:sendEmailAction>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press=".onSendEmailPress"/>
+		</semantic:sendEmailAction> -->
+			<semantic:titleCustomTextActions>
+				<Button type="Emphasized" press="printReq" icon="sap-icon://print"/>
+				<Button text="View Events" press="handleSideContentShow" type="Ghost"/>
+				<!-- <layout:content>
+            	<Link
+				text="View Order"
+				target="_blank"
+				href="terumodrmsdev-dev-tmpaymentscreation-approuter.cfapps.ap11.hana.ondemand.com"/>
+                </layout:content> -->
+			</semantic:titleCustomTextActions>
+			<semantic:closeAction>
+				<semantic:CloseAction id="closeColumn" visible="true" press="onExit"/>
+			</semantic:closeAction>
+			<semantic:positiveAction>
+				<semantic:PositiveAction id="id_approve"  visible="false"  text="Approve" press="onApproveOrdr"/>
+			</semantic:positiveAction>
+			<semantic:negativeAction>
+				<semantic:NegativeAction id="id_reject"   visible="false"  text="Reject" press="RejectOrder"/>
+			</semantic:negativeAction>
+			<!--<semantic:fullScreenAction>-->
+			<!--	<semantic:FullScreenAction id="enterFullScreen" showNavButton="true" visible="true" press=".toggleFullScreen"/>-->
+			<!--</semantic:fullScreenAction>-->
+			<semantic:fullScreenAction>
+				<semantic:FullScreenAction id="enterFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}" press="onFullScreen"/>
+			</semantic:fullScreenAction>
+			<semantic:exitFullScreenAction>
+				<semantic:ExitFullScreenAction id="exitFullScreen"
+					visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}" press="toggleFullScreen"/>
+			</semantic:exitFullScreenAction>
+			
+		</semantic:SemanticPage>
+		<layout:sideContent>
+			<Toolbar>
+				<!-- <Title id="cTitle" text="Events"  /> -->
+				<ToolbarSpacer/>
+				<Button text="Close" type="Emphasized" press="handleSideContentHide"/>
+			</Toolbar>
+			<layout:VerticalLayout width="100%">
+				<u:Timeline id="idTimeline" showHeaderBar="true" showSearch="false" showFilterBar="false" showSort="true" sortOldestFirst="true" sort="true"
+					enableScroll="false" lazyLoading="false" growingThreshold="0" content="{eventData>/value}" showIcons="false"
+					noDataText="No Ticket Events are currently available" width="100%">
+					<u:content>
+						<u:TimelineItem id="idTemplateItem" text="Event : {path:'eventData>COMMENTS'}"
+						  
+							userNameClickable="true"
+							dateTime="{ path:'eventData>CREATION_DATE'}"
+							userName="{path:'eventData>USER_NAME'}" title=": {eventData>USER_ROLE}"/>
+
+							
+					</u:content>
+					
+				</u:Timeline>
+			</layout:VerticalLayout>
+		</layout:sideContent>
+	</layout:DynamicSideContent>
+</mvc:View>

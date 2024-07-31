@@ -1,0 +1,155 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealproductcomplaint.controller.DetailPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <Text text="hjkl"></Text>
+        </content >
+    </Page>
+</mvc:View> -->
+
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%" xmlns:ui="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified" displayBlock="true"
+	xmlns:t="sap.suite.ui.commons" 
+	controllerName="com.ibs.ibsappidealproductcomplaint.controller.DetailPage"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<!-- <m:App> -->
+		<m:Page id="detailPageId" class="sapUiSizeCompact" showHeader="false" showFooter="true" >
+			<m:content>
+				<layout:DynamicSideContent id="DynamicSideContent" class="sapUiSizeCompact" sideContentFallDown="BelowM"
+					breakpointChanged="handleBreakpointChangeEvent" showSideContent="false">
+					<!--General Section-->
+					<ObjectPageLayout id="ObjectPageLayout" selectedSection="firstSection" enableLazyLoading="false" showEditHeaderButton="true"
+						editHeaderButtonPress="handleEditBtnPress" showTitleInHeaderContent="true">
+
+						<headerTitle>
+							<ObjectPageDynamicHeaderTitle>
+								<expandedHeading>
+									<m:Title text="" id="reqno" wrapping="true"/>
+								</expandedHeading>
+								
+								<snappedHeading>
+									<m:FlexBox fitContainer="true" alignItems="Center">
+										<m:Title text="Claim Request No. : {cModel>/CR_NO}" wrapping="true"/>
+									</m:FlexBox>
+								</snappedHeading>
+								<actions>
+
+								<!-- <m:Button text="Edit" press="editValues" id="edtBTn" type="Emphasized" visible="false"></m:Button> -->
+
+                       <m:Button text="View Events" press="Content" type="Emphasized"></m:Button>
+						<m:Button id="idFullScreen" press="onFullScreen" icon="{appView>/icon}" type="Transparent" visible="{FullScreenButton}" />
+                        <!-- <Button press="onExitScreen" id="idExitScreen" icon="sap-icon://exit-full-screen" type="Transparent" visible="{ExitScreenButton}" /> -->
+						<m:Button icon="sap-icon://decline" type="Transparent" press="onExit" />
+								</actions>
+							</ObjectPageDynamicHeaderTitle>
+						</headerTitle>
+						<sections>
+
+	               <ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Header Details" titleUppercase="false" mode="Expanded">
+								<blocks>
+									<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2">
+										<f:content>
+											<core:Title/>
+											
+											<m:Label text="Creation Date" design="Bold"/>
+											<m:Text text="{path:'iModel>/value/0/CREATED_ON',formatter: '.formatter.formatDate'}"/>
+
+											<m:Label text="Product Group" design="Bold"/>
+										<m:Text id="id_Grp" text="{iModel>/value/0/PROD_GRP}" ></m:Text>
+
+											<core:Title/>	
+											<m:Label text="Product Code" design="Bold"/>
+											<m:Text text="{path:'iModel>/value/0/PROD_CODE',formatter: '.formatter.formadata'}"/>
+
+											<core:Title/>
+											<m:Label text="Factory Name" design="Bold"/>
+											<m:Text text="{iModel>/value/0/FACTORY_NAME}"/>
+										</f:content>
+									</f:SimpleForm>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+				
+	
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Form Detail" titleUppercase="false">
+								<blocks>
+									
+                   <m:Table id="priceDifferentTable" class="sapUiSmallMarginBottom" autoPopinMode="true" 
+				   contextualWidth="auto" items="{fileModel>/value}">
+											<m:columns>
+											
+
+												<m:Column>
+													<m:Label text="File Name" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Download" design="Bold"/>
+												</m:Column>
+
+												
+											</m:columns>
+
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+													
+													<m:Text text="{fileModel>FILE_NAME}"/>
+													<m:Button press="f_download" type="Transparent" tooltip="Download" icon="sap-icon://download"
+													enabled="true"></m:Button>
+													<!-- <m:Button press="onDelete" type="Reject" enabled="false" tooltip="Delete" icon="sap-icon://delete"></m:Button> -->
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>		
+													
+									
+
+
+
+											
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+						</sections>
+					</ObjectPageLayout>
+
+					<layout:sideContent>
+						<m:Toolbar>
+							<m:Title text="Events"/>
+							<m:ToolbarSpacer/>
+							<!-- <m:Button icon="sap-icon://refresh" type="Transparent" press="handleRefreshEvents"/> -->
+							<m:Button text="Close" type="Transparent" press="CloseEvent"/>
+						</m:Toolbar>
+						<!-- <m:FeedInput id="emailTextId" post="onPostMessage" showIcon="false" placeholder="Enter query here"/> -->
+						<layout:VerticalLayout width="100%">
+							<t:Timeline id="idTimeline" showHeaderBar="false" showSearch="false" showSort="false" sortOldestFirst="false" sort="false"
+								enableScroll="false" lazyLoading="false" growingThreshold="0" showItemFilter="false"
+								content="{path : 'eventData>/value',sorter : { path : 'EVENT_NO',descending : true}}" showIcons="false"
+								 width="100%">
+								<t:content>
+									<t:TimelineItem id="idTemplateItem" userNameClickable="true"
+										text="Event : {eventData>COMMENT}"
+										dateTime="{path:'eventData>CREATION_DATE'}"
+										userName="{eventData>USER_NAME}" title="{eventData>USER_ROLE}"/>
+								</t:content>
+							</t:Timeline>
+						</layout:VerticalLayout>
+					</layout:sideContent>
+                    
+				</layout:DynamicSideContent>
+				</m:content>
+			
+			</m:Page>
+</mvc:View>

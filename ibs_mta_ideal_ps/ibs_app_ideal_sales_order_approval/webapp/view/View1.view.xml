@@ -1,0 +1,176 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealsalesorderapproval.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" controllerName="com.ibs.ibsappidealsalesorderapproval.controller.View1"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.uxap"
+	xmlns:u="sap.ui.unified" class="viewPadding">
+	<m:Page showHeader="true" showNavButton="false" navButtonPress="onBack" titleAlignment="Center">
+		<m:content>
+			<m:Table id="idItemsTable" growing="true" items="{path : 'supplier>/value',sorter : { path : 'PR_NO',descending : true}}" mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true">
+											<m:headerToolbar>        	
+												<m:OverflowToolbar>	
+												<m:SearchField class="sapUiMediumMarginTopBottom" placeholder="Search by Purchase request no " liveChange=".onSearch" id="seachId" width="25%" />	                
+														<m:ToolbarSpacer/>
+													
+													<m:Button icon="sap-icon://sort" press="onSort" id="sortTable"/>
+														<m:Button icon="sap-icon://filter" press="onFilter" id="filtertble"/>
+														<m:Button icon="sap-icon://reset" press="onReset" id="resetTable"/>
+													<!-- <m:Button icon="sap-icon://excel-attachment" press="onExport"  id="exportTable"/>   -->
+													</m:OverflowToolbar>		                                          
+											</m:headerToolbar>
+											<m:columns>
+												<m:Column hAlign="Center">
+													<m:Text text="Purchase Request no "/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Distributor Name"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Creation Date"/>
+												</m:Column>
+												<m:Column hAlign="Center">
+													<m:Text text="Updated Date"/>
+												</m:Column>
+
+												<m:Column hAlign="Center" width="15%">
+													<m:Text text="Amount (₹)"/>
+												</m:Column>
+												<m:Column hAlign="Center" >
+													<m:Text text="Status"/>
+												</m:Column>
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+														<m:ObjectNumber number="{supplier>PR_NO}"/>
+														<m:Text text="{supplier>DISTRIBUTOR_NAME}"/>
+														<m:Text text="{path: 'supplier>PR_CREATION_DATE', formatter: '.formatter.formatDate'}"/>
+														<m:Text text="{path: 'supplier>LAST_UPDATED_DATE', formatter: '.formatter.formatDate'}"/>
+
+														<m:Text  text=" {path: 'supplier>GRAND_TOTAL',formatter: '.formatter.formatterAmount'}"  textAlign="Right"/>
+														<m:ObjectStatus text="{path: 'supplier>TO_STATUS/DESC'}" state="{path: 'supplier>TO_STATUS/CODE',formatter: '.formatter.formatStateText'}" ></m:ObjectStatus>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+										
+	    </m:content>  
+	</m:Page>    
+</mvc:View>
+
+
+<!-- <mvc:View controllerName="com.ibs.ibsappidealsalesorderapproval.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core"
+    xmlns="sap.m" xmlns:m="sap.m">
+    <Page id="page" showHeader="false">
+         <content>
+            <IconTabBar
+		id="idIconTabBar"
+		select=".onFilterSelect"
+		class="sapUiResponsiveContentPadding"
+		selectedKey="NotInvited">
+		<items>
+
+		<IconTabFilter
+				icon="sap-icon://approvals"
+				iconColor="Positive"
+				count="{countModel>/Invited}"				
+				text="Approve"
+				key="Purchase Request Approved"/>
+			<IconTabFilter
+				icon="sap-icon://pending"
+				iconColor="Critical"
+				count="{countModel>/NotInvited}"
+				text="Created"
+				id="idNotInvited"
+				key="Purchase Request Created"/>
+				<IconTabFilter
+				icon="sap-icon://clear-all"
+				iconColor="Negative"
+				count="{countModel>/InviteRejected}"
+				text="In Approval"
+				key="Purchase Request In Approval" />
+				<IconTabFilter
+				icon="sap-icon://delete"
+				iconColor="Negative"
+				count="{countModel>/Deleted}"
+				text="Rejected"
+				key="Purchase Request Rejected" />
+		<IconTabSeparator />
+			<IconTabFilter
+				showAll="true"
+				id="AllTab"
+				count="{countModel>/All}"
+				text="{i18n>icontabAllReq}"
+				key="All" 
+				/>
+			
+		</items>
+		<content>
+		<m:Table id="idItemsTable" growing="true" items="{path : 'supplier>/value',sorter : { path : 'PR_NO',descending : true}}" mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true">
+											<m:headerToolbar>        	
+												<m:OverflowToolbar>	
+												<m:SearchField class="sapUiMediumMarginTopBottom" placeholder="Search by Pr No" liveChange=".onSearch" id="seachId" width="25%" />	                
+														<m:ToolbarSpacer/>
+													
+													<m:Button icon="sap-icon://sort" press="onSort" id="sortTable"/>
+														<m:Button icon="sap-icon://filter" press="onFilter" id="filtertble"/>
+														<m:Button icon="sap-icon://reset" press="onReset" id="resetTable"/>
+													<m:Button icon="sap-icon://excel-attachment" press="onExport"  id="exportTable"/>  
+													</m:OverflowToolbar>		                                          
+											</m:headerToolbar>
+											<m:columns>
+												<m:Column hAlign="Center">
+													<m:Text text="Pr No."/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Distributor"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Creation Date"/>
+												</m:Column>
+												<m:Column hAlign="Center">
+													<m:Text text="Updated Date"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Amount"/>
+												</m:Column>
+												<m:Column hAlign="Center" >
+													<m:Text text="Status"/>
+												</m:Column>
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+														<m:ObjectNumber number="{supplier>PR_NO}"/>
+														<m:Text text="{supplier>DISTRIBUTOR_NAME}"/>
+														<m:Text text="{path: 'supplier>PR_CREATION_DATE', formatter: '.formatter.formatDate'}"/>
+														<m:Text text="{path: 'supplier>LAST_UPDATED_DATE', formatter: '.formatter.formatDate'}"/>
+
+														<m:Text  text="  {path: 'supplier>GRAND_TOTAL',formatter: '.formatter.formatterAmount'}" textAlign="Right" />
+														<m:ObjectStatus text="{path: 'supplier>TO_STATUS/DESC'}" state="{path: 'supplier>TO_STATUS/CODE',formatter: '.formatter.formatStateText'}" ></m:ObjectStatus>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+			
+		</content>
+	</IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
+ -->

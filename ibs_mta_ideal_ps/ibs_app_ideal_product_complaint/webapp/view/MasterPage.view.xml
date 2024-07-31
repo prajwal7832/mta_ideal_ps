@@ -1,0 +1,113 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealproductcomplaint.controller.MasterPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+
+<mvc:View controllerName="com.ibs.ibsappidealproductcomplaint.controller.MasterPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:m="sap.m"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+		       <IconTabBar
+		id="idIconTabBar"
+		select=".onFilterSelect"
+		class="sapUiResponsiveContentPadding"
+		selectedKey="NotInvited">
+		<items>
+
+           <IconTabFilter
+				icon="sap-icon://approvals"
+				iconColor="Positive"
+				count="{countModel>/Created}"
+				text="Created"
+				id="idNotInvited"
+				key="ProcomplaintCreated"/>
+		
+
+			<IconTabFilter
+				icon="sap-icon://accept"
+				iconColor="Positive"
+				count="{countModel>/Approved}"				
+				text="Approved"
+				key="Procomplaintapproved"/>
+
+
+			<IconTabFilter
+				icon="sap-icon://clear-all"
+				iconColor="Negative"
+				count="{countModel>/Rejected}"
+				text="Rejected"
+				key="Procomplaintrejected" />
+
+         
+
+		<IconTabSeparator />
+			<IconTabFilter
+				showAll="true"
+				id="AllTab"
+				count="{countModel>/All}"
+				text="All Complaint"
+				key="All"/>
+			
+		</items>
+		<content>
+        <m:Table id="idItemsTable" growing="true" items="{path : 'supplier>/value',sorter : { path : 'PPR_NO',descending : true}}" mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true">
+											<m:headerToolbar>        	
+												<m:OverflowToolbar>	
+												<m:SearchField class="sapUiMediumMarginTopBottom" placeholder="Search by PPR Request Number " liveChange=".onSearch" width="25%" id="seachId" />	                
+														<m:ToolbarSpacer/>
+													<m:Button text="Create Request" press="orderCreate" visible="{viewModel>/BtnEnable1}" type="Emphasized"/>
+													<m:Button icon="sap-icon://sort" press="onSort" id="sortTable"/>
+														<m:Button icon="sap-icon://filter" press="onFilter" id="filtertble"/>
+														<m:Button icon="sap-icon://reset" press="onReset" id="resetTable"/>
+
+													</m:OverflowToolbar>		                                          
+											</m:headerToolbar>
+											<m:columns>
+
+												<m:Column hAlign="Center">
+													<m:Text text="PPR Request Number"/>
+												</m:Column>
+													<m:Column hAlign="Center">
+													<m:Text text="Product Group"/>
+												</m:Column>
+												<m:Column hAlign="Center">
+													<m:Text text="Factory Name"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Created On"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Status"/>
+												</m:Column>
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+	
+														<m:ObjectNumber number="{path: 'supplier>PPR_NO'}" textAlign="Right"/>
+														<m:Text text="{supplier>PROD_GRP}" textAlign="Right"/>
+														<m:Text text="{path: 'supplier>FACTORY_NAME'}"/>
+                                                        <m:Text text="{path: 'supplier>CREATED_ON', formatter: '.formatter.formatDate'}" />
+														<m:ObjectStatus text="{path: 'supplier>TO_STATUS/DESC'}" state="{path: 'supplier>TO_STATUS/CODE',formatter: '.formatter.formatStateText'}" ></m:ObjectStatus>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+										</content>
+	</IconTabBar>
+         </content >
+    </Page>
+</mvc:View>
+
+
+
+
+

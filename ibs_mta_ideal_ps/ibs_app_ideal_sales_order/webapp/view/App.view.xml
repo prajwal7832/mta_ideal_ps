@@ -1,0 +1,23 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealsalesorder.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <App id="app">
+    </App>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealsalesorder.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"  xmlns:f="sap.f"
+    xmlns="sap.m">
+    <App id="app">
+
+      <pages>
+            <f:FlexibleColumnLayout 
+            id="layout" 
+            backgroundDesign="Solid" 
+            layout="{appView>/layout}"/>
+        </pages>
+    </App>
+
+</mvc:View>

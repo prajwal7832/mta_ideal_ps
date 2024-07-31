@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog title="Select Sales Order" contentHeight="80%"
+        class="sapUiSizeCompact">
+         <subHeader>
+            <Toolbar>
+                <SearchField id="contctCountry_Id" liveChange="handleOTHContactCountrySearch" />
+            </Toolbar>
+        </subHeader>
+ 
+        <List id="contactcntry_listId" items="{path:'Po_data>/value', sorter : { path : 'SAP_SO_NO',descending : true}}"
+            mode="SingleSelectMaster" selectionChange="contactOTHCountrySelection">
+            <StandardListItem title="{Po_data>SAP_SO_NO}"  info="{path:'Po_data>GRAND_TOTAL',formatter: '.formatter.formatterAmount'} INR"
+            description="{path:'Po_data>PR_CREATION_DATE',formatter: '.formatter.formatDate'}" />
+        </List>
+       
+            <buttons>
+            <Button text="Cancel" press="closeContactCountryDialog" type="Emphasized" />
+        </buttons>
+
+    </Dialog>
+</core:FragmentDefinition>
+
+
+

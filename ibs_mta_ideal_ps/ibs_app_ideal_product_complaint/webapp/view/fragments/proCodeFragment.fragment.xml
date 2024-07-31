@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog title="Select Sales Order" contentHeight="80%"
+        class="sapUiSizeCompact">
+         <subHeader>
+            <Toolbar>
+                <SearchField id="contctCountry_Id" liveChange="ProductOnserch" />
+            </Toolbar>
+        </subHeader>
+ 
+        <List id="contactcntry_listId" items="{path:'proddata>/Charts', sorter : { path : 'SAP_SO_NO',descending : true}}"
+            mode="SingleSelectMaster" selectionChange="SProCode">
+            <StandardListItem  title="{proddata>ProCode}" 
+             description="{path:'proddata>ProDes'}" />
+        </List>
+       
+            <buttons>
+            <Button text="Cancel" press="closeprocode" type="Emphasized" />
+        </buttons>
+
+    </Dialog>
+</core:FragmentDefinition>

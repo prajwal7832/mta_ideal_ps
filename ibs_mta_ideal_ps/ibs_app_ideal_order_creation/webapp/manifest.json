@@ -1,0 +1,187 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ibs.ibsappidealordercreation",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.2",
+      "toolsId": "901034c4-1515-42bd-8e6e-f3331aab3487"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/OData/v4/ideal-retailer-registration/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "OrderCreate-disaplay": {
+          "semanticObject": "OrderCreate",
+          "action": "disaplay",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.126.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibs.ibsappidealordercreation.i18n.i18n"
+        }
+      },
+      "retailerDatas":{
+        "type":"sap.ui.model.json.JSONModel",
+				"uri":"model/dummyData.json"
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.ibs.ibsappidealordercreation.view",
+        "controlAggregation": "beginColumnPages",
+        "controlId": "layout",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteMasterpage",
+          "pattern": "",
+          "target": [
+            "TargetMasterpage"
+          ]
+        },
+        {
+          "name": "ServiceMsg",
+          "pattern": "ServiceMsg",
+          "target": [
+              "ServiceMsg"
+          ]
+        },
+        {
+          "name": "RouteCreationpage",
+          "pattern": "Order_Creation",
+          "target": [
+            "TargetMasterpage",
+            "TargetCreationpage"
+          ]
+        },
+        {
+          "name": "RouteDetailpage",
+          "pattern": "detailpage/{SO_NO}",
+          "target": [
+            "TargetMasterpage",
+            "TargetDetailpage"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMasterpage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "controlAggregation": "beginColumnPages",
+          "viewId": "Masterpage",
+          "viewName": "Masterpage"
+        }, 
+        "ServiceMsg": {
+          "viewType": "XML",
+          "viewName": "ServiceMsg"
+        },
+        "TargetCreationpage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "controlAggregation": "endColumnPages",
+          "viewId": "Creationpage",
+          "viewName": "Creationpage"
+        },
+        "TargetDetailpage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "controlAggregation": "midColumnPages",
+          "viewId": "Detailpage",
+          "viewName": "Detailpage"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.ibs.ibsappidealordercreation.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "ibs_bs_ideal_ps"
+  }
+}

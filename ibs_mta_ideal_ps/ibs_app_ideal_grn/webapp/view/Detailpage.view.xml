@@ -1,0 +1,149 @@
+<mvc:View controllerName="com.ibs.ibsappidealgrn.controller.Detailpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
+	<App id="idApp">
+	<pages>
+    <Page id="page" showHeader="false">
+    <!-- <l:VerticalLayout width="100%" > -->
+			<OverflowToolbar>
+			<Title text="" class="titleWeight"/>
+			<ToolbarSpacer />
+				<Button press="fullscreen" id="idFullScreen"
+				icon="sap-icon://full-screen" type="Transparent" />
+				<Button press="fullscreen" id="idExitScreen"
+				icon="sap-icon://exit-full-screen" type="Transparent" />
+				<!-- <Button id="onBackMaster" icon="sap-icon://decline" press="onBack" type="Transparent" /> -->
+				<Button icon="sap-icon://decline" type="Transparent" press="onBack"/>
+			 </OverflowToolbar>
+					
+
+			<!-- <f:SimpleForm id="simpleForm2" editable="true" layout="ResponsiveGridLayout" columnsM="3" columnsL="3" columnsXL="3"
+					class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle"> -->
+				<f:SimpleForm id="simpleForm1" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+							adjustLabelSpan="false" columnsXL="3" columnsL="3" columnsM="2" class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+					<f:content>
+					<core:Title/>
+					<Label text="Sales Order No" design="Bold" />
+					<Text text ="{path:'cusomerHeaderModel>/SalesOrder', formatter:'.formatter.getDataNullValue'}" class="sapUiTinyMarginBegin"/>
+
+					<Label text="Invoice Number" design="Bold" />
+					<Text id="idInvoice" text="{path:'cusomerHeaderModel>/InvoiceNumber', formatter:'.formatter.getDataNullValue'}" />
+					
+					<core:Title/>
+					<Label text="Invoice Date" design="Bold" />
+					<Text text="{path:'cusomerHeaderModel>/InvoiceDate', formatter:'.formatter.getDataNullValue',
+						type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd.MM.yyyy' , UTC: false }}" />
+
+					<!-- <Label text="Customer Name" design="Bold" />
+					<Text text="{path:'cusomerHeaderModel>/CustomerName', formatter:'.formatter.getDataNullValue'}" /> -->
+				</f:content>
+			</f:SimpleForm>
+        <content>
+		
+		<Table id="idProductsTable" inset="false" items="{grnDetailModel>/}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<dependents>
+								<!-- <plugins:ColumnResizer/> hSpacing="2rem" showGoOnFB="false"-->
+							</dependents>
+						<headerToolbar>
+							<OverflowToolbar visible="false">
+								<Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/>
+								<content>
+									<ToolbarSpacer/>
+									<SearchField id="oSearchMasterData" visible="true" width="40%" placeholder="Search"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+									<Button icon="" press="onRefresh"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Left" width="9rem" visible="false">
+								<Label text="Material Group" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Left" width="11rem">
+								<Label text="Material" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text="UOM" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Price(₹)" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Quantity" design="Bold" wrapping="true"/>
+							</Column>
+							
+							<Column hAlign="Right">
+								<Label text="Accepted Quantity" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Rejected Quantity" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="CGST Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="SGST Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="IGST Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Taxes Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right" visible="false">
+								<Label text="Net Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Total Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive" press="onPress">
+								<cells>	
+									<ObjectIdentifier text="{grnDetailModel>MaterialGroup}"
+									 title="{grnDetailModel>MaterialGrpdes}"/>
+									<ObjectIdentifier text="{grnDetailModel>MaterialCode}"
+									 title="{grnDetailModel>MaterialDesc}"/>									
+									<Text text="{path:'grnDetailModel>Uom',formatter:'.formatter.getDataNullValue'}"/>
+									<Text textAlign="Right" text="{path:'grnDetailModel>UnitPrice',formatter:'.formatter.formatterAmount'}"/>
+									<Text text="{path:'grnDetailModel>Quantity',formatter:'.formatter.getDataNullValue'}"/>
+									
+									<Input width="5rem" value="{path:'grnDetailModel>AcceptQty' ,formatter:'.formatter.getDataNullValue'}"
+									textAlign="Right" type="Number" liveChange="handleAcceptedQty"/>
+									<Text text = "{path:'grnDetailModel>RejectQty',formatter:'.formatter.getDataNullValue'}" />
+									<Text text = "{path:'grnDetailModel>CgstAmount',formatter:'.formatter.formatterAmount'}" />
+									<Text text = "{path:'grnDetailModel>SgstAmount',formatter:'.formatter.formatterAmount'}" />
+									<Text text = "{path:'grnDetailModel>IgstAmount',formatter:'.formatter.formatterAmount'}" />
+
+									<Text text = "{path:'grnDetailModel>TaxesAmount',formatter:'.formatter.formatterAmount'}" />
+									<Text text = "{path:'grnDetailModel>NetAmount',formatter:'.formatter.formatterAmount'}" />
+									<Text text = "{path:'grnDetailModel>TotalAmount',formatter:'.formatter.formatterAmount'}" />
+									</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</content>
+			 <footer>
+				<Bar>
+					<contentLeft>
+						<Button id="messagePopoverBtn" visible="false" type="Ghost" icon="sap-icon://message-popup" text="" press="handleMessagePopoverPress"
+							ariaHasPopup="Dialog"/>
+						<Title text = "Total Amount : {path:'retailerInfoModel>/MaterialAmount/0/TOTAL_AMOUNT'}"  class="sapUiMediumMarginEnd"/>
+						<Title text = "Total Taxes : {path:'retailerInfoModel>/MaterialAmount/0/TOTAL_TAXES'}" />
+					</contentLeft>
+					<contentRight>
+						<Button id="saveBt" text="Accept" press="onOrderDataFetch" type="Success" enabled="true"/>
+					</contentRight>
+				</Bar>
+			</footer>
+            
+    </Page>
+	</pages>
+	</App>
+</mvc:View>

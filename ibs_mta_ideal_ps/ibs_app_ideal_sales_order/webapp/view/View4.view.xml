@@ -1,0 +1,271 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealsalesorder.controller.View4"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <Text text="jklfdfd;"></Text>
+        </content >
+    </Page>
+</mvc:View> -->
+
+
+
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" controllerName="com.ibs.ibsappidealsalesorder.controller.View4"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.uxap"
+	xmlns:u="sap.ui.unified" class="viewPadding" xmlns:ui="sap.ui.table" xmlns:table="sap.ui.table" >
+	<m:Page showHeader="false" showNavButton="false" navButtonPress="onBack" class="sapUiSizeCompact">
+		<m:content>
+			<ObjectPageLayout class="sapUiSizeCompact">
+				<headerTitle>
+					<ObjectPageHeader objectTitle="">
+						
+						<m:Button icon="sap-icon://nav-back" type="Emphasized" press="navigateToView1"></m:Button>
+					</ObjectPageHeader>
+				</headerTitle>
+			
+				<sections>
+				
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Order Details" titleUppercase="false" mode="Expanded">
+								<blocks>
+									<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2">
+										<f:content>
+											<core:Title/>
+
+											<m:Label text="Date" design="Bold"/>
+											<m:Input id="id_Date" value="" editable="false"/>
+
+											<m:Label text="Payment Method" design="Bold"/>
+											<m:Input id="id_payMeth" value="{headerData>/results/0/Text1}" editable="false"/>
+
+											<core:Title/>
+											<m:Label text="Ship From" design="Bold" />
+											<m:Input id="id_ShipF" value="{shipDetail>/results/0/Shipfrom}" editable="false"/>
+											
+											<core:Title/>
+											<m:Label text="Ship To" design="Bold" required="true" />
+											    <m:ComboBox items="{path: 'shipDetail>/results'}" selectionChange="handleHQCountry" id="shiftdetail" valueState="None" >
+												<core:Item key="{shipDetail>Kunnr}" text="{shipDetail>Name1}"/>
+											</m:ComboBox>
+											
+										</f:content>
+									</f:SimpleForm>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Add Items" titleUppercase="false">
+								<blocks>
+                                       <m:VBox>
+												
+	                    
+												
+												
+												
+	
+
+                 <f:SimpleForm id="f_full" title=""  layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" visible="true">
+										<f:content>
+										<core:Title/>
+							<m:Label text="Material Group" required="true" design="Bold" wrapping="true"  id="textgrup"/>
+							<m:Input id="id_Grp" enabled="true" change="onGrpChange" valueHelpOnly="true" width="100%" valueHelpRequest="handleValueGroupHelp"
+								placeholder="Select Material Group" showValueHelp="true" valueState="None" ></m:Input>
+							<core:Title/>
+							<m:Label text="Material" required="true" design="Bold" id="textpro"/>
+							<m:Input id="id_Item" value="" enabled="{val>/val}" valueHelpOnly="true" width="100%" valueHelpRequest="handleValueProductHelp"
+								placeholder="Select Material" showValueHelp="true" valueState="None" ></m:Input>		
+											
+										</f:content>
+									</f:SimpleForm>
+
+
+              <table:Table id="Table1" rows="{tModel>/}" selectionMode="None" class="sapUiSizeCompact" >
+							 <ui:extension>
+							<m:OverflowToolbar style="Clear">
+								
+								<m:ToolbarSpacer/>
+								<m:Button text="Template" icon="sap-icon://download" press="onTemplateDownload" type="Emphasized"
+								class="sapUiTinyMarginEnd sapUiTinyMarginBottom"/>
+								<u:FileUploader id="FileUploaderId" buttonText="Upload" sameFilenameAllowed="true" iconOnly="false" buttonOnly="true" fileType="XLSX,xlsx"
+								icon="sap-icon://upload" iconFirst="true" style="Emphasized" change="onUpload" class="sapUiTinyMarginBottom"/>
+                                  <!-- handleValueChange -->
+							</m:OverflowToolbar>
+						</ui:extension>
+								<table:columns>
+									<table:Column width="10rem" hAlign="Center">
+										<m:Label wrapping="true" text="Material Code" design="Bold" />
+										<table:template>
+											<m:Text text="{tModel>MaterialCode}"></m:Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="17rem" hAlign="Center">
+										<m:Label wrapping="true" text="Material Desc" design="Bold" />
+										<table:template>
+											<m:Text text="{tModel>MaterialDes}"></m:Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="6rem" hAlign="Right">
+										<m:Text wrapping="true" text="Quantity"  />
+										<table:template>
+											<m:Input value="{tModel>Quantity}" change="quantityChange" textAlign="End"  ></m:Input>
+										</table:template>
+									</table:Column>
+
+									<table:Column width="7rem" hAlign="Right">
+										<m:Label wrapping="true" text="Price(₹)" design="Bold" />
+										<table:template>
+											<m:Text text="{path:'tModel>NetPrice',formatter: '.formatter.formatterAmount'}"></m:Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="5rem" hAlign="Right">
+										<m:Label wrapping="true" text="UOM" design="Bold" />
+										<table:template>
+											<m:Text text="{tModel>Uom}"></m:Text>
+										</table:template>
+									</table:Column>
+									
+								</table:columns>
+
+								
+
+                                    <table:Column width="6rem" hAlign="Right">
+										<m:Label wrapping="true" text="CGST(%)" design="Bold" />
+										<table:template>
+											<m:Text text="{tModel>Cgst_per}"></m:Text>
+										</table:template>
+									</table:Column>
+									<table:Column width="6rem"  hAlign="Right">
+										<m:Label wrapping="true" text="SGST(%)" design="Bold" />
+										<table:template>
+											<m:Text text="{tModel>Sgst_per}"></m:Text>
+										</table:template>
+									</table:Column>
+									
+									<table:Column width="6rem" hAlign="Right">
+										<m:Label wrapping="true" text="Tax(%)" design="Bold" />
+										<table:template>
+											<m:Text text="{path:'tModel>tax', formatter: '.formatter.formatterAmount'}"></m:Text>
+										</table:template>
+									</table:Column>
+
+                                    <table:Column width="8rem" hAlign="Right">
+										<m:Label wrapping="true" text="Total Amount(₹)" design="Bold" />
+										<table:template>
+											<m:Text text="{path:'tModel>total' ,formatter: '.formatter.formatterAmount'}"></m:Text>
+										</table:template>
+									</table:Column>
+
+
+									 <table:Column width="9rem" hAlign="Center">
+										<m:Label wrapping="true" text="Delete" design="Bold" />
+										<table:template>
+										<m:Button press="onDelete" type="Reject" enabled="true" tooltip="Delete" icon="sap-icon://delete"></m:Button>
+										</table:template>
+									</table:Column>
+
+							</table:Table> 
+
+
+<!-- phone view -->
+
+			       <!-- <m:OverflowToolbar style="Clear" visible="true">
+								
+								<m:ToolbarSpacer/>
+								<m:Button text="Template" icon="sap-icon://download" press="R_onTemplateDownload" type="Emphasized"
+								class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+								<u:FileUploader id="R_FileUploaderId" buttonText="Upload" sameFilenameAllowed="true" iconOnly="false" buttonOnly="true" fileType="XLSX,xlsx"
+								icon="sap-icon://upload" iconFirst="true" style="Emphasized" change="R_onUploadR" class="sapUiTinyMarginBottom"/>
+							</m:OverflowToolbar>
+
+			<m:Table id="idMTable" inset="false" items="{tModel>/}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true" visible="true">
+						
+						
+						<m:columns>
+							<m:Column hAlign="Left" width="9rem">
+								<m:Label id="MS2G2T1F1" text="Material Code" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Left" width="7rem">
+								<m:Label id="MS2G2T1F2" text="Material Desc" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label id="MS2G2T1F3" text="Quantity" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label id="MS2G2T1F4" text="UOM" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label id="MS2G2T1F5" text="Price(₹)" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label id="MS2G2T1F6" text="CGST (%)" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label id="MtableIbanId" text="SGST (%)" design="Bold"/>
+							</m:Column>
+
+							<m:Column hAlign="Center">
+								<m:Label id="MS2G2T1F8" text="TAX (%)" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label id="MS2G2T1F9_name" text="Total Amount(₹)" design="Bold"/>
+							</m:Column>
+							<m:Column hAlign="Center">
+								<m:Label  text="Delete" design="Bold"/>
+							</m:Column>
+						</m:columns>
+						<m:items>
+							<m:ColumnListItem type="Inactive">
+								<m:cells>	
+									<m:Text text="{tModel>MaterialCode}"/>
+									<m:Text text="{tModel>MaterialDes}"/>									
+									<m:Text text="{tModel>Quantity}"/>
+									<m:Text text="{path:'tModel>Uom'}"/>
+									<m:Text text="{path:'tModel>NetPrice', formatter : '.formatter.formatterAmount' }"/>
+									<m:Text text="{path:'tModel>Cgst_per'}"/>
+									<m:Text text="{path:'tModel>Sgst_per'}"/>
+									<m:Text text="{path:'tModel>tax', formatter : '.formatter.formatterAmount' }"/>
+									<m:Text text="{path:'tModel>total', formatter : '.formatter.formatterAmount' }"/>
+										<m:Button press="onDelete" type="Reject" enabled="true" tooltip="Delete" icon="sap-icon://delete"></m:Button>
+									</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+					</m:Table> -->
+
+								</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+	
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Note" titleUppercase="false">
+								<m:VBox>
+                                            	<m:TextArea maxLength="1000" width="100%"  value="" placeholder="Description..." id="notes"/>
+										</m:VBox>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+	       </ObjectPageLayout >
+	    </m:content>
+	    <m:footer>
+			<m:Bar>
+				<m:contentRight>
+					<m:Button text="Review Order" type="Success" press="onSubmitData" enabled="false" id="excelorder"/>
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+	</m:Page>    
+</mvc:View>
+
+
+

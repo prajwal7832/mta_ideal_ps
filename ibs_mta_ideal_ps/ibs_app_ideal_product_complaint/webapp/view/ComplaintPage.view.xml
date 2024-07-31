@@ -1,0 +1,188 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealproductcomplaint.controller.ComplaintPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <Text text="comp"></Text>
+        </content >
+    </Page>
+</mvc:View> -->
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" controllerName="com.ibs.ibsappidealproductcomplaint.controller.ComplaintPage"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns="sap.uxap"
+	xmlns:u="sap.ui.unified" class="viewPadding" xmlns:ui="sap.ui.table"  >
+	<m:Page showHeader="false" showNavButton="false" navButtonPress="onBack" class="sapUiSizeCompact">
+		<m:content>
+			<ObjectPageLayout class="sapUiSizeCompact">
+				<headerTitle>
+					<ObjectPageHeader objectTitle="PPR Request">
+						
+						<m:Button icon="sap-icon://nav-back" type="Emphasized" press="navigateToView1"></m:Button>
+					</ObjectPageHeader>
+				</headerTitle>
+			
+				<sections>
+				
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Header Fields" titleUppercase="false" mode="Expanded">
+								<blocks>
+									<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+										adjustLabelSpan="false" columnsXL="4" columnsL="3" columnsM="2">
+										<f:content>
+											<core:Title/>
+											<m:Label text="Product Group" design="Bold" required="true"/>
+										<m:Input id="id_Grp" enabled="true" liveChange="onGrpChange"  valueHelpRequest="handleValueGroupHelpProGrop"
+								             placeholder="Product Group" showValueHelp="true" valueState="None" value="{Select_po>/SAP_SO_NO}" ></m:Input>
+											 
+											<m:Label text="Description" design="Bold" />
+											<m:Input id="id_Desc" value="" editable="true"/>
+											<core:Title/>
+											<m:Label text="Product Code" design="Bold" required="true"/>
+										    <m:Input id="id_Procode" enabled="true" liveChange="onproductChange"  valueHelpRequest="ProCodehandleValueGroupHelp"
+								             placeholder="Product Code" showValueHelp="true" valueState="None" value="" ></m:Input>
+											 
+											<m:Label text="Product Unknown" design="Bold"/>
+											<m:CheckBox id="click" select="onclick" ></m:CheckBox>
+											
+											<core:Title/>
+											<m:Label text="Factory Name" design="Bold" required="true"/>
+											<m:Input id="id_OrdDate" value="IDEAL" editable="false"/>
+											
+										</f:content>
+									</f:SimpleForm>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+
+			
+	
+					<ObjectPageSection titleUppercase="false" title="">
+						<subSections>
+							<ObjectPageSubSection title="Form Details" titleUppercase="false">
+								<blocks>
+											<m:VBox>	
+											
+											<m:Table id="priceDifferentTable" items="{claimAttachMapJson>/}"  class="sapUiSmallMarginBottom" autoPopinMode="true" contextualWidth="auto">
+											<m:columns>
+												<m:Column>
+													<m:Label text="Download Complaint Form" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Upload Filled Form" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Uploaded Form Name" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Download Filled Form" design="Bold"/>
+												</m:Column>
+
+												<m:Column>
+													<m:Label text="Action" design="Bold"/>
+												</m:Column>
+											</m:columns>
+
+											<m:items>
+												<m:ColumnListItem>
+													<m:cells>
+														<m:Button text="Dowload" press="onTemplateDownload"></m:Button>
+														<u:FileUploader name="myFileUpload" uploadUrl="upload/" buttonOnly="true" buttonText="Choose File" sameFilenameAllowed="true"
+													change="handleUpload" enabled="true" fileType="txt,jpg,docx,docm,pdf,xlsx" typeMissmatch="handleTypeMissmatch" visible="true"/>
+													<m:Text text="{claimAttachMapJson>FILE_NAME}"/> 
+													<m:Button  id="downloadid"   press="downloadFileContent" type="Transparent" tooltip="Download" icon="sap-icon://download" text="download" 
+													enabled="false"></m:Button>
+													<m:Button   id="deletBTN" press="onDelete" type="Reject" enabled="false" tooltip="Delete" icon="sap-icon://delete"></m:Button>
+													</m:cells>
+												</m:ColumnListItem>
+
+											</m:items>
+										</m:Table>
+
+									<!-- <ui:Table id="invoiceTableId" rowActionCount="1" rowSelectionChange="1" rows="{proddata>/0}" fixedColumnCount="1"
+													visible="true" selectionMode="None" 
+													ariaLabelledBy="title">
+												
+													<ui:columns>
+														
+														<ui:Column width="15rem" hAlign="Center"
+															visible="true">
+															<m:Label id="S2G2T1F1" text="Download Complaint Form" design="Bold"/>
+															<ui:template>
+																<m:Button text="Download"></m:Button>
+															</ui:template>
+														</ui:Column>
+
+													
+														<ui:Column width="15rem" visible="true" hAlign="Center">
+															<m:Label id="S2G2T1F2" text="Upload Filled Form" design="Bold"/>
+															<ui:template>
+														<u:FileUploader name="myFileUpload" uploadUrl="upload/" buttonOnly="true" buttonText="Choose File" sameFilenameAllowed="true"
+													change="handleUpload" enabled="true" fileType="txt,jpg,docx,docm,pdf,xlsx" typeMissmatch="handleTypeMissmatch"/>
+															</ui:template>
+														</ui:Column>
+
+														
+														<ui:Column width="15rem" visible="true" hAlign="Center">
+															<m:Label id="S2G2T1F3" text="Uploaded Form Name" design="Bold"/>
+															<ui:template>
+																<m:Text text="fghjk"/>
+															</ui:template>
+														</ui:Column>
+
+														
+														<ui:Column width="15rem" visible="true" hAlign="Center">
+															<m:Label id="S2G2T1F4"
+																text="Download Filled Form" design="Bold"/>
+															<ui:template>
+																<m:Button text="Download"></m:Button>
+															</ui:template>
+														</ui:Column>
+
+														<ui:Column width="12rem" visible="true" hAlign="Center">
+															<m:Label id="S2G2T1F49"
+																text="Action " design="Bold"/>
+															<ui:template>
+																<m:Button text="Delete"></m:Button>
+															</ui:template>
+														</ui:Column>
+
+
+                                          </ui:columns>
+												</ui:Table> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+	       </ObjectPageLayout >
+	    </m:content>
+	    <m:footer>
+			<m:Bar>
+				<m:contentRight>
+					<!-- <m:Button text="Save" type="Emphasized" press="onSave" visible="{viewModel>/BtnEnable}" enabled="{viewModel>/Enabled}"/> -->
+					<m:Button text="Submit" type="Success" press="openSaveFragment" enabled="false" id="submitBTN"/>
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+	</m:Page>    
+</mvc:View>

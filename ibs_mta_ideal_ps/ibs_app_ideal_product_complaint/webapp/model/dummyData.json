@@ -1,0 +1,19 @@
+{
+	"Charts" :[{
+		"ProGroup": "TAZUNA",
+		"ProCode": "Tazuna 3.00mmx15mm RX ",
+		"ProDes": "1DCRK3015EHW"
+	
+	}, {
+		"ProGroup": "ACCUFORCE",
+		"ProCode": "Tazuna 2.50mmx10mm RX",
+		"ProDes": "1DCRK3015EHTWC"
+		
+	}, {
+		"ProGroup": "RUNTHROUGH",
+		"ProCode": "Accuforce 3.75mm x 20mm",
+		"ProDes": "2DCRK3015EHW"
+	
+	} 
+	]
+}

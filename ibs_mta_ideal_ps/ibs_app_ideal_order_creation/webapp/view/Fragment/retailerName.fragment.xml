@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Retailer" contentHeight="50%" contentWidth="25%"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="retailerSrch" liveChange="handleRetailerSrch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="retailer_listId" items="{retailerIdData>/}"
+			mode="SingleSelectMaster" selectionChange="handleRetailer">
+			<StandardListItem description="{retailerIdData>retailerId}" 
+			title="{retailerIdData>retailerName}" iconInset="true"/>
+
+		</List>
+		<buttons>
+			<Button text="Cancel" press="closeRetailer" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

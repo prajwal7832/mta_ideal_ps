@@ -1,0 +1,95 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealordercreation.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealordercreation.controller.Masterpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m">
+	<App id="idApp">
+	<pages>
+    <Page id="page" showHeader="false">
+    
+        <content>
+		<Table id="idOrdersTable" inset="false" items="{path:'retailerData>/', sorter : { path : 'SO_NO',descending : true}}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="20" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<dependents>
+								<!-- <plugins:ColumnResizer/> hSpacing="2rem" showGoOnFB="false"-->
+							</dependents>
+						<headerToolbar>
+							<OverflowToolbar visible="true">
+								<!-- <Title id="id_totalItems" width="15%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/> -->
+								
+								<content>
+								<SearchField id="oSearchMasterData" visible="true" width="29%" placeholder="Search by Sales Order No,Retailer"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+									<ToolbarSpacer/>
+									<Button id="idCreate" text="Create Order" type="Emphasized" icon="sap-icon://add-activity" press="onCreate">
+									<layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button>
+									
+									<Button visible="true" id="idFilterBtn" icon="sap-icon://filter" press="onFilter" type="Transparent" class="sapUiNoMarginEnd sapUiTinyMarginBegin">
+									<layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button>
+									
+									<Button id="idSortBtn" icon="sap-icon://sort" press="handleSort" type="Transparent" class="sapUiNoMarginEnd">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button>
+									<Button icon="sap-icon://refresh" press="onRefresh">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</Button>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column hAlign="Center" width="9rem">
+								<Label text="Sales Order No" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text="Retailer" design="Bold" wrapping="true"/>
+							</Column>
+							
+							<Column hAlign="Center">
+								<Label text="Creation Date" design="Bold" wrapping="true"/>
+							</Column>
+							<Column hAlign="Right" width="11rem">
+								<Label text="Total Amount(₹)" design="Bold" wrapping="true"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="onPress">
+								<cells>
+									<!-- <Text text = "{retailerData>RETAILER_ID}" /> -->
+									<Text text="{path:'retailerData>SO_NO',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									<Text text="{path:'retailerData>RETAILER_NAME',formatter:'.formatter.getDataNullValue'}" wrapping="true"/>
+									
+									<Text text="{path:'retailerData>CREATION_DATE' ,formatter:'.formatter.getDataNullValue',
+									type: 'sap.ui.model.type.DateTime', formatOptions: {pattern: 'dd.MM.yyyy' , UTC: false }}"/>
+									<Text class="totalAmt" text="{path:'retailerData>GROSS_TOTAL',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</content>
+    </Page>
+	</pages>
+	</App>
+</mvc:View>
+

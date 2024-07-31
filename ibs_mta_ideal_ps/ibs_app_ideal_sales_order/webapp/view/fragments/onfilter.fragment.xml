@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+        id="settingsDialog"
+        confirm="handleConfirm2"
+        cancel="handleCancel" filterSearchOperator="Contains"
+        resetFilters="handleResetFilters">
+        <filterItems>
+            <ViewSettingsFilterItem text="Purchase Request no" key="PR_NO" items="{path:'supplier>/value', sorter : { path : 'PR_NO',descending : true}}">
+                <items>
+                    <ViewSettingsItem text="{supplier>PR_NO}" key="{supplier>PR_NO}" />
+                        </items>
+                </ViewSettingsFilterItem>       
+        </filterItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

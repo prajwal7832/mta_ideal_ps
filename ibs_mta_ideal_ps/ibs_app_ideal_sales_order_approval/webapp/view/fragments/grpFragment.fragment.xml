@@ -1,0 +1,31 @@
+<!-- <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog class="sapUiSizeCompact" id="grpF4Id" title="Product Group" noDataText="No Product Group Found" liveChange="handleGrpValueHelpSearch"
+		confirm="handleGrpValueHelpClose" items="{group>/results}">
+		
+			<StandardListItem id="grpTempId" title="{group>MaterialGroup}" 
+			description="{group>MaterialGroupDes}" class="sapUiSmallMarginTop"/>
+            
+	</SelectDialog>
+</core:FragmentDefinition> -->
+
+
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog title="Select Material Group" contentHeight="80%"
+        class="sapUiSizeCompact">
+         <subHeader>
+            <Toolbar>
+                <SearchField id="contctCountry_Id" liveChange="handleOTHContactCountrySearch" />
+            </Toolbar>
+        </subHeader>
+ 
+        <List id="contactcntry_listId" items="{group>/results}"
+            mode="SingleSelectMaster" selectionChange="contactOTHCountrySelection">
+            <StandardListItem title="{group>MaterialGroup}" description="{group>MaterialGroupDes}"/>
+        </List>
+       
+            <buttons>
+            <Button text="Cancel" press="closeContactCountryDialog" type="Emphasized" />
+        </buttons>
+
+    </Dialog>
+</core:FragmentDefinition>

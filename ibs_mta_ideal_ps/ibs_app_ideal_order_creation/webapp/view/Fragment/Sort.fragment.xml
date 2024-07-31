@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+xmlns:core="sap.ui.core"
+xmlns="sap.m">
+
+    <ViewSettingsDialog
+        id="idSortFragment"
+        title="Sort"
+
+        sortDescending="true"
+
+        groupDescending="true"
+
+        confirm="handleSortDialogConfirm"
+
+        selectedSortItem="sortItem3">
+
+        <sortItems>
+            <ViewSettingsItem id="idSortRetailerName" text="Sales Order No " key="SO_NO" selected="true"/>
+            <ViewSettingsItem text="Retailer Name" key="RETAILER_NAME"/>
+
+        </sortItems>
+
+    </ViewSettingsDialog>
+
+</core:FragmentDefinition>

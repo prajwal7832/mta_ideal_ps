@@ -1,0 +1,251 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ibs.ibsappidealsalesorder",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.1",
+      "toolsId": "7dcf7089-f628-4739-a87f-4905577b29de"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZIBS_SALES_ORDER_CREATION_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "CAPM_SERVICE": {
+        "uri": "/odata/v4/ideal-purchase-creation-srv/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+    }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "SalesOrder-display": {
+          "semanticObject": "SalesOrder",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibs.ibsappidealsalesorder.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Request"
+        }
+      },
+      "external_service": { 
+        "dataSource": "CAPM_SERVICE",
+        "preload": true,
+        "settings": {
+            "synchronizationMode": "None",
+            "operationMode": "Server",
+            "autoExpandSelect": true,
+            "earlyRequests": true
+        }
+    }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.ibs.ibsappidealsalesorder.view",
+        "controlAggregation": "beginColumnPages",
+        "controlId": "layout",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteApp",
+          "pattern": "test",
+          "target": ["TargetView1"]
+        },
+        {
+          "name": "ServiceMsg",
+          "pattern": "ServiceMsg",
+          "target": ["ServiceMsg"]
+        },
+        {
+          "name": "RouteView1",
+          "pattern": "View1/{loginId}",
+          "target": [
+            "TargetView1"
+          ]
+        },
+        {
+          "name": "View3",
+          "pattern": "View3/:D_loginId:",
+          "target": [
+            "TargetView3"
+          ]
+        },
+        {
+          "name": "View2",
+          "pattern": "View2/{PR_NO}",
+          "target": [
+            "TargetView1",
+            "TargetView2"
+          ]
+        },
+        {
+          "name": "Cart",
+          "pattern": "Cart/{loginId}",
+          "target": [
+            "TargetCart"
+          ]
+        },
+        {
+          "name": "detailPage",
+          "pattern": "detailPage/{loginId}/:FLAG:",
+          "target": [
+            "TargetdetailPage"
+          ]
+        },
+        {
+          "name": "View4",
+          "pattern": "View4/{D_loginId}/:FLAG:",
+          "target": [
+            "View4"
+          ]
+        }
+       
+      ],
+      "targets": {
+        "TargetApp": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewName": "App"
+          },
+          "ServiceMsg": {
+            "viewType": "XML",
+            "viewName": "ServiceMsg"
+          },
+        "TargetView1": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "View1",
+          "viewName": "View1",
+          "controlAggregation": "beginColumnPages"
+        },
+        "TargetView3": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "View3",
+          "viewName": "View3",
+          "controlAggregation": "beginColumnPages"
+        },
+        "TargetView2": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "View2",
+          "viewName": "View2",
+          "controlAggregation": "midColumnPages"
+        },
+        "TargetCart": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "Cart",
+          "viewName": "Cart"
+        },
+        "TargetdetailPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "detailPage",
+          "viewName": "detailPage"
+        },
+        "View4": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "View4",
+          "viewName": "View4",
+          "controlAggregation": "beginColumnPages"
+        }
+        
+      }
+    },
+    "rootView": {
+      "viewName": "com.ibs.ibsappidealsalesorder.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "ibs_bs_ideal_ps"
+  }
+}

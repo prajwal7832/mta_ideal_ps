@@ -1,0 +1,176 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ibs.ibsappidealproductcomplaint",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.2",
+      "toolsId": "84cc859a-42aa-44c2-97d8-e2edaa71b272"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/ideal-product-complaint-srv/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ProductComplaint-display": {
+          "semanticObject": "ProductComplaint",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.126.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibs.ibsappidealproductcomplaint.i18n.i18n"
+        }
+      },
+      "Data":{
+				"type":"sap.ui.model.json.JSONModel",
+				"uri":"model/dummyData.json"
+			},
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.ibs.ibsappidealproductcomplaint.view",
+        "controlAggregation": "beginColumnPages",
+         "controlId": "layout",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteMasterPage",
+          "pattern": "MasterPage/{loginId}",
+          "target": [
+            "TargetMasterPage"
+          ]
+        },
+        {
+          "name": "DetailPage",
+          "pattern": "DetailPage/{PR_NO}",
+          "target": [
+              "TargetMasterPage",
+              "DetailPage"
+          ]
+      },
+      {
+        "name": "ComplaintPage",
+        "pattern": "ComplaintPage/{loginId}",
+        "target": [
+            "TargetComplaintPage"
+        ]
+    }
+      ],
+      "targets": {
+        "TargetMasterPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "MasterPage",
+          "viewName": "MasterPage",
+          "controlAggregation": "beginColumnPages"
+        },
+        "DetailPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "DetailPage",
+          "viewName": "DetailPage",
+          "controlAggregation": "midColumnPages"
+      },
+      "TargetComplaintPage": {
+        "viewType": "XML",
+        "transition": "slide",
+        "clearControlAggregation": false,
+        "viewId": "ComplaintPage",
+        "viewName": "ComplaintPage"
+       }
+      }
+    },
+    "rootView": {
+      "viewName": "com.ibs.ibsappidealproductcomplaint.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "ibs_bs_ideal_ps"
+  }
+}

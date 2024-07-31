@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="IDEAL_GRN_ACCEPTANCE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Grn_Header" EntityType="IDEAL_GRN_ACCEPTANCE.Grn_Header">
+                    <NavigationPropertyBinding Path="TO_ITEMS_REF" Target="Grn_Items"/>
+                    <NavigationPropertyBinding Path="TO_STATUS_REF" Target="Grn_Status_Master"/>
+                </EntitySet>
+                <EntitySet Name="Grn_Items" EntityType="IDEAL_GRN_ACCEPTANCE.Grn_Items"/>
+                <EntitySet Name="Grn_Event_Logs" EntityType="IDEAL_GRN_ACCEPTANCE.Grn_Event_Logs"/>
+                <EntitySet Name="Grn_Status_Master" EntityType="IDEAL_GRN_ACCEPTANCE.Grn_Status_Master"/>
+                <EntitySet Name="Grn_Stock" EntityType="IDEAL_GRN_ACCEPTANCE.Grn_Stock">
+                    <NavigationPropertyBinding Path="TO_STATUS_REF" Target="Grn_Status_Master"/>
+                </EntitySet>
+                <EntitySet Name="Material_Group_Master" EntityType="IDEAL_GRN_ACCEPTANCE.Material_Group_Master"/>
+                <EntitySet Name="Material_Code_Master" EntityType="IDEAL_GRN_ACCEPTANCE.Material_Code_Master"/>
+                <ActionImport Name="grnAccept" Action="IDEAL_GRN_ACCEPTANCE.grnAccept"/>
+                <ActionImport Name="updateGrnPrice" Action="IDEAL_GRN_ACCEPTANCE.updateGrnPrice"/>
+            </EntityContainer>
+            <EntityType Name="Grn_Header">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="INVOICE_NO"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="DISTRIBUTOR_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="DELIVERY_NO" Type="Edm.String" MaxLength="15"/>
+                <Property Name="INVOICE_NO" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="INVOICE_DATE" Type="Edm.Date"/>
+                <Property Name="DELIVERY_DATE" Type="Edm.Date"/>
+                <Property Name="ACCEPTED_DATE" Type="Edm.Date"/>
+                <Property Name="INVOICE_AMOUNT" Type="Edm.Double"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <Property Name="SAP_ORDER_NO" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="TO_ITEMS_REF" Type="IDEAL_GRN_ACCEPTANCE.Grn_Items">
+                    <ReferentialConstraint Property="INVOICE_NO" ReferencedProperty="INVOICE_NO"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_STATUS_REF" Type="IDEAL_GRN_ACCEPTANCE.Grn_Status_Master">
+                    <ReferentialConstraint Property="STATUS" ReferencedProperty="STATUS"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Grn_Items">
+                <Key>
+                    <PropertyRef Name="INVOICE_NO"/>
+                    <PropertyRef Name="ITEM_NO"/>
+                </Key>
+                <Property Name="INVOICE_NO" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="ITEM_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="50"/>
+                <Property Name="MATERIAL_GROUP_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="MATERIAL_CODE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="BATCH" Type="Edm.String" MaxLength="10"/>
+                <Property Name="EXPIRY_DATE" Type="Edm.Date"/>
+                <Property Name="HSN_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UNIT_OF_MEASURE" Type="Edm.String" MaxLength="3"/>
+                <Property Name="UNIT_PRICE" Type="Edm.String" MaxLength="17"/>
+                <Property Name="OPENING_STOCK" Type="Edm.String" MaxLength="10"/>
+                <Property Name="QUANTITY" Type="Edm.Double"/>
+                <Property Name="ACCEPTED_QUANTITY" Type="Edm.Double"/>
+                <Property Name="REJECTED_QUANTITY" Type="Edm.Double"/>
+                <Property Name="CGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_AMOUNT" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TAX_AMOUNT" Type="Edm.String" MaxLength="17"/>
+                <Property Name="TOTAL_AMOUNT" Type="Edm.String" MaxLength="17"/>
+            </EntityType>
+            <EntityType Name="Grn_Event_Logs">
+                <Key>
+                    <PropertyRef Name="INVOICE_NO"/>
+                    <PropertyRef Name="EVENT_NO"/>
+                </Key>
+                <Property Name="INVOICE_NO" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="EVENT_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="USER_NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="COMMENT" Type="Edm.String" MaxLength="200"/>
+                <Property Name="CREATED_ON" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <EntityType Name="Grn_Status_Master">
+                <Key>
+                    <PropertyRef Name="STATUS"/>
+                </Key>
+                <Property Name="STATUS" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="STATUS_DESCRIPTION" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="Grn_Stock">
+                <Key>
+                    <PropertyRef Name="DISTRIBUTOR_ID"/>
+                    <PropertyRef Name="MATERIAL_GROUP"/>
+                    <PropertyRef Name="MATERIAL_CODE"/>
+                </Key>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="MATERIAL_CODE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="100"/>
+                <Property Name="UNIT_PRICE" Type="Edm.String" MaxLength="17"/>
+                <Property Name="UPDATED_PRICE" Type="Edm.String" MaxLength="17"/>
+                <Property Name="MATERIAL_STOCK" Type="Edm.Int32"/>
+                <Property Name="HSN_CODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UNIT_OF_MEASURE" Type="Edm.String" MaxLength="3"/>
+                <Property Name="CGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IGST_PERC" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UPDATED_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <NavigationProperty Name="TO_STATUS_REF" Type="IDEAL_GRN_ACCEPTANCE.Grn_Status_Master">
+                    <ReferentialConstraint Property="STATUS" ReferencedProperty="STATUS"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Material_Group_Master">
+                <Key>
+                    <PropertyRef Name="MATERIAL_GROUP"/>
+                </Key>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MATERIAL_GROUP_DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="Material_Code_Master">
+                <Key>
+                    <PropertyRef Name="MATERIAL_GROUP"/>
+                    <PropertyRef Name="MATERIAL_CODE"/>
+                </Key>
+                <Property Name="MATERIAL_GROUP" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MATERIAL_CODE" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <ComplexType Name="userEvent">
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="50"/>
+            </ComplexType>
+            <Action Name="grnAccept" IsBound="false">
+                <Parameter Name="action" Type="Edm.String"/>
+                <Parameter Name="appType" Type="Edm.String"/>
+                <Parameter Name="grnHeader" Type="Collection(IDEAL_GRN_ACCEPTANCE.Grn_Header)" Nullable="false"/>
+                <Parameter Name="grnItems" Type="Collection(IDEAL_GRN_ACCEPTANCE.Grn_Items)" Nullable="false"/>
+                <Parameter Name="grnEvent" Type="Collection(IDEAL_GRN_ACCEPTANCE.Grn_Event_Logs)" Nullable="false"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Action Name="updateGrnPrice" IsBound="false">
+                <Parameter Name="appType" Type="Edm.String"/>
+                <Parameter Name="updPriceDetails" Type="Collection(IDEAL_GRN_ACCEPTANCE.Grn_Stock)" Nullable="false"/>
+                <Parameter Name="Event" Type="IDEAL_GRN_ACCEPTANCE.userEvent"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

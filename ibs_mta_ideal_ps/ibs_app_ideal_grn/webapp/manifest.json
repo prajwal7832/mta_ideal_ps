@@ -1,0 +1,186 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "com.ibs.ibsappidealgrn",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.2",
+      "toolsId": "f8942d64-d4b5-4679-beb7-47266a627520"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/ideal-grn-acceptance/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "ZIBS_DMS_GRN_SRV": {
+        "uri": "/sap/opu/odata/sap/ZIBS_DMS_GRN_SRV/",
+        "type": "OData",
+        "settings": {
+            "localUri": "localService/ZIBS_DMS_GRN_SRV/metadata.xml"
+        }
+    }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "Grn-Display": {
+          "semanticObject": "Grn",
+          "action": "Display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.126.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibs.ibsappidealgrn.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "onPremiseSrv": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+            "defaultOperationModel": "Server",
+            "defaultBindingMode": "OneWay",
+            "defaultCountMode": "Request",
+            "useBatch":false
+        },
+        "dataSource": "ZIBS_DMS_GRN_SRV",
+        "preload": true
+    }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.ibs.ibsappidealgrn.view",
+        "controlAggregation": "beginColumnPages",
+        "controlId": "layout",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteMasterpage",
+          "pattern": "",
+          "target": [
+            "TargetMasterpage"
+          ]
+        },
+        {
+          "name": "ServiceMsg",
+          "pattern": "ServiceMsg",
+          "target": [
+              "ServiceMsg"
+          ]
+        },
+        {
+          "name": "RouteDetailpage",
+          "pattern": "detailpage/{InvoiceNo}",
+          "target": [
+            "TargetMasterpage",
+            "TargetDetailpage"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMasterpage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "controlAggregation": "beginColumnPages",
+          "viewId": "Masterpage",
+          "viewName": "Masterpage"
+        },
+        "ServiceMsg": {
+          "viewType": "XML",
+          "viewName": "ServiceMsg"
+        },
+        "TargetDetailpage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "controlAggregation": "midColumnPages",
+          "viewId": "Detailpage",
+          "viewName": "Detailpage"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.ibs.ibsappidealgrn.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "ibs_bs_ideal_ps"
+  }
+}

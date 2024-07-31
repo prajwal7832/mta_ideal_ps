@@ -1,0 +1,133 @@
+<mvc:View controllerName="com.ibs.ibsappidealsalesorder.controller.View3" xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt"
+	displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:cards="sap.f.cards" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:grid="sap.ui.layout.cssgrid">
+	<App id="ap">
+	<tnt:ToolPage id="toolpageID" class="sapUiDemoToolPage sapUiSizeCompact">
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress"
+					tooltip="{i18n>collpaseMenuButtonText}">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Button>
+				<Button  icon="sap-icon://nav-back" text="" type="Transparent" press="backNav"/>
+				<!-- <Text text="Sales Order" class="titleHeaderClass"/> -->
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://refresh" press="handleRefresh"/>
+				<Button text="Cart"  icon="sap-icon://cart" press="onCart" id="cartButton">
+					<customData>
+						<BadgeCustomData id="count" key="badge" value=""/>
+					</customData>
+				</Button>
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation expanded="true">
+				<tnt:NavigationList>
+					<tnt:NavigationListItem text="Categories" icon="sap-icon://activity-items" items="{ path : 'category1>/results'}">
+						<tnt:NavigationListItem text="{category1>MaterialGroupDes}" select="onListItemPress"/>
+					</tnt:NavigationListItem>			
+				</tnt:NavigationList>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<App id="app1">
+				<Page showHeader="false" showNavButton="false" enableScrolling="true" class="sapUiSizeCompact">
+					<content>
+						<VBox class="VboxSearch sapUiSmallMargin" justifyContent="Center">
+							<SearchField id="search" placeholder=" Search by Material Name" search="onSearch" liveChange="onSearch" width="96%"/>
+						</VBox>
+						<VBox class="favHead">
+							<Title text="Favorite Items" class="favHeader"></Title>
+							
+						<Carousel pages="{path: 'favMaterials>/results', parameters: {expand: 'images'} ,sorter : { path : 'MaterialDes',descending : true}}" class="custom-grid-row" id="favCarousel">
+											<customLayout>
+												<CarouselLayout visiblePagesCount="{category>/cardCount}"/>
+							
+											</customLayout>
+
+											<f:Card class="customcardFav">
+												<f:content>
+													<VBox>
+														<HBox justifyContent="Center" class="imageContainer" >
+															<Image src="{favMaterials>ImageUrl}" width="160px" height="98px" />
+														</HBox>
+														<VBox class="nameText">
+															<Text text="{favMaterials>MaterialDes}" class="sapUiTinyMarginBottom" maxLines="2" />
+															<ObjectNumber number="{path:'favMaterials>NetPrice',formatter:'.formatter.formatterAmount'} INR"/>
+														</VBox>
+														<HBox class="cbuttons">
+															<StepInput  value="{favMaterials>Quantity}" width="30%" change="favonStepInputChange" id="favquantity"/>
+															<Button icon="sap-icon://cart" press=".onAddToCartFavPress" type="{favMaterials>cartBtn}"
+																class="sapUiTinyMarginEnd">
+																	<customData>
+																		<BadgeCustomData key="badge" value="{favMaterials>gQuantity}" />
+																</customData>
+															</Button>
+														</HBox>
+														<layoutData>
+															<l:GridData span="L2 M3 S8" linebreakL="false" linebreakM="true" linebreakS="true"/>
+														</layoutData>
+													</VBox>
+												</f:content>
+											</f:Card>
+						</Carousel>
+						</VBox>
+
+						<VBox class="sapUiContentPadding">
+							<List items="{category>/results}" id="list">
+								<items>
+									<CustomListItem>
+										<HBox>
+											<Title text="{category>MaterialGroupDes}" class="materialGrpHeader"/>
+										</HBox>
+										<Carousel pages="{path: 'category>NavMaterialSet/results', parameters: {expand: 'images'}}" id="carousel" class="custom-grid-row">
+											<customLayout>
+												<CarouselLayout visiblePagesCount="{category>/cardCount}"/>
+							
+											</customLayout>
+											
+											<f:Card class="customcard" id="card">
+												<f:content>
+													<VBox>
+														<HBox justifyContent="Center" class="imageContainer" id="imageContainer">
+															<Image src="{category>ImageUrl}" width="160px" height="98px" class="image"/>
+														</HBox>
+														<VBox class="nameText">
+															<Text text="{category>MaterialDes}" class="sapUiTinyMarginBottom" maxLines="2" />
+															<ObjectNumber number="{path:'category>NetPrice',formatter:'.formatter.formatterAmount'} INR"/>
+														</VBox>
+														<HBox class="cbuttons">
+															<StepInput value="{category>Quantity}" width="30%" change="categoryonStepInputChange" id="step" />
+															<!-- <Button icon="sap-icon://cart" press=".onAddToCartPress" type="{= ${category>FavoriteCount} === 'x' ? 'Success' : 'Default'}"
+																class="sapUiTinyMarginEnd" /> -->
+															<Button icon="sap-icon://cart" press=".onAddToCartPress" type="{category>cartBtn}"
+																class="sapUiTinyMarginEnd"  >
+																<customData>
+																		<BadgeCustomData key="badge" animation="None"  value="{category>gQuantity}" />
+																</customData>
+															</Button>
+
+															
+															
+
+														</HBox>
+														<layoutData>
+															<l:GridData span="L2 M3 S8" linebreakL="false" linebreakM="true" linebreakS="true"/>
+														</layoutData>
+													</VBox>
+												</f:content>
+											</f:Card>
+										</Carousel>
+									</CustomListItem>
+								</items>
+							</List>
+						</VBox>
+					</content>
+				</Page>
+			</App>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+	</App>
+</mvc:View>

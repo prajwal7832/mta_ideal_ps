@@ -1,0 +1,74 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealpaymentapproval.controller.MasterPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+    </Page>
+</mvc:View> -->
+
+<mvc:View controllerName="com.ibs.ibsappidealpaymentapproval.controller.MasterPage"
+xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" 
+xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+   <m:Page>
+   <m:content>
+   <m:Table id="idItemsTable" growing="true" items="{path : 'supplier>/value',sorter : { path : 'POP_NO',descending : true}}" mode="SingleSelectMaster" selectionChange="onSelectionItem" autoPopinMode="true">
+											<m:headerToolbar>        	
+												<m:OverflowToolbar>	
+												<m:SearchField class="sapUiMediumMarginTopBottom" placeholder="Search by Payment Request Number" liveChange=".onSearch" width="30%" id="seachId"/>	                
+														<m:ToolbarSpacer/>
+													
+													<m:Button icon="sap-icon://sort" press="onSort" id="sortTable"/>
+														<m:Button icon="sap-icon://filter" press="onFilter" id="filtertble"/>
+														<m:Button icon="sap-icon://reset" press="onReset" id="resetTable"/>
+													<!-- <m:Button icon="sap-icon://excel-attachment" press="onExport"  id="exportTable"/>   -->
+													</m:OverflowToolbar>		                                          
+											</m:headerToolbar>
+											<m:columns>
+												
+
+												<!-- <m:Column>
+													<m:Text text="Distributor ID"/>
+												</m:Column> -->
+
+												<m:Column hAlign="Center">
+													<m:Text text="Payment Request No"/>
+												</m:Column>
+													 <m:Column hAlign="Center">
+													<m:Text text="Distributor Name"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Purchase Order No"/>
+												</m:Column>
+											
+												<m:Column hAlign="Center">
+													<m:Text text="Creation Date"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Payment Type"/>
+												</m:Column>
+
+												<m:Column hAlign="Center">
+													<m:Text text="Status"/>
+												</m:Column>
+												
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem >
+													<m:cells>
+														
+														<m:ObjectNumber number="{path: 'supplier>POP_NO'}" textAlign="Right"/>
+														<m:Text text="{supplier>DISTRIBUTOR_NAME}" textAlign="Right"/>
+													    <m:Text text="{supplier>PR_SAP_NO}" textAlign="Right"/>
+														<m:Text text="{path: 'supplier>CREATION_DATE',formatter: '.formatter.formatDate'}" />
+														<m:Text  text="{path: 'supplier>PAYMENT_TYPE',formatter: '.formatter.paymentType'}"/>
+														<m:ObjectStatus text="{path: 'supplier>TO_STATUS/DESC'}" state="{path: 'supplier>TO_STATUS/CODE',formatter: '.formatter.formatStateText'}"  ></m:ObjectStatus>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+   </m:content>
+   </m:Page>   
+</mvc:View>
+

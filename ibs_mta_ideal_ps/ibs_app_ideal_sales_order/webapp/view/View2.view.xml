@@ -1,0 +1,330 @@
+<!-- <mvc:View controllerName="com.ibs.ibsappidealsalesorder.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <Text text="dfghjk"></Text>
+      </content >
+    </Page>
+</mvc:View> -->
+
+
+<mvc:View controllerName="com.ibs.ibsappidealsalesorder.controller.View2" xmlns:commons="sap.suite.ui.commons"
+    xmlns:mvc="sap.ui.core.mvc"  xmlns:ui="sap.ui.table"		
+	xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout"
+    xmlns="sap.m" height="100%">
+    <Page showHeader="false">
+	  <l:DynamicSideContent
+		id="DynamicSideContent" class="sapUiDSCExplored sapUiContentPadding" showSideContent="false" >
+			<l:sideContent>
+				<Toolbar >
+				<Title text="Event"></Title>
+				<ToolbarSpacer/>
+				<Button text="Close" type="Transparent"  press="CloseEvent" visible="true"></Button>
+				</Toolbar>
+										
+<layout:VerticalLayout width="100%">
+<commons:Timeline id="idTimeline" showHeaderBar="false" showSearch="false" showSort="false" showItemFilter="false" sort="true"
+					enableScroll="false" lazyLoading="false" growingThreshold="0" content="{eventData>/value}" showIcons="false"
+					noDataText="No Ticket Events are currently available" width="100%">
+
+				<commons:content>
+				<commons:TimelineItem 
+				id="idTemplateItem" text="Event : {eventData>COMMENTS}"
+							userNameClickable="true"
+							dateTime="{ path:'eventData>CREATION_DATE'}"
+							userName="{path:'eventData>USER_NAME'}" title=": {eventData>USER_ROLE}" />
+							
+				</commons:content>	
+</commons:Timeline>
+</layout:VerticalLayout>
+
+
+
+
+
+	        </l:sideContent>
+        <f:DynamicPage id="dynamicPageId" showFooter="true">
+
+            <!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Purchase Request No: {headerData>/0/PR_NO}" id="idheader"/>
+				</f:heading>
+
+				<f:actions>
+					<ToolbarSpacer/>
+						<Toolbar>
+						<Button
+							id="id_cnaBTn"
+                           icon="sap-icon://sys-cancel"
+							text="Cancel Order"
+                            type="Negative"
+							press="RejectOrder"
+							visible="false"
+							/>
+							<Button
+							text="View Event"
+							press="Content"
+							visible="true"
+							type="Emphasized"/>
+							<Button id="idFullSc" press="onFullScreen" icon="sap-icon://full-screen" type="Transparent" visible="{FullScreenButton}" />
+                        <!-- <Button press="onExitScreen" id="idExitScreen" icon="sap-icon://exit-full-screen" type="Transparent" visible="{ExitScreenButton}" /> -->
+						<Button icon="sap-icon://decline" type="Transparent" press="onExit" />
+						</Toolbar>
+				</f:actions>
+
+</f:DynamicPageTitle>
+</f:title>
+
+     <f:header>
+		<f:DynamicPageHeader pinnable="true"  >
+        			<FlexBox visible="true" wrap="Wrap" fitContainer="true" alignItems="Stretch" class="sapUiMediumMarginBottom">
+				
+					<!-- <VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Order Type" design="Bold"/>
+						<Text text="{headerData>/0/ORDER_TYPE}"/>
+					</VBox> -->
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Payment Method" design="Bold"/>
+						<!-- <Text text="{headerData>/0/PAYMENT_METHOD}"/> -->
+						<Text text="{path:'headerData>/0/PAYMENT_METHOD',formatter:'.formatter.formadata'}"/>
+					</VBox>
+
+					<VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+						<Label text="Ship From" design="Bold"/>
+						<Text text="{shipDetail>/results/0/Shipfrom}"/>
+					</VBox>
+
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd">
+						<Label text="Ship To" design="Bold"/>
+						<ObjectNumber number="{headerData>/0/SHIP_NAME}" emphasized="false"/>
+					</VBox>
+
+					<VBox justifyContent="Center" class="sapUiSmallMarginEnd" >
+						<Label text="SAP Document No" design="Bold" visible="false" id="sapNO"/>
+						<Text id="id_sapNo" text="{headerData>/0/SAP_SO_NO}"/>
+					</VBox>
+
+					<!-- <VBox justifyContent="Center" class="sapUiSmallMarginEnd" id="id_orderVbox">
+						<Label text="Purchase Order No." design="Bold"/>
+						<ObjectStatus id="id_order" state="Success"/>
+					</VBox> -->
+				</FlexBox>
+				<FlexBox alignItems="Start" justifyContent="SpaceBetween">         
+					<items>
+						<Panel backgroundDesign="Transparent" class="sapUiNoContentPadding">
+							<content>
+								<layout:HorizontalLayout allowWrapping="true">
+									<layout:VerticalLayout class="sapUiMediumMarginEnd amt">
+										<Title class="amt" id="id_totalAmount" text="Total Amount : {path:'iModel>/Totamt',formatter:'.formatter.formatterAmount'} INR" />
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<Title id="id_totalTax" class="tax" text="Total Tax :  {path:'iModel>/Totax',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<Title id="id_subTotal" class="sub" text="Grand Total : {path:'iModel>/TotalIcTax',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout>
+									<!-- <layout:VerticalLayout class="sapUiMediumMarginEnd">
+										<Title id="id_totalTcs" class="tcs" text="TCS ({total>/0/tcspers} %) : {path:'total>/0/tcsTotal',formatter:'.formatter.formatterAmount'}"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout>
+										<Title id="id_grandTotal" class="grand" text="Grand Total : {path:'total>/0/grandTotal',formatter:'.formatter.formatterAmount'} INR"/>
+									</layout:VerticalLayout> -->
+								</layout:HorizontalLayout>
+							</content>
+						</Panel>
+					</items>
+				</FlexBox>
+		</f:DynamicPageHeader>
+</f:header>  
+
+
+
+	<f:content>
+	<VBox>
+			<ui:Table  
+            rows="{iModel>/value}" id="table" selectionBehavior="RowOnly"  
+	        ariaLabelledBy="title" enableColumnFreeze="true" fixedColumnCount="2" >
+<ui:extension>
+			<!-- <OverflowToolbar>
+            <Toolbar>
+			 <Label text="Orders"  design="Bold" id="idLabel" visible="true"/>				
+            </Toolbar>
+        </OverflowToolbar> -->
+				</ui:extension>
+
+
+				<ui:columns>
+					<!-- <ui:Column width="15rem">
+						<m:Text text="Material Code" />
+						<ui:template>
+							<m:Text text="{iModel>MATERIAL_CODE}"/>
+						</ui:template>
+					</ui:Column> -->
+
+					<ui:Column width="9rem" hAlign="Center">
+						<Label text="Material" />
+						<ui:template>
+							<Text text="{iModel>MATERIAL_DESC}"/>
+						</ui:template>
+					</ui:Column>
+
+	<ui:Column width="9rem"  hAlign="Center">
+						<Label text="HSN CODE"  />
+						<ui:template>
+							<Text text="{iModel>HSN_CODE}" />
+						</ui:template>
+					</ui:Column>
+					
+						<ui:Column width="8rem" hAlign="Right">
+						<Label text="Quantity" />
+						<ui:template>
+							<Text text="{iModel>QUANTITY}" />
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="8rem" hAlign="Right">
+						<Label text="UOM" />
+						<ui:template>
+							<Text text="{iModel>UNIT_OF_MEASURE}" />
+						</ui:template>
+					</ui:Column>
+
+					<ui:Column width="8rem" hAlign="Right">
+						<Label text=" Price(₹)" />
+						<ui:template>
+							<!-- <m:Label text="{iModel>NET_AMOUNT}" /> -->
+							<Label text="{path:'iModel>NET_AMOUNT',formatter:'.formatter.formatterAmount'} "/>
+						</ui:template>
+					</ui:Column>
+
+					<ui:Column width="8rem" hAlign="Right" >
+						<Label text="CGST (%)" />
+						<ui:template>
+							<Label text="{iModel>CGST_PERC}"  />
+						</ui:template>
+					</ui:Column>
+
+               <ui:Column width="8rem" hAlign="Right">
+						<Label text="SGST (%)" />
+						<ui:template>
+							<Label text="{iModel>SGST_PERC}"  />
+						</ui:template>
+					</ui:Column>
+
+<!-- 
+                    <ui:Column width="11rem">
+						<m:Label text="IGST (%)" />
+						<ui:template>
+							<m:Label text="{iModel>IGST_PERC}"  />
+						</ui:template>
+					</ui:Column> -->
+
+
+         
+					<ui:Column width="8rem" hAlign="Right">
+						<Label text="TAX (%)" />
+						<ui:template>
+							<Label text="{path:'iModel>TAXES_AMOUNT', formatter:'.formatter.formatterAmount'}"/>
+						</ui:template>
+					</ui:Column>
+
+
+					  <!-- <ui:Column width="8rem" hAlign="Right">
+						<m:Label text=" Tax Amount" />
+						<ui:template>
+							
+							<m:Label text=" ₹ {path:'iModel>perProTax',formatter:'.formatter.tableAmountt'} "/>
+						</ui:template>
+					</ui:Column> -->
+
+					<ui:Column width="8rem" hAlign="Right">
+						<Label text="Total Amount(₹)" />
+						<ui:template>
+					
+							<Label text="{path:'iModel>TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'}"/>
+						</ui:template>
+					</ui:Column>
+				
+
+
+
+
+				</ui:columns>
+			</ui:Table>
+
+
+
+			<Table id="idMTable" inset="false" items="{iModel>/value}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true" visible="false">
+						
+						<!-- <m:OverflowToolbar style="Clear">
+							<m:Title text="Invoice Items"/>
+							<m:ToolbarSpacer/>
+						</m:OverflowToolbar> -->
+
+						<columns>
+							<Column hAlign="Left" width="9rem">
+								<Label id="MS2G2T1F1" text="Material" design="Bold"/>
+							</Column>
+							<Column hAlign="Left" width="7rem">
+								<Label id="MS2G2T1F2" text="HSN CODE" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F3" text="Quantity" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F4" text="UOM" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F5" text="Price(₹)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F6" text="CGST (%)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MtableIbanId" text="SGST (%)" design="Bold"/>
+							</Column>
+
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F8" text="TAX (%)" design="Bold"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label id="MS2G2T1F9_name" text="Total Amount(₹)" design="Bold"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive">
+								<cells>	
+									<Text text="{iModel>MATERIAL_DESC}"/>
+									<Text text="{iModel>HSN_CODE}"/>									
+									<Text text="{iModel>QUANTITY}"/>
+									<Text text="{path:'iModel>UNIT_OF_MEASURE', formatter:'.formatter.formatDate'}"/>
+									<Text text="{path:'iModel>NET_AMOUNT', formatter : '.formatter.formatterAmount' }"/>
+									<Text text="{path:'iModel>CGST_PERC'}"/>
+									<Text text="{path:'iModel>SGST_PERC'}"/>
+									<Text text="{path:'iModel>TAXES_AMOUNT', formatter : '.formatter.formatterAmount' }"/>
+									<Text text="{path:'iModel>TOTAL_AMOUNT', formatter : '.formatter.formatterAmount' }"/>
+									</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					</VBox>
+				
+</f:content>
+
+
+
+
+
+<!-- </f:content> -->
+
+		<!-- </m:content> -->
+
+</f:DynamicPage>
+</l:DynamicSideContent>
+ </Page>
+</mvc:View>

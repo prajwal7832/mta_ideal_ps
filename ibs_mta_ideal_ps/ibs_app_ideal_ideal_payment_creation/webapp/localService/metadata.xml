@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ideal_payments_creation_srv" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="PaymentsHeader" EntityType="ideal_payments_creation_srv.PaymentsHeader">
+                    <NavigationPropertyBinding Path="TO_STATUS" Target="MasterPaymentStatus"/>
+                    <NavigationPropertyBinding Path="TO_ATTACHMENT" Target="PaymentsAttachments"/>
+                    <NavigationPropertyBinding Path="TO_EVENT" Target="PaymentsEventLog"/>
+                </EntitySet>
+                <EntitySet Name="PaymentsAttachments" EntityType="ideal_payments_creation_srv.PaymentsAttachments"/>
+                <EntitySet Name="PaymentsEventLog" EntityType="ideal_payments_creation_srv.PaymentsEventLog">
+                    <NavigationPropertyBinding Path="TO_EVENT_STATUS" Target="MasterPaymentEvent"/>
+                </EntitySet>
+                <EntitySet Name="MasterPaymentEvent" EntityType="ideal_payments_creation_srv.MasterPaymentEvent"/>
+                <EntitySet Name="MasterPaymentStatus" EntityType="ideal_payments_creation_srv.MasterPaymentStatus"/>
+                <EntitySet Name="PrHeader" EntityType="ideal_payments_creation_srv.PrHeader">
+                    <NavigationPropertyBinding Path="TO_STATUS" Target="MasterPrStatus"/>
+                </EntitySet>
+                <EntitySet Name="MasterPrStatus" EntityType="ideal_payments_creation_srv.MasterPrStatus"/>
+                <EntitySet Name="MasterPrEvent" EntityType="ideal_payments_creation_srv.MasterPrEvent"/>
+                <ActionImport Name="createPayment" Action="ideal_payments_creation_srv.createPayment"/>
+            </EntityContainer>
+            <EntityType Name="PaymentsHeader">
+                <Key>
+                    <PropertyRef Name="SAP_ORDER_NO"/>
+                    <PropertyRef Name="POP_NO"/>
+                </Key>
+                <Property Name="SAP_ORDER_NO" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="POP_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISTRIBUTOR_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PR_SAP_NO" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CREATION_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="PAYMENT_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="OFFLINE_FP_UTR" Type="Edm.String" MaxLength="50"/>
+                <Property Name="OFFLINE_FP_DATE" Type="Edm.Date"/>
+                <Property Name="OFFLINE_FP_AMOUNT" Type="Edm.Double"/>
+                <Property Name="OFFLINE_PP_UTR" Type="Edm.String" MaxLength="50"/>
+                <Property Name="OFFLINE_PP_DATE" Type="Edm.Date"/>
+                <Property Name="OFFLINE_PP_UTR_AMT" Type="Edm.Double"/>
+                <Property Name="OFFLINE_PP_CREDIT_NOTE_NO" Type="Edm.String" MaxLength="40"/>
+                <Property Name="OFFLINE_PP_CREDIT_NOTE_AMT" Type="Edm.Double"/>
+                <Property Name="PDC_NO" Type="Edm.Int64"/>
+                <Property Name="PDC_DATE" Type="Edm.Date"/>
+                <Property Name="PDC_AMT" Type="Edm.Double"/>
+                <Property Name="EXCRDT_DAYS" Type="Edm.Int32"/>
+                <Property Name="DIST_COMMENTS" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PAY_NOW_UTR" Type="Edm.String" MaxLength="50"/>
+                <Property Name="PAY_NOW_TRASAC_NO" Type="Edm.String" MaxLength="50"/>
+                <Property Name="PAY_NOW_DATE" Type="Edm.Date"/>
+                <Property Name="PAY_NOW_AMT" Type="Edm.Double"/>
+                <Property Name="DOC_POST" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ATTACH" Type="Edm.String" MaxLength="1"/>
+                <Property Name="STATUS" Type="Edm.Int32"/>
+                <Property Name="AR_AMOUNT_ENTERED" Type="Edm.Double"/>
+                <Property Name="LAST_UPDATED_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="APPROVER_LEVEL" Type="Edm.Int32"/>
+                <Property Name="APPROVER_ROLE" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="TO_STATUS" Type="ideal_payments_creation_srv.MasterPaymentStatus">
+                    <ReferentialConstraint Property="STATUS" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+                <NavigationProperty Name="TO_ATTACHMENT" Type="Collection(ideal_payments_creation_srv.PaymentsAttachments)"/>
+                <NavigationProperty Name="TO_EVENT" Type="Collection(ideal_payments_creation_srv.PaymentsEventLog)"/>
+            </EntityType>
+            <EntityType Name="PaymentsAttachments">
+                <Key>
+                    <PropertyRef Name="POP_NO"/>
+                    <PropertyRef Name="FILE_ID"/>
+                </Key>
+                <Property Name="POP_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="ATTACH_CODE" Type="Edm.Int32"/>
+                <Property Name="FILE_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="FILE_CONTENT" Type="Edm.Stream"/>
+                <Property Name="FILE_MIMETYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_TYPE" Type="Edm.String" MaxLength="100"/>
+                <Property Name="FILE_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CREATION_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+            </EntityType>
+            <EntityType Name="PaymentsEventLog">
+                <Key>
+                    <PropertyRef Name="POP_NO"/>
+                    <PropertyRef Name="EVENT_NO"/>
+                </Key>
+                <Property Name="POP_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="EVENT_NO" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="EVENT_CODE" Type="Edm.Int32"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="100"/>
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="USER_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="COMMENTS" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="CREATION_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <NavigationProperty Name="TO_EVENT_STATUS" Type="ideal_payments_creation_srv.MasterPaymentEvent">
+                    <ReferentialConstraint Property="EVENT_CODE" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MasterPaymentEvent">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="MasterPaymentStatus">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="PrHeader">
+                <Key>
+                    <PropertyRef Name="PR_NO"/>
+                </Key>
+                <Property Name="PR_NO" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SAP_SO_NO" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PR_CREATION_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="DISTRIBUTOR_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DISTRIBUTOR_NAME" Type="Edm.String" MaxLength="100"/>
+                <Property Name="SHIP_TO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="SHIP_NAME" Type="Edm.String" MaxLength="200"/>
+                <Property Name="SHIP_FROM" Type="Edm.String" MaxLength="200"/>
+                <Property Name="BILL_TO" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ORDER_TYPE" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PAYMENT_METHOD" Type="Edm.String" MaxLength="10"/>
+                <Property Name="REGION_CODE" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PR_STATUS" Type="Edm.String" MaxLength="10"/>
+                <Property Name="LAST_UPDATED_DATE" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="APPROVER_LEVEL" Type="Edm.Int32"/>
+                <Property Name="APPROVER_ROLE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="GRAND_TOTAL" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="TO_STATUS" Type="ideal_payments_creation_srv.MasterPrStatus">
+                    <ReferentialConstraint Property="PR_STATUS" ReferencedProperty="CODE"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MasterPrStatus">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="MasterPrEvent">
+                <Key>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CODE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESC" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <ComplexType Name="User_Details">
+                <Property Name="USER_ROLE" Type="Edm.String" MaxLength="50"/>
+                <Property Name="USER_ID" Type="Edm.String" MaxLength="50"/>
+            </ComplexType>
+            <Action Name="createPayment" IsBound="false">
+                <Parameter Name="action" Type="Edm.String"/>
+                <Parameter Name="appType" Type="Edm.String"/>
+                <Parameter Name="paymentsHeader" Type="Collection(ideal_payments_creation_srv.PaymentsHeader)" Nullable="false"/>
+                <Parameter Name="paymentsAttachments" Type="Collection(ideal_payments_creation_srv.PaymentsAttachments)" Nullable="false"/>
+                <Parameter Name="paymentsEventLog" Type="Collection(ideal_payments_creation_srv.PaymentsEventLog)" Nullable="false"/>
+                <Parameter Name="userDetails" Type="ideal_payments_creation_srv.User_Details"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Annotations Target="ideal_payments_creation_srv.PaymentsAttachments/FILE_CONTENT">
+                <Annotation Term="Core.ContentDisposition">
+                    <Record Type="Core.ContentDispositionType">
+                        <PropertyValue Property="Filename" Path="FILE_NAME"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Core.MediaType" Path="FILE_MIMETYPE"/>
+            </Annotations>
+            <Annotations Target="ideal_payments_creation_srv.PaymentsAttachments/FILE_MIMETYPE">
+                <Annotation Term="Core.IsMediaType" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

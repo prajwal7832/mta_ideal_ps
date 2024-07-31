@@ -1,0 +1,120 @@
+<mvc:View controllerName="com.ibs.ibsappidealordercreation.controller.Detailpage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
+	<App id="idApp">
+	<pages>
+    <Page id="page" showHeader="false">
+    <!-- <l:VerticalLayout width="100%" > -->
+			<OverflowToolbar>
+			<Title text="" class="titleWeight"/>
+			<ToolbarSpacer /><Button press="fullscreen" id="idFullScreen"
+				icon="sap-icon://full-screen" type="Transparent" />
+				<Button press="fullscreen" id="idExitScreen"
+				icon="sap-icon://exit-full-screen" type="Transparent" />
+				<Button icon="sap-icon://decline" type="Transparent" press="onBack"/>
+			 </OverflowToolbar>
+					
+
+			<!-- <f:SimpleForm id="simpleForm2" editable="true" layout="ResponsiveGridLayout" columnsM="2" columnsL="2" columnsXL="4"
+					class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle"> -->
+				<f:SimpleForm id="simpleForm1" layout="ResponsiveGridLayout" backgroundDesign="Solid" labelSpanXL="5" labelSpanL="5" labelSpanM="5"
+							adjustLabelSpan="false" columnsXL="3" columnsL="3" columnsM="2" class="formHiddenTitle sapUiFormContainerTitle sapUiFormTitle">
+					<f:content>
+					<core:Title/>
+					<Label text="Sales Order No" design="Bold"/>
+					<Text text ="{path:'retailerHeaderData>/0/SO_NO', formatter:'.formatter.getDataNullValue'}" class="sapUiTinyMarginBegin"/>
+
+					<Label text="Retailer Name " design="Bold"/>
+					<Text id="idName" text="{path:'retailerHeaderData>/0/RETAILER_NAME', formatter:'.formatter.getDataNullValue'}" />
+					
+					<core:Title/>
+					<Label text="Ship To Address" design="Bold"/>
+					<Text text="{path:'retailerHeaderData>/0/SHIP_TO_PARTY', formatter:'.formatter.getDataNullValue'}" />
+
+					<Label text="Total Amount" design="Bold"/>
+					<Text text="₹ {path:'retailerHeaderData>/0/GROSS_TOTAL', formatter:'.formatter.formatterAmount'}" />
+					</f:content>
+			</f:SimpleForm>
+				<!-- </l:VerticalLayout> -->
+        <content>
+		<Table id="idProductsTable" inset="false" items="{retailerMaterialItems>/}" sticky="ColumnHeaders,HeaderToolbar" class="sapUiContentPadding"
+						growing="true" growingThreshold="10" autoPopinMode="true" contextualWidth="Auto" fixedLayout="true">
+						<dependents>
+								<!-- <plugins:ColumnResizer/> hSpacing="2rem" showGoOnFB="false"-->
+							</dependents>
+						<headerToolbar>
+							<OverflowToolbar visible="false">
+								<Title id="id_totalItems" width="25%" wrapping="true" class="sapUiContentPadding sapUiResponsiveContentPadding"/>
+								<content>
+									<ToolbarSpacer/>
+									<SearchField id="oSearchMasterData" visible="true" width="40%" placeholder="Search"
+									 showRefreshButton="false" liveChange="onSearch">
+									 <layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow" />
+									</layoutData>
+									</SearchField>
+									<Button icon="" press="onRefresh"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<!-- <Column hAlign="Left" width="9rem">
+								<Label text="Retailer" design="Bold"/>
+							</Column>
+							<Column hAlign="Right" width="13rem">
+								<Label text="Ship To Address" design="Bold" wrapping="true"/>
+							</Column> -->
+							<!-- <Column hAlign="Right" width="9rem">
+								<Label text="Material Code" design="Bold" wrapping="true"/>
+							</Column> -->
+							<Column hAlign="Center" width="8rem">
+								<Label text="Material" design="Bold" wrapping="true"/>
+							</Column>
+							
+							<Column hAlign="Center">
+								<Label text="HSN Code" wrapping="true" design="Bold"/>
+							</Column>
+							
+							<Column hAlign="Right">
+								<Label text="Material Qty" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="UOM" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Price(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right" visible="false">
+								<Label text="Net Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Taxes Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							<Column hAlign="Right">
+								<Label text="Total Amount(₹)" wrapping="true" design="Bold"/>
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem type="Inactive" press="onPress">
+								<cells>									
+									<!-- <Text text="{retailerMaterialItems>MATERIAL_CODE}"/> -->
+									<ObjectIdentifier title="{retailerMaterialItems>MATERIAL_DESC}"
+									 text="{retailerMaterialItems>MATERIAL_CODE}" />
+									<Text text="{retailerMaterialItems>HSN_CODE}" wrapping="true"/>
+									<Text text="{retailerMaterialItems>QUANTITY}" wrapping="true"/>
+									<Text text="{retailerMaterialItems>UNIT_OF_MEASURE}" wrapping="true"/>
+									<Text text="{path:'retailerMaterialItems>STD_PRICE',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									<Text text="{path:'retailerMaterialItems>NET_AMOUNT',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									<Text text="{path:'retailerMaterialItems>TAXES_AMOUNT',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									<Text text="{path:'retailerMaterialItems>TOTAL_AMOUNT',formatter:'.formatter.formatterAmount'}" wrapping="true"/>
+									</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</content>
+            
+    </Page>
+	</pages>
+	</App>
+</mvc:View>

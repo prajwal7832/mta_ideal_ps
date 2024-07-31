@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Material" contentHeight="50%" contentWidth="25%"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="materialSrch" liveChange="handleMaterialSrch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="material_listId" items="{materialMaster>/}"
+			mode="SingleSelectMaster" selectionChange="handleMaterial">
+			<StandardListItem title="{materialMaster>MATERIAL_DESC}" description="{materialMaster>MATERIAL_CODE}" iconInset="true"/>
+
+		</List>
+		<buttons>
+			<Button text="Cancel" press="closeMaterial" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

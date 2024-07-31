@@ -1,0 +1,55 @@
+{ 
+"BlankJson":[{
+    "Retailer":null,
+    "ShipTo":null,
+    "MATERIAL_CODE":null,
+    "MATERIAL_DESC":null,
+    "QUANTITY":null,
+    "UNIT_OF_MEASURE":null,
+    "TOTAL_AMOUNT":null,
+    "HSN_CODE":null,
+    "STD_PRICE":null,
+    "BASE_PRICE" :null,
+    "DISC_AMOUNT" :null,
+    "DISC_PERCENTAGE" :null,
+    "NET_AMOUNT": null,
+    "CGST_PERC":null,
+    "CGST_AMOUNT":null,
+    "SGST_PERC" :null,
+    "SGST_AMOUNT":null,
+    "IGST_PERC" :null,
+    "IGST_AMOUNT":null,
+    "TAXES_AMOUNT" :null,
+    "AVAILABLE_QTY":null
+}],
+"MaterialGrup":[
+    {
+    "materialDesc":"Others",
+    "materialCode":"0000000"
+    },
+    {
+        "materialGroupDesc":"100x100MM",
+        "materiaGroupCode":"100X100"
+    }
+],
+"Material":[{
+        "materialDesc":"Angle Own MSPG 100X100",
+        "materialCode":"AOMSPG100X100"
+}],
+"MaterialGrpInp":[
+    {
+        "materialDescInp":null,
+        "materialCodeInp":null
+    }
+],
+"MaterialInp":[{
+    "materialDescInp":null,
+    "materialCodeInp":null,
+    "Division":null,
+    "MaterialDataObj":null
+}],
+"MaterialAmount":[{
+    "TOTAL_TAXES":0,
+    "TOTAL_AMOUNT":0
+}]
+}

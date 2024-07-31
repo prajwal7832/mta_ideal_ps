@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m"
+xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+xmlns:l="sap.ui.layout" width="20%">
+<Dialog title="Cancel Order" draggable="true" resizable="true" titleAlignment="Center" contentWidth="30rem" class="sapUiSizeCompact">
+
+<l:VerticalLayout>
+<Label text="Reason for Cancel Order:"></Label>
+<TextArea  id="inputcomment"   rows="5" cols="100" maxLength="1000" width="100%"></TextArea>
+</l:VerticalLayout>
+
+<OverflowToolbar>
+<ToolbarSpacer/>
+<Button text="Submit" press="SubmitrejectOrder" />
+<Button text="Cancel" press="CancelOrder1" ></Button>
+</OverflowToolbar>
+
+</Dialog>
+</core:FragmentDefinition>

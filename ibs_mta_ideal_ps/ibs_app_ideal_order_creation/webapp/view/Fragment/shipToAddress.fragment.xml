@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Ship To Address" contentHeight="50%" contentWidth="25%"
+		class="sapUiSizeCompact">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="shipToSrch" liveChange="handleShipToSrch" />
+			</Toolbar>
+		</subHeader>
+
+		<List id="shipTo_listId" items="{retailerAddr>/}"
+			mode="SingleSelectMaster" selectionChange="handleShipTo">
+			<StandardListItem title="{retailerAddr>address}" iconInset="true"/>
+
+		</List>
+		<buttons>
+			<Button text="Cancel" press="closeShipTo" type="Emphasized" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
